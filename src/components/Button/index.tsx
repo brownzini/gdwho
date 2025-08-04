@@ -11,6 +11,7 @@ interface Props {
   iconName?: string | null;
   shadow?: string;
   borderStyle?:string;
+  display?:string;
   children: ReactNode;
 }
 
@@ -24,10 +25,12 @@ export default function Button({
   fontWeight = "font-black",
   shadow = "shadow-none",
   borderStyle="border-none",
+  display="",
   children,
 }: Props) {
   const containerStyle = `
-          relative shadow-md
+          relative
+          ${display}
           ${shadow}
           ${width} ${height} 
           ${bgColor} ${hoverBgColor} 

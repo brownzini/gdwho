@@ -1,7 +1,8 @@
 const cardStyles = {
   container: `
         w-[100%] h-[40%]
-        pl-24 pr-24
+        sm:pl-24 sm:pr-24
+        pl-7 pr-7
     `,
   content: `
         w-[100%] h-[100%] sm:min-h-[230px]
@@ -9,58 +10,49 @@ const cardStyles = {
     `,
   cardWrapper: `
         w-[100%] h-[100%]
-        flex flex-col justify-center items-center
+        flex flex-col justify-center items-center gap-1 sm:gap-0
         rounded-tl-[12px]
         rounded-bl-[12px]
         bg-[#FEF4E4]
-        pl-20
+        pl-2 sm:pl-20
         border-[1px] border-t-[#d2953238] border-l-[#d2953238] border-b-[#d2953238] border-r-[#FEF4E4]
     `,
   cardHeader: `
-        w-[100%] h-[1%]
-        pt-5
+        w-[100%] h-[5%] sm:h-[1%]
         flex flex-col justify-center items-start
     `,
   cardTitle: `
         font-["Exo_2"]
         text-[#250A29]
         font-black
-        text-[2rem]
+        sm:text-[2rem]
+        text-[1rem]
     `,
   cardBody: `
         w-[100%] h-[50%]
         flex flex-col justify-center items-start
     `,
   CardSubTitle: `
-        w-[75%]
-        font-["Roboto"]
-        text-[#373540]
-        text-left
-        font-light
+        w-[100%] sm:w-[75%]
+        font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] leading-[10px]
     `,
   cardFooter: `
         w-[100%] h-[25%]
         flex justify-start items-center
         pr-10
-        gap-3
+        gap-1 sm:gap-3
     `,
   playButtonFont: `
-        font-["Inter"]
-        text-[#428B8D]
-        font-medium
-        hover:text-[#fff]
-        w-[100%]
-        h-[100%]
+        font-["Inter"] text-[#428B8D] font-medium hover:text-[#fff] text-[0.7rem]
+        w-[100%] h-[100%]
         grid items-center justify-center
         transition ease-in-out duration-500 
     `,
   githubButtonFont: `
-        font-["Inter"]
-        text-[#fff]
-        font-medium
-        w-[100%]
-        h-[100%]
+        font-["Inter"] text-[#fff] font-medium text-[0.7rem] sm:text-[1rem]
+        w-[100%] h-[100%]
         grid items-center justify-center
+
     `,
   cardImage: `
         w-[75%] h-[100%]

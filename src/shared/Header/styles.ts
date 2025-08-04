@@ -5,7 +5,7 @@ const headerStyle = {
       flex 
       justify-between 
       items-center
-      pl-25 pr-25
+      pl-7 sm:pl-25 sm:pr-25 pr-7
   `,
   description: `
      w-[100%] h-[100%]
@@ -22,13 +22,15 @@ const headerStyle = {
      font-light
      font-["Inter"]
      text-[#4E4848]
+     text-[0.84rem]
   `,
   actions: `
      w-[25%] h-[100%]
      flex 
      justify-center
      items-center
-     gap-5
+     sm:gap-5
+     gap-1
   `,
 };
 

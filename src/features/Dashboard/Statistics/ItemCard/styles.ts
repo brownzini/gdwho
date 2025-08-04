@@ -15,15 +15,15 @@ const itemCardStyles = {
       flex justify-center items-center
   `,
   cardBodyTitle: `
-      text-center text-[#1B141D] font-light font-["Roboto"]
-      w-[50%]
+      text-center text-[#1B141D] font-light font-["Roboto"] text-[0.75rem] leading-[10px]
+      w-[100%] sm:w-[50%]
   `,
   cardFooter: `
       w-[100%] h-[25%]
       flex justify-center items-center
   `,
   cardFooterTitle: `
-      text-center text-[#412345] font-black font-["Inter"] text-[2rem]
+      text-center text-[#412345] font-black font-["Inter"] text-[1.2rem] sm:text-[2rem] 
   `,
 };
 
