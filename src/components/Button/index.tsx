@@ -9,6 +9,8 @@ interface Props {
   fontColor?: string;
   fontWeight?: string;
   iconName?: string | null;
+  shadow?: string;
+  borderStyle?:string;
   children: ReactNode;
 }
 
@@ -16,18 +18,21 @@ export default function Button({
   width = "w-[100%]",
   height = "h-[100%]",
   bgColor = "!bg-[#ffff]",
-  hoverBgColor = "hover:!bg-[#ffff]",
+  hoverBgColor = "hover:"+bgColor,
   borderRadius = "rounded-[10px]",
   fontColor = "text-[#000000]",
   fontWeight = "font-black",
+  shadow = "shadow-none",
+  borderStyle="border-none",
   children,
 }: Props) {
   const containerStyle = `
           relative shadow-md
+          ${shadow}
           ${width} ${height} 
           ${bgColor} ${hoverBgColor} 
-          ${borderRadius} 
           ${fontColor} ${fontWeight} text-center
+          ${borderRadius} ${borderStyle}
           flex justify-center items-center
           transition ease-in-out duration-500 
           cursor-pointer

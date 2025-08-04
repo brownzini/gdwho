@@ -10,14 +10,15 @@ const cardStyles = {
   cardWrapper: `
         w-[100%] h-[100%]
         flex flex-col justify-center items-center
-        shadow-md
-        rounded-tl-[25px]
-        rounded-bl-[25px]
+        rounded-tl-[12px]
+        rounded-bl-[12px]
         bg-[#FEF4E4]
         pl-20
+        border-[1px] border-t-[#d2953238] border-l-[#d2953238] border-b-[#d2953238] border-r-[#FEF4E4]
     `,
   cardHeader: `
         w-[100%] h-[1%]
+        pt-5
         flex flex-col justify-center items-start
     `,
   cardTitle: `
@@ -38,12 +39,36 @@ const cardStyles = {
         font-light
     `,
   cardFooter: `
-        w-[100%] h-[1%]
+        w-[100%] h-[25%]
         flex justify-start items-center
+        pr-10
+        gap-3
+    `,
+  playButtonFont: `
+        font-["Inter"]
+        text-[#428B8D]
+        font-medium
+        hover:text-[#fff]
+        w-[100%]
+        h-[100%]
+        grid items-center justify-center
+    `,
+  githubButtonFont: `
+        font-["Inter"]
+        text-[#fff]
+        font-medium
+        w-[100%]
+        h-[100%]
+        grid items-center justify-center
     `,
   cardImage: `
         w-[70%] h-[100%]
-        bg-[#ff0000]
+        bg-[#FEF4E4]
+        border-[1px] 
+        border-b-[#d2953238] border-l-[#FEF4E4]
+        border-t-[#d2953238] border-r-[#d2953238] 
+        rounded-tr-[12px] rounded-br-[12px]
+        relative
     `,
 };
 
