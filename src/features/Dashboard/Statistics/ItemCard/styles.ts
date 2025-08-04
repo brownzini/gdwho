@@ -1,6 +1,6 @@
 const itemCardStyles = {
   cardContent: `
-      w-[25%] h-[100%]
+      w-[50%] h-[100%]
       bg-[#F5F5F5] 
       rounded-[10px]
   `,
@@ -15,8 +15,8 @@ const itemCardStyles = {
       flex justify-center items-center
   `,
   cardBodyTitle: `
-      text-center text-[#1B141D] font-light font-["Roboto"] text-[0.75rem] leading-[10px]
-      w-[100%] sm:w-[50%]
+      text-center text-[#1B141D] font-light font-["Roboto"] text-[0.75rem] leading-[10px] sm:leading-[16px] sm:text-[1rem]
+      w-[100%] md:w-[50%]
   `,
   cardFooter: `
       w-[100%] h-[25%]

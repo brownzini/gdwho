@@ -1,7 +1,8 @@
 const cardStyles = {
   container: `
         w-[100%] h-[40%]
-        sm:pl-24 sm:pr-24
+        md:pl-24 md:pr-24
+        sm:pl-10 sm:pr-10
         pl-7 pr-7
     `,
   content: `
@@ -14,7 +15,7 @@ const cardStyles = {
         rounded-tl-[12px]
         rounded-bl-[12px]
         bg-[#FEF4E4]
-        pl-2 sm:pl-20
+        pl-2 sm:pl-5 md:pl-20
         border-[1px] border-t-[#d2953238] border-l-[#d2953238] border-b-[#d2953238] border-r-[#FEF4E4]
     `,
   cardHeader: `
@@ -33,8 +34,8 @@ const cardStyles = {
         flex flex-col justify-center items-start
     `,
   CardSubTitle: `
-        w-[100%] sm:w-[75%]
-        font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] leading-[10px]
+        w-[100%] md:w-[75%]
+        font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] sm:text-[1rem] leading-[10px] sm:leading-[16px]
     `,
   cardFooter: `
         w-[100%] h-[25%]
@@ -43,7 +44,7 @@ const cardStyles = {
         gap-1 sm:gap-3
     `,
   playButtonFont: `
-        font-["Inter"] text-[#428B8D] font-medium hover:text-[#fff] text-[0.7rem]
+        font-["Inter"] text-[#428B8D] font-medium hover:text-[#fff] text-[0.7rem] sm:text-[1rem]
         w-[100%] h-[100%]
         grid items-center justify-center
         transition ease-in-out duration-500 

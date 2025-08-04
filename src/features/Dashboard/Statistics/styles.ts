@@ -2,7 +2,7 @@ const statisticsStyles = {
   container: `
         w-[100%] h-[100%] 
         flex flex-col sm:flex-row items-center justify-center gap-5
-        pl-7 pr-7 sm:pl-24 sm:pr-24 pb-5
+        pl-7 pr-7 pb-5 md:pl-24 md:pr-24 pl-10 pr-10
     `,
   cardsArea: `
         w-[100%] h-[100%] 
@@ -20,7 +20,7 @@ const statisticsStyles = {
   `,
   cardWrapper: `
       w-[100%] h-[100%]
-      flex justify-start items-center gap-3
+      flex justify-start items-center gap-3 sm:gap-1
   `,
   gameDetails: `
         w-[100%] sm:w-[50%] h-[100%] 

@@ -5,7 +5,7 @@ const headerStyle = {
       flex 
       justify-between 
       items-center
-      pl-7 sm:pl-25 sm:pr-25 pr-7
+      pl-7 pr-7 sm:pl-10 sm:pr-10 md:pl-25 md:pr-25 
   `,
   description: `
      w-[100%] h-[100%]
