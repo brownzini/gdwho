@@ -24,8 +24,13 @@ const statisticsStyles = {
   `,
   gameDetails: `
         w-[50%] h-[100%] 
-        flex items-center justify-center 
-        bg-amber-500
+        flex flex-col items-center justify-end 
+  `,
+  myGamesButtonTitle: `
+      w-[100%] h-[100%]
+      hover:text-[#fff] text-[#623E6C] font-medium
+      transition ease-in-out duration-500 
+      grid items-center justify-center
   `,
 };
 
