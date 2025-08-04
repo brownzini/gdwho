@@ -63,7 +63,7 @@ const cardStyles = {
         grid items-center justify-center
     `,
   cardImage: `
-        w-[70%] h-[100%]
+        w-[75%] h-[100%]
         bg-[#FEF4E4]
         border-[1px] 
         border-b-[#d2953238] border-l-[#FEF4E4]

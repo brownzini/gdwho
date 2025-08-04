@@ -1,7 +1,7 @@
 const statisticsStyles = {
   container: `
         w-[100%] h-[100%] 
-        flex items-center justify-center gap-2
+        flex items-center justify-center gap-5
         pl-24 pr-24 pb-5
     `,
   cardsArea: `

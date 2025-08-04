@@ -28,9 +28,14 @@ export default function Statistics() {
             iconName="lostMatches"
             description="Partidas Perdidas"
           />
+          <ItemCard
+            value={10}
+            iconName="created"
+            description="Jogos Criados"
+          />
         </div>
-
       </div>
+
       <div className={statisticsStyles["gameDetails"]}>
         <PersonalizedButton />
         <Button
@@ -42,6 +47,7 @@ export default function Statistics() {
           <p className={statisticsStyles["myGamesButtonTitle"]}>Meus Jogos</p>
         </Button>
       </div>
+
     </div>
   );
 }
