@@ -1,7 +1,68 @@
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <h2>teste</h2>
+    <div
+      className="
+      w-[100%] h-[100vh] 
+      flex 
+      items-center 
+      justify-center
+    "
+    >
+      <div
+        className="
+          w-[93%] h-[84%] 
+          2xl:max-w-[1400px] 
+          flex 
+          items-center 
+          justify-center 
+          rounded-[25px]
+      "
+      >
+        <div
+          className="
+          w-[100%] h-[100%]
+          flex 
+          flex-col 
+          items-center 
+          justify-center 
+        "
+        >
+          <div
+            className="
+            w-[100%] h-[5%]
+            bg-[#F8F9FC] 
+            rounded-tl-[25px]
+          "
+          ></div>
+          <div
+            className="
+            w-[100%] h-[100%]
+            bg-[#F8F9FC] 
+            rounded-bl-[25px]
+            flex 
+            justify-center 
+            items-center
+          "
+          >
+            <div
+              className="
+              w-[100%] h-[100%]
+              bg-[#FFFFFF]
+              rounded-bl-[25px]
+              rounded-tr-[25px]
+            "
+            ></div>
+          </div>
+        </div>
+        <div
+          className="
+          w-[30%] h-[100%]
+          bg-[#F8F9FC] 
+          rounded-tr-[25px]
+          rounded-br-[25px]
+        "
+        ></div>
+      </div>
     </div>
   );
 }
