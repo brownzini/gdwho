@@ -1,4 +1,5 @@
 import Header from "../../shared/Header";
+import Card from "@/features/Dashboard/Card";
 
 export default function MainScreen() {
   return (
@@ -7,6 +8,7 @@ export default function MainScreen() {
         nameTitle="Gabriel"
         todayTitle="Hoje é segunda feira , 11/07/2025"
       />
+      <Card />
     </div>
   );
 }

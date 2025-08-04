@@ -1,4 +1,4 @@
-import ButtonIcon from "@/components/ButtonIcon";
+import Button from "@/components/Button";
 import headerStyle from "./styles";
 import SvgModel from "@/components/svg";
 
@@ -17,16 +17,16 @@ export default function Header({ nameTitle, todayTitle  }:Props) {
         </p>
       </div>
       <div className={headerStyle["actions"]}>
-        <ButtonIcon
+        <Button
           height="h-[40%]"
           bgColor="!bg-[#ffffff]"
           hoverBgColor="hover:!bg=[#ffff]"
         >
           <SvgModel name="settings" width="50%" height="50%" />
-        </ButtonIcon>
-        <ButtonIcon height="h-[40%]" bgColor="!bg-[#ffffff]">
+        </Button>
+        <Button height="h-[40%]" bgColor="!bg-[#ffffff]">
           <SvgModel name="logout" width="30%" height="30%" />
-        </ButtonIcon>
+        </Button>
       </div>
     </div>
   );

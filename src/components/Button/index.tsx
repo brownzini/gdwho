@@ -12,7 +12,7 @@ interface Props {
   children: ReactNode;
 }
 
-export default function ButtonIcon({
+export default function Button({
   width = "w-[100%]",
   height = "h-[100%]",
   bgColor = "!bg-[#ffff]",
