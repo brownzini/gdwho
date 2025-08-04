@@ -4,7 +4,7 @@ const cardStyles = {
         pl-24 pr-24
     `,
   content: `
-        w-[100%] h-[100%]
+        w-[100%] h-[100%] sm:min-h-[230px]
         flex justify-center items-center
     `,
   cardWrapper: `
@@ -52,6 +52,7 @@ const cardStyles = {
         w-[100%]
         h-[100%]
         grid items-center justify-center
+        transition ease-in-out duration-500 
     `,
   githubButtonFont: `
         font-["Inter"]

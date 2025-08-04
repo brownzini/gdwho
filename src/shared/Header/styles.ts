@@ -1,7 +1,7 @@
 const headerStyle = {
   container: `
       w-[100%] h-[12%] 
-      min-h-[120px] 
+      min-h-[100px] 
       flex 
       justify-between 
       items-center
