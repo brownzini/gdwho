@@ -1,0 +1,33 @@
+import ButtonIcon from "@/components/ButtonIcon";
+import headerStyle from "./styles";
+import SvgModel from "@/components/svg";
+
+interface Props {
+    nameTitle:string;
+    todayTitle:string;
+}
+
+export default function Header({ nameTitle, todayTitle  }:Props) {
+  return (
+    <div className={headerStyle["container"]}>
+      <div className={headerStyle["description"]}>
+        <h2 className={headerStyle["title"]}>{nameTitle}</h2>
+        <p className={headerStyle["subtitle"]}>
+          {todayTitle}
+        </p>
+      </div>
+      <div className={headerStyle["actions"]}>
+        <ButtonIcon
+          height="h-[40%]"
+          bgColor="!bg-[#ffffff]"
+          hoverBgColor="hover:!bg=[#ffff]"
+        >
+          <SvgModel name="settings" width="50%" height="50%" />
+        </ButtonIcon>
+        <ButtonIcon height="h-[40%]" bgColor="!bg-[#ffffff]">
+          <SvgModel name="logout" width="30%" height="30%" />
+        </ButtonIcon>
+      </div>
+    </div>
+  );
+}

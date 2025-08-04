@@ -1,3 +1,5 @@
+import DashboardScreen from "@/screens/DashboardScreen";
+
 export default function Home() {
   return (
     <div
@@ -51,7 +53,9 @@ export default function Home() {
               rounded-bl-[25px]
               rounded-tr-[25px]
             "
-            ></div>
+            >
+              <DashboardScreen />
+            </div>
           </div>
         </div>
         <div
