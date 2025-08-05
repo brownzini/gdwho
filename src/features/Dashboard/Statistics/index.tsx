@@ -39,7 +39,7 @@ export default function Statistics() {
           borderStyle="border-[1px] border-[#AB99B0]"
           hoverBgColor="hover:bg-[#1f0826]"
         >
-          <p className={statisticsStyles["myGamesButtonTitle"]}>Meus Jogos</p>
+          <p className={statisticsStyles["myGamesButtonTitle"]}>Meu Jogo</p>
         </Button>
         <Button
           display="flex md:hidden"

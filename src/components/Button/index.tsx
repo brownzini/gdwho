@@ -8,10 +8,13 @@ interface Props {
   borderRadius?: string;
   fontColor?: string;
   fontWeight?: string;
+  fontFamily?:string;
+  fontStyle?:string;
   iconName?: string | null;
   shadow?: string;
   borderStyle?:string;
   display?:string;
+  cursor?:string;
   children: ReactNode;
 }
 
@@ -23,9 +26,12 @@ export default function Button({
   borderRadius = "rounded-[10px]",
   fontColor = "text-[#000000]",
   fontWeight = "font-black",
+  fontFamily=`font-["Inter"]`,
+  fontStyle="text-[1rem]",
   shadow = "shadow-none",
   borderStyle="border-none",
   display="",
+  cursor="cursor-pointer",
   children,
 }: Props) {
   const containerStyle = `
@@ -34,11 +40,11 @@ export default function Button({
           ${shadow}
           ${width} ${height} 
           ${bgColor} ${hoverBgColor} 
-          ${fontColor} ${fontWeight} text-center
+          ${fontStyle} ${fontFamily} ${fontColor} ${fontWeight} text-center
           ${borderRadius} ${borderStyle}
           flex justify-center items-center
           transition ease-in-out duration-500 
-          cursor-pointer
+          ${cursor}
     `;
   return <button className={containerStyle}>{children}</button>;
 }

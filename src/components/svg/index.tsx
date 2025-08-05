@@ -2,8 +2,9 @@ interface Props {
   name: string;
   width?: string;
   height?: string;
+  onClick?: () => void;
 }
-export default function SvgModel({ name, width, height }: Props) {
+export default function SvgModel({ name, width, height, onClick }: Props) {
   switch (name) {
     case "settings":
       return (
@@ -131,6 +132,7 @@ export default function SvgModel({ name, width, height }: Props) {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="absolute cursor-pointer"
+          onClick={() => (onClick) && onClick()}
         >
           <path
             fillRule="evenodd"

@@ -4,7 +4,7 @@ import Header from "../../shared/Header";
 import Card from "@/features/Dashboard/Card";
 import Statistics from "@/features/Dashboard/Statistics";
 
-export default function MainScreen() {
+export default function DashboardScreen() {
   return (
     <div className="
       w-[100%] h-[100%]
