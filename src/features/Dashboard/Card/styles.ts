@@ -10,7 +10,7 @@ const cardStyles = {
         flex justify-center items-center
     `,
   cardWrapper: `
-        w-[100%] h-[100%]
+        w-[100%] h-[100%] max-w-[500px] 
         flex flex-col justify-center items-center gap-1 sm:gap-0 2xl:gap-2
         rounded-tl-[12px]
         rounded-bl-[12px]
@@ -34,8 +34,8 @@ const cardStyles = {
         flex flex-col justify-center items-start
     `,
   CardSubTitle: `
-        w-[100%] 2xl:w-[75%]
-        font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] sm:text-[1rem] xl:text-[1.4rem] leading-[10px] sm:leading-[16px] xl:leading-[25px]
+        w-[70%] sm:w-[75%]
+        font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] sm:text-[1.2rem] leading-[10px] sm:leading-[16px]
     `,
   cardFooter: `
         w-[100%] h-[25%]
