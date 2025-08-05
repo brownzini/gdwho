@@ -13,10 +13,7 @@ const statisticsStyles = {
         flex justify-start items-center
   `,
   descriptionTitle: `
-        font-black 
-        font-["Inter"]
-        text-[#311F35]
-        text-[1.4rem]
+        font-black font-["Inter"] text-[#311F35] text-[1.2rem] xl:text-[1.6rem]
   `,
   cardWrapper: `
       w-[100%] h-[100%]

@@ -15,7 +15,7 @@ const itemCardStyles = {
       flex justify-center items-center
   `,
   cardBodyTitle: `
-      text-center text-[#1B141D] font-light font-["Roboto"] text-[0.75rem] leading-[10px] sm:leading-[16px] sm:text-[1rem]
+      text-center text-[#1B141D] font-light font-["Roboto"] text-[0.75rem] leading-[10px] sm:leading-[16px] sm:text-[1rem]  xl:text-[1.2rem]
       w-[100%] md:w-[50%]
   `,
   cardFooter: `

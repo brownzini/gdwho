@@ -35,7 +35,7 @@ const cardStyles = {
     `,
   CardSubTitle: `
         w-[100%] 2xl:w-[75%]
-        font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] sm:text-[1rem] leading-[10px] sm:leading-[16px]
+        font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] sm:text-[1rem] xl:text-[1.4rem] leading-[10px] sm:leading-[16px] xl:leading-[25px]
     `,
   cardFooter: `
         w-[100%] h-[25%]
