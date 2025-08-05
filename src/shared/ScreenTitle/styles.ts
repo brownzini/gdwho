@@ -1,5 +1,6 @@
 const screenTitleStyles = {
   container: `
+  relative
   pl-10 
   w-[64%] h-[10%] 
   flex flex-row justify-between items-center`,

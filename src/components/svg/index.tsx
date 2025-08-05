@@ -132,13 +132,70 @@ export default function SvgModel({ name, width, height, onClick }: Props) {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="absolute cursor-pointer"
-          onClick={() => (onClick) && onClick()}
+          onClick={() => onClick && onClick()}
         >
           <path
             fillRule="evenodd"
             clipRule="evenodd"
             d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z"
             fill="#FA6C3E"
+          />
+        </svg>
+      );
+    case "entries":
+      return (
+        <svg
+          fill="#31B3B5"
+          id={name + "_id"}
+          width={width}
+          height={height}
+          viewBox="0 0 52 52"
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          className="cursor-pointer"
+          onClick={() => onClick && onClick()}
+        >
+          <g>
+            <path d="M25,2.3l11.7.2a5.51,5.51,0,0,1,2.5,1h0l4.6,4.6,4.6,4.6a3.55,3.55,0,0,1,1,2.5h0L49.7,27a3.55,3.55,0,0,1-1,2.5h0L29.5,48.7a3.69,3.69,0,0,1-5,0h0L13.9,38.1,3.3,27.5a3.69,3.69,0,0,1,0-5h0L22.5,3.3a3.55,3.55,0,0,1,2.5-1ZM18.6,21l-1.9,1.8a.85.85,0,0,0,0,1.3L27.9,35.3a.85.85,0,0,0,1.3,0l1.9-1.9a.85.85,0,0,0,0-1.3L19.7,21A.65.65,0,0,0,18.6,21Zm5.3-5.4L22,17.5a.85.85,0,0,0,0,1.3L33.2,30a.85.85,0,0,0,1.3,0l1.9-1.9a.85.85,0,0,0,0-1.3L25.1,15.6A.91.91,0,0,0,23.9,15.6ZM42,10a3.69,3.69,0,0,0-5,0,3.69,3.69,0,0,0,0,5,3.69,3.69,0,0,0,5,0A3.69,3.69,0,0,0,42,10Z" />
+          </g>
+        </svg>
+      );
+    case "dataList":
+      return (
+        <svg
+          id={name + "_id"}
+          width={width}
+          height={height}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="cursor-pointer"
+          onClick={() => onClick && onClick()}
+        >
+          <path
+            d="M20 6L3 6"
+            stroke="#8B3D4B"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M11 16L3 16"
+            stroke="#8B3D4B"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M12 11L3 11"
+            stroke="#8B3D4B"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M15 14.5L17.5 17M17.5 17L20 14.5M17.5 17V9"
+            stroke="#8B3D4B"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       );
