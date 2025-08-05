@@ -7,7 +7,7 @@ import Statistics from "@/features/Dashboard/Statistics";
 export default function MainScreen() {
   return (
     <div className="
-      w-[100%] h-[100%] 
+      w-[100%] h-[100%]
       flex flex-col justify-center items-center gap-3
     ">
       <Header

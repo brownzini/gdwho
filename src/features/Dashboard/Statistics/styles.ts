@@ -1,8 +1,8 @@
 const statisticsStyles = {
   container: `
-        w-[100%] h-[100%] 
+        w-[100%] h-[100%] max-h-[300px]
         flex flex-col sm:flex-row items-center justify-center gap-5
-        pl-7 pr-7 pb-5 md:pl-24 md:pr-24 pl-10 pr-10
+        pl-7 pr-7 pb-5 2xl:pl-24 2xl:pr-24 pl-10 pr-10
     `,
   cardsArea: `
         w-[100%] h-[100%] 
@@ -24,7 +24,7 @@ const statisticsStyles = {
   `,
   gameDetails: `
         w-[100%] sm:w-[50%] h-[100%] 
-        flex flex-col items-center jusitfy-center sm:justify-end gap-2 md:gap-0
+        flex flex-col items-center jusitfy-center sm:justify-end gap-2 2xl:gap-0
   `,
   myGamesButtonTitle: `
       w-[100%] h-[100%]
