@@ -34,7 +34,7 @@ export default function DataList() {
               value={value}
               setValue={setValue}
               borderStyle="border-none"
-              fontSize="text-[1.6rem]"
+              fontSize="text-[0.93rem] sm:text-[1.2rem] xl:text-[1.6rem]"
               fontColor="text-[#8B803D] italic"
               fontFamily={`font-["Roboto"] `}
             />
@@ -43,14 +43,14 @@ export default function DataList() {
       </div>
       <div className={dataListStyles["buttonsArea"]}>
         <Button 
-          height="h-[64%]" 
+          height="h-[57%] sm:h-[64%]" 
           bgColor="bg-[#939292]" 
           hoverBgColor="hover:bg-[#504c4c]"
         >
           <b className={dataListStyles["backButton"]}>VOLTAR</b>
         </Button>
         <Button 
-          height="h-[64%]" 
+          height="h-[57%] sm:h-[64%]" 
           bgColor="bg-[#C6518F]"
           hoverBgColor="hover:bg-[#cc0f74]"
         >

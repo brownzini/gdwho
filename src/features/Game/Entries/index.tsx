@@ -4,12 +4,11 @@ import entriesStyles from "./styles";
 import { useState } from "react";
 
 export default function Entries() {
-  
   const [response, setResponse] = useState<string>("");
   const [input, setInpuit] = useState<string>("");
   const [output, setOutput] = useState<string>("");
   const [level, setLevel] = useState<string>("100");
-  
+
   return (
     <div className={entriesStyles["entriesArea"]}>
       <div className={entriesStyles["response"]}>
@@ -48,30 +47,33 @@ export default function Entries() {
           fontColor="text-[#603A41]"
         />
       </div>
-      <div className="flex items-center justify-start">
-        <div className="flex items-center justify-start gap-2">
-          <h2 className="text-[#2F2433] font-black flex leading-[16px]">
+      <div className={entriesStyles["level"]}>
+        <div className={entriesStyles["levelWrapper"]}>
+          <h2 className={entriesStyles["levelTitle"]}>
             Nivel de <br /> proximidade:
           </h2>
           <Input
             type="number"
-            width="w-[25%]"
+            width="w-[25%] min-w-[100px]"
             height="h-[100%] p-3"
             value={level}
             setValue={setLevel}
             borderStyle="border-[#522161] border-[1px]"
             fontColor="text-[#522161] text-center font-black"
+            fontSize="text-[0.7rem] sm:text-[1rem]"
           />
         </div>
       </div>
-      <div className="col-span-2 h-[100%] flex items-center justify-start">
+      <div className={entriesStyles["buttonArea"]}>
         <Button
-          width=" w-[31%]"
+          width=" w-[100%] sm:w-[50%]"
           height=" h-[75%]"
           bgColor="bg-[#FA6C3E]"
           hoverBgColor="hover:bg-[#cc471b]"
         >
-          <b className="text-[#fff] font-light w-full h-full grid items-center justify-center">INSERIR ENTRADA</b>
+          <b className="text-[#fff] font-light w-full h-full grid items-center justify-center">
+            INSERIR ENTRADA
+          </b>
         </Button>
       </div>
     </div>
