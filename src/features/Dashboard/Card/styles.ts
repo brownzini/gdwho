@@ -11,11 +11,11 @@ const cardStyles = {
     `,
   cardWrapper: `
         w-[100%] h-[100%]
-        flex flex-col justify-center items-center gap-1 sm:gap-0
+        flex flex-col justify-center items-center gap-1 sm:gap-0 2xl:gap-2
         rounded-tl-[12px]
         rounded-bl-[12px]
         bg-[#FEF4E4]
-        pl-2 sm:pl-5 2xl:pl-20
+        pl-2 sm:pl-5 2xl:pl-7
         border-[1px] border-t-[#d2953238] border-l-[#d2953238] border-b-[#d2953238] border-r-[#FEF4E4]
     `,
   cardHeader: `
