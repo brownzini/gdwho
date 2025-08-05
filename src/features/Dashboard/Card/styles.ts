@@ -1,6 +1,6 @@
 const cardStyles = {
   container: `
-        w-[100%] h-[40%] max-h-[250px]
+        w-[100%]  h-[30%] sm:h-[40%] max-h-[250px]
         2xl:pl-24 2xl:pr-24
         sm:pl-10 sm:pr-10
         pl-7 pr-7
@@ -30,11 +30,11 @@ const cardStyles = {
         text-[1rem]
     `,
   cardBody: `
-        w-[100%] h-[50%]
+        w-[100%] h-[50%] sm:h-[57%] lg:h-[48%] xl:h-[40%]
         flex flex-col justify-center items-start
     `,
   CardSubTitle: `
-        w-[70%] sm:w-[75%]
+        w-[75%] sm:w-[75%]
         font-["Roboto"] text-[#373540] text-left font-light text-[0.75rem] sm:text-[1.2rem] leading-[10px] sm:leading-[16px]
     `,
   cardFooter: `

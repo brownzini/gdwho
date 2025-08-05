@@ -14,7 +14,7 @@ export default function PersonalizedButton() {
                 bgColor="bg-[#F5F5F5]"
                 borderStyle="border-[1px] border-[#C68F7E] border-dashed" 
             >
-               <p className={personalizedButtonStyles["description"]}>criar um jogo</p>
+               <p className={personalizedButtonStyles["description"]}>criar novo jogo</p>
             </Button>
         </div>
     );

@@ -20,12 +20,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div
-          className="
+        <div className="
+          bg-[#F8F9FC] 
           w-[100%] h-[100%] md:w-[30%] md:h-[100%] max-h-[750px] z-12
-        bg-[#F8F9FC] 
           rounded-[25px] md:rounded-tl-[0px] md:rounded-bl-[0px] md:rounded-tr-[25px] md:rounded-br-[25px]
-          hiddens absolute md:relative top-[0px] left-[0px] md:flex 
+          hidden absolute md:relative top-[0px] left-[0px] md:flex 
         "
         >
           <HistoryScreen />
