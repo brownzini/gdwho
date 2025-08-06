@@ -6,7 +6,7 @@ interface Props {
   field: string;
 }
 
-export default function ItemComponent({ type, quantity, field }: Props) {
+export default function CardItem({ type, quantity, field }: Props) {
   const colors: Record<ActionType, string> = {
     criou: "border border[#911893] text-[#911893] ",
     listou: "border border[#1B2B62] text-[#1B2B62] ",

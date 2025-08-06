@@ -1,4 +1,4 @@
-import ItemComponent from "./ItemComponent";
+import CardItem from "./CardItem";
 
 import { historyItemType } from "@/types/History";
 import cardStyles from "./styles";
@@ -23,7 +23,7 @@ export default function Card({ date, items }: Props) {
       <div className={cardStyles["body"]}>
         {items.map((element, index) => {
           return (
-            <ItemComponent
+            <CardItem
               key={index}
               type={element.type}
               quantity={element.quantity}

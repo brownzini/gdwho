@@ -1,5 +1,5 @@
 
-import EditGameScreen from "@/screens/EditGameScreen";
+import ConfigurationScreen from "@/screens/ConfigurationScreen";
 import HistoryScreen from "@/screens/HistoryScreen";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
               rounded-tr-[25px]
             "
             >
-              <EditGameScreen />
+              <ConfigurationScreen />
             </div>
           </div>
         </div>

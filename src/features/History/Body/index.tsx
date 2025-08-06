@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HistoryCard } from "@/types/History";
-import Card from "./Card";
+import Card from "../components/Card";
 
 export default function Body() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,6 +1,6 @@
 "use client";
-import DataList from "../DataList";
-import Entries from "../Entries";
+import DataList from "../components/DataList";
+import Entries from "../components/Entries";
 import createStyles from "./styles";
 
 export default function Create() {

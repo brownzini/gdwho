@@ -1,5 +1,5 @@
 const entryItemStyles = {
-  wrapper: `flex justify-start items-center gap-2`,
+  wrapper: `flex justify-between  items-center gap-2`,
   input: `  text-[#112BCD] font-bold  whitespace-pre-wrap`,
   output: ` text-[#3C478B] font-bold  whitespace-pre-wrap`,
   label: `
