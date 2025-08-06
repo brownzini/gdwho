@@ -5,13 +5,30 @@ import Button from "@/components/Button";
 
 export default function Statistics() {
   return (
-    <div className={statisticsStyles["container"]}>
-      <div className={statisticsStyles["cardsArea"]}>
-        <div className={statisticsStyles["description"]}>
-          <h2 className={statisticsStyles["descriptionTitle"]}>Estatísticas</h2>
+    <div
+      data-name="dashboard-statistics-container" 
+      className={statisticsStyles["container"]}
+    >
+      <div
+        data-name="dashboard-statistics-cards-area" 
+        className={statisticsStyles["cardsArea"]}
+      >
+        <div
+          data-name="dashboard-statistics-description" 
+          className={statisticsStyles["description"]}
+        >
+          <h2
+            data-name="dashboard-statistics-card-description-title" 
+            className={statisticsStyles["descriptionTitle"]}
+          >
+            Estatísticas
+          </h2>
         </div>
 
-        <div className={statisticsStyles["cardWrapper"]}>
+        <div
+          data-name="dashboard-statistics-cards-wrapper" 
+          className={statisticsStyles["cardsWrapper"]}
+        >
           <ItemCard
             value={10}
             iconName="matchesTotal"
@@ -27,11 +44,18 @@ export default function Statistics() {
             iconName="lostMatches"
             description="Partidas Perdidas"
           />
-          <ItemCard value={10} iconName="created" description="Jogos Criados" />
+          <ItemCard 
+            value={10} 
+            iconName="created" 
+            description="Jogos Criados" 
+          />
         </div>
       </div>
 
-      <div className={statisticsStyles["gameDetails"]}>
+      <div
+        data-name="dashboard-statistics-game-details-area" 
+        className={statisticsStyles["gameDetails"]}
+      >
         <PersonalizedButton />
         <Button
           height="h-[50%] sm:h-[40%]"
@@ -39,7 +63,12 @@ export default function Statistics() {
           borderStyle="border-[1px] border-[#AB99B0]"
           hoverBgColor="hover:bg-[#1f0826]"
         >
-          <p className={statisticsStyles["myGamesButtonTitle"]}>Meu Jogo</p>
+          <p
+            data-name="dashboard-statistics-my-game-label" 
+            className={statisticsStyles["buttonTitle"]}
+          >
+            Meu Jogo
+          </p>
         </Button>
         <Button
           display="flex md:hidden"
@@ -48,7 +77,12 @@ export default function Statistics() {
           borderStyle="border-[1px] border-[#AB99B0]"
           hoverBgColor="hover:bg-[#1f0826]"
         >
-          <p className={statisticsStyles["myGamesButtonTitle"]}>Histórico</p>
+          <p
+            data-name="dashboard-statistics-history-label" 
+            className={statisticsStyles["buttonTitle"]}
+          >
+            Histórico
+          </p>
         </Button>
       </div>
     </div>

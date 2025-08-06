@@ -1,7 +1,6 @@
 const cardStyles = {
   container: `
         w-[100%]  h-[30%] sm:h-[40%] max-h-[250px]
-        2xl:pl-24 2xl:pr-24
         sm:pl-10 sm:pr-10
         pl-7 pr-7
     `,
@@ -30,7 +29,7 @@ const cardStyles = {
         text-[1rem]
     `,
   cardBody: `
-        w-[100%] h-[50%] sm:h-[57%] lg:h-[48%] xl:h-[40%]
+        w-[100%] h-[50%] sm:h-[57%] lg:h-[48%] xl:h-[50%]
         flex flex-col justify-center items-start
     `,
   CardSubTitle: `
