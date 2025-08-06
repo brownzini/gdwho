@@ -47,7 +47,7 @@ export default function DataList() {
           bgColor="bg-[#939292]" 
           hoverBgColor="hover:bg-[#504c4c]"
         >
-          <b className={dataListStyles["backButton"]}>VOLTAR</b>
+          <b className={dataListStyles["backButtonDescription"]}>VOLTAR</b>
         </Button>
         <Button 
           height="h-[57%] sm:h-[64%]" 

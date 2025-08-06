@@ -20,15 +20,21 @@ export default function Slider({
 }: Props) {
   const sliderStyles = {
     container: `
-            w-full max-w-md 
-            flex ${inline} justify-center items-start gap-5
+      w-full max-w-md 
+      flex ${inline} justify-center items-start gap-5
     `,
     label: `text-[${labelColor}] font-black font-["Roboto"]`,
     input: `w-full h-[2px] bg-[#482374] rounded-lg appearance-none cursor-pointer`,
   };
   return (
-    <div className={sliderStyles["container"]}>
-      <p className={sliderStyles["label"]}>
+    <div
+      data-name="slider-container" 
+      className={sliderStyles["container"]}
+    >
+      <p 
+        data-name="slider-label"
+        className={sliderStyles["label"]}
+      >
         {label} ({value}%)
       </p>
       <input

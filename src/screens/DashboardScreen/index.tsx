@@ -1,9 +1,8 @@
 
 import Header from "../../shared/Header";
 
-import Card from "@/features/Dashboard/Card";
-import Statistics from "@/features/Dashboard/Statistics";
 import dashboardScreenStyles from "./styles";
+import Dashboard from "@/features/Dashboard";
 
 export default function DashboardScreen() {
   return (
@@ -15,8 +14,7 @@ export default function DashboardScreen() {
         nameTitle="Gabriel"
         todayTitle="Hoje é segunda feira , 11/07/2025"
       />
-      <Card />
-      <Statistics />
+      <Dashboard />
     </div>
   );
 }

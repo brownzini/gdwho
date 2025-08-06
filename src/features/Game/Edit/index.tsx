@@ -1,7 +1,7 @@
 "use client";
 
-import DataList from "../components/DataList";
-import Entries from "../components/Entries";
+import DataList from "../layouts/DataList";
+import Entries from "../layouts/Entries";
 import editStyles from "./styles";
 
 export default function Edit() {

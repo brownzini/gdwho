@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HistoryCard } from "@/types/History";
-import Card from "../components/Card";
+import HisotryCard from "../layouts/HisotryCard";
 
 export default function Body() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -222,7 +222,7 @@ export default function Body() {
     <div className="hide-scrollbar mb-3 w-[100%] h-[100%] pl-5 flex flex-col items-center justify-start overflow-y-scroll scrollbar-none">
       {cards.map((element, index) => {
         return (
-          <Card
+          <HisotryCard
             key={index}
             date={element.date}
             items={element.items}

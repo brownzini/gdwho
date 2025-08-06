@@ -35,10 +35,11 @@ export default function EditGameScreen() {
               height="100%"
               onClick={() => console.log("")}
             />
-            <h2 
+            <h2
               data-name="edit-game-screen-entries-label"
-              className={editGameScreenStyles["entrieLabel"]}>
-                :0
+              className={editGameScreenStyles["entrieLabel"]}
+            >
+              :0
             </h2>
           </div>
           <div
@@ -52,7 +53,7 @@ export default function EditGameScreen() {
               onClick={() => console.log("")}
             />
             <h2
-              data-name="edit-game-screen-dataList-label" 
+              data-name="edit-game-screen-dataList-label"
               className={editGameScreenStyles["dataListLabel"]}
             >
               :0

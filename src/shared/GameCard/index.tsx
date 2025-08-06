@@ -10,7 +10,7 @@ interface Props {
   updateColor?: (key: string, value: string) => void;
 }
 
-export default function Card({
+export default function GameCard({
   type = "correct",
   editMode,
   color,

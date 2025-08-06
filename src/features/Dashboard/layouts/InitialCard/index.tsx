@@ -2,7 +2,7 @@ import Button from "@/components/Button";
 import cardStyles from "./styles";
 import Image from "next/image";
 
-export default function Card() {
+export default function InitialCard() {
   return (
     <div 
       data-name="dashboard-card-container"

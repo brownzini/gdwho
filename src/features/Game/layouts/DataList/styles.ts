@@ -32,7 +32,7 @@ const dataListStyles = {
       w-[100%] h-[50%] md:h-[25%]
       flex justify-center items-start gap-2
   `,
-  backButton:` text-[#fff] font-medium text-[1rem] `,
+  backButtonDescription:` text-[#fff] font-medium text-[1rem] `,
   createButton:`text-[#fff] font-medium text-[1rem] `,
 };
 export default dataListStyles;

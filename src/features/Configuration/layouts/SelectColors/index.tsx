@@ -3,7 +3,7 @@
 import { CardColorsType } from "@/types/CardColors";
 import { useState } from "react";
 
-import Card from "@/shared/Card";
+import GameCard from "@/shared/GameCard";
 import selectColorsStyles from "./styles";
 
 export default function SelectColors() {
@@ -35,21 +35,21 @@ export default function SelectColors() {
         data-name="cards-list-area" 
         className={selectColorsStyles["cardListArea"]}
       >
-        <Card
+        <GameCard
           editMode
           type="correct"
           color={colors.correct}
           updateColor={updateColor}
           description="Muito Perto"
         />
-        <Card
+        <GameCard
           editMode
           type="nearby"
           description="Proximo"
           color={colors.nearby}
           updateColor={updateColor}
         />
-        <Card
+        <GameCard
           editMode
           type="distant"
           description="Distante"
