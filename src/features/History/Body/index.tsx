@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { HistoryCard } from "@/types/History";
+
+import bodyStyles from "./styles";
+
 import HisotryCard from "../layouts/HisotryCard";
+import { HistoryCard } from "@/types/History";
 
 export default function Body() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -219,7 +222,10 @@ export default function Body() {
     },
   ]);
   return (
-    <div className="hide-scrollbar mb-3 w-[100%] h-[100%] pl-5 flex flex-col items-center justify-start overflow-y-scroll scrollbar-none">
+    <div
+      data-name="history-body-container"
+      className={bodyStyles["container"]}
+    >
       {cards.map((element, index) => {
         return (
           <HisotryCard

@@ -20,7 +20,7 @@ const cardStyles = {
   dateTitle: `
         font-light text-[#262424]
     `,
-  body: `
+  cardsList: `
         flex flex-col items-center justify-start gap-2
         w-[100%] h-[100%] 
     `,

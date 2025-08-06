@@ -1,9 +1,14 @@
 import Body from "@/features/History/Body";
 import Header from "@/features/History/Header";
 
+import historyScreenStyles from "./styles";
+
 export default function HistoryScreen() {
     return (
-        <div className="w-[100%] h-[100%] flex flex-col justify-center items-center">
+        <div
+          data-name="history-screen-container" 
+          className={historyScreenStyles["container"]}
+        >
             <Header />
             <Body />
         </div>

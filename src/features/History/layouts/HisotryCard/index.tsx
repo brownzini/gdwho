@@ -10,17 +10,33 @@ interface Props {
 
 export default function HisotryCard({ date, items }: Props) {
   return (
-    <div className={cardStyles["container"]}>
-
-      <div className={cardStyles["header"]}>
+    <div
+      data-name="history-card-container" 
+      className={cardStyles["container"]}
+    >
+      <div 
+        data-name="history-card-header-area" 
+        className={cardStyles["header"]}
+      >
         <div className={cardStyles["detail"]} />
-        <div className={cardStyles["date"]}>
-          <h3 className={cardStyles["dateTitle"]}> {date} </h3>
+        <div
+          data-name="history-card-date-area"  
+          className={cardStyles["date"]}
+        >
+          <h3
+            data-name="history-card-date-title"   
+            className={cardStyles["dateTitle"]}
+          > 
+            {date} 
+          </h3>
         </div>
         <div className={cardStyles["detail"]} />
       </div>
 
-      <div className={cardStyles["body"]}>
+      <div
+        data-name="history-card-list-area" 
+        className={cardStyles["cardsList"]}
+      >
         {items.map((element, index) => {
           return (
             <CardItem

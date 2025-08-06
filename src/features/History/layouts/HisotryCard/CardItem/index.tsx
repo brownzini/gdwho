@@ -14,13 +14,16 @@ export default function CardItem({ type, quantity, field }: Props) {
     removeu: "border border[#99250D] text-[#99250D] ",
   };
 
-  const bodyDiv =
-    "flex justify-center items-center w-[100%] h-[16%] 2xl:max-h-[4vh] " +
+  const cardItemContainer =
+    "flex justify-center items-center w-[100%] h-[16%] 2xl:max-h-[4vh] text-center " +
     colors[type] +
     " p-1 rounded-[5px] font-semibold leading-none";
 
   return (
-    <div className={bodyDiv}>
+    <div
+      data-name="card-item-container" 
+      className={cardItemContainer}
+    >
       <h2>{type + " " + quantity + " " + field}</h2>
     </div>
   );
