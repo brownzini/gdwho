@@ -1,4 +1,10 @@
 const entriesStyles = {
+  entryListContainer: `
+        hide-scrollbar
+        w-[100%] h-[93%] max-h-[200px]
+        col-start-1 col-span-2 row-start-2 row-span-4
+        overflow-y-scroll
+  `,
   entriesArea: `
       w-[100%] h-[93%] 
       grid grid-cols-2 grid-rows-[1fr_1fr_1fr_auto_1fr] gap-2
