@@ -1,5 +1,5 @@
 
-import ConfigurationScreen from "@/screens/ConfigurationScreen";
+import DashboardScreen from "@/screens/DashboardScreen";
 import HistoryScreen from "@/screens/HistoryScreen";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
               rounded-tr-[25px]
             "
             >
-              <ConfigurationScreen />
+              <DashboardScreen />
             </div>
           </div>
         </div>

@@ -6,8 +6,16 @@ interface Props {
 }
 export default function ScreenTitle({ title, children }: Props) {
   return (
-    <div className={screenTitleStyles["container"]}>
-      <h2 className={screenTitleStyles["title"]}>{title}</h2>
+    <div
+      data-name="screen-title-container" 
+      className={screenTitleStyles["container"]}
+    >
+      <h2
+        data-name="screen-title-label"  
+        className={screenTitleStyles["title"]}
+      >
+          {title}
+      </h2>
       {children}
     </div>
   );

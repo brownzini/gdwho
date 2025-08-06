@@ -13,7 +13,7 @@ const entryItemStyles = {
       max-w-[100px] min-h-[25px] w-[100%] h-[100%] 
       flex justify-center items-center gap-3 
   `,
-  iconsArea: `flex justify-center items-center w-[20%] h-full`,
+  iconArea: `flex justify-center items-center w-[20%] h-full`,
 };
 
 export default entryItemStyles;

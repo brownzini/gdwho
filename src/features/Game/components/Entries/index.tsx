@@ -16,9 +16,20 @@ export default function Entries({ readMode = false }: Props) {
   const [level, setLevel] = useState<string>("100");
 
   return (
-    <div className={entriesStyles["entriesArea"]}>
-      <div className={entriesStyles["response"]}>
-        <b className={entriesStyles["responseLabel"]}>Resposta:</b>
+    <div 
+      data-name="entries-area" 
+      className={entriesStyles["entriesArea"]}
+    >
+      <div 
+        data-name="response-area" 
+        className={entriesStyles["response"]}
+      >
+        <b
+          data-name="response-label"
+          className={entriesStyles["responseLabel"]}
+        >
+          Resposta:
+        </b>
         <Input
           width="w-full"
           height="h-[50%]"
@@ -31,22 +42,38 @@ export default function Entries({ readMode = false }: Props) {
       </div>
 
       {!readMode && (
-        <div className={entriesStyles["input"]}>
-          <b className={entriesStyles["inputLabel"]}>Input:</b>
+        <div 
+          data-name="entries-input-area" 
+          className={entriesStyles["input"]}
+        >
+          <b
+            data-name="entries-input-label"
+            className={entriesStyles["inputLabel"]}
+          >
+            Input:
+          </b>
           <Input
             width="w-full"
             height="h-[50%]"
             value={input}
             setValue={setInpuit}
+            fontColor="text-[#3A5F60]"
             placeHolder="Ex: trabalha com construções"
             borderStyle="border-[#31B3B5] border-[1px]"
-            fontColor="text-[#3A5F60]"
           />
         </div>
       )}
       {!readMode && (
-        <div className={entriesStyles["output"]}>
-          <b className={entriesStyles["outputLabel"]}>Output:</b>
+        <div
+          data-name="entries-output-area"
+          className={entriesStyles["output"]}
+        >
+          <b
+            data-name="entries-output-label"
+            className={entriesStyles["outputLabel"]}
+          >
+            Output:
+          </b>
           <Input
             width="w-full"
             height="h-[50%]"
@@ -59,9 +86,18 @@ export default function Entries({ readMode = false }: Props) {
         </div>
       )}
       {!readMode && (
-        <div className={entriesStyles["level"]}>
-          <div className={entriesStyles["levelWrapper"]}>
-            <h2 className={entriesStyles["levelTitle"]}>
+        <div 
+          data-name="entries-level-area" 
+          className={entriesStyles["level"]}
+        >
+          <div
+            data-name="entries-level-wrapper-area"
+            className={entriesStyles["levelWrapper"]}
+          >
+            <h2
+              data-name="entries-level-title"
+              className={entriesStyles["levelTitle"]}
+            >
               Nivel de <br /> proximidade:
             </h2>
             <Input
@@ -78,52 +114,60 @@ export default function Entries({ readMode = false }: Props) {
         </div>
       )}
       {!readMode && (
-        <div className={entriesStyles["buttonArea"]}>
+        <div
+          data-name="entries-button-area"
+          className={entriesStyles["buttonArea"]}
+        >
           <Button
             width=" w-[100%] sm:w-[50%]"
             height=" h-[75%]"
             bgColor="bg-[#FA6C3E]"
             hoverBgColor="hover:bg-[#cc471b]"
           >
-            <b className="text-[#fff] font-bold w-full h-full grid items-center justify-center">
+            <b
+              data-name="entries-button-title"
+              className={entriesStyles["buttonTitle"]}>
               INSERIR ENTRADA
             </b>
           </Button>
         </div>
       )}
       {readMode && (
-        <div className={entriesStyles["entryListContainer"]}>
+        <div 
+          data-name="entries-list-container"
+          className={entriesStyles["entryListContainer"]}
+        >
           <EntryItem
             input={"Trabalha com cons..."}
             output={"Mexe com ciment..."}
             label={100}
           />
-                    <EntryItem
+          <EntryItem
             input={"Trabalha com cons..."}
             output={"Mexe com ciment..."}
             label={100}
           />
-                    <EntryItem
+          <EntryItem
             input={"Trabalha com cons..."}
             output={"Mexe com ciment..."}
             label={100}
           />
-                    <EntryItem
+          <EntryItem
             input={"Trabalha com cons..."}
             output={"Mexe com ciment..."}
             label={100}
           />
-                    <EntryItem
+          <EntryItem
             input={"Trabalha com cons..."}
             output={"Mexe com ciment..."}
             label={100}
           />
-                    <EntryItem
+          <EntryItem
             input={"Trabalha com cons..."}
             output={"Mexe com ciment..."}
             label={100}
           />
-                    <EntryItem
+          <EntryItem
             input={"Trabalha com cons..."}
             output={"Mexe com ciment..."}
             label={100}

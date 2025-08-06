@@ -6,7 +6,10 @@ import editStyles from "./styles";
 
 export default function Edit() {
   return (
-    <div className={editStyles["wrapper"]}>
+    <div
+      data-name="edit-game-container"  
+      className={editStyles["wrapper"]}
+    >
       <Entries readMode={true} />
       <DataList />
     </div>
