@@ -1,3 +1,4 @@
+import CreateGameScreen from "@/screens/CreateGameScreen";
 import DashboardScreen from "@/screens/DashboardScreen";
 import HistoryScreen from "@/screens/HistoryScreen";
 
@@ -16,7 +17,7 @@ export default function Home() {
               rounded-tr-[25px]
             "
             >
-              <DashboardScreen />
+              <CreateGameScreen />
             </div>
           </div>
         </div>

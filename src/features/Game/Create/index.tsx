@@ -5,8 +5,11 @@ import createStyles from "./styles";
 
 export default function Create() {
   return (
-    <div className={createStyles["wrapper"]}>
-      <Entries />
+    <div 
+      data-name="edit-game-container"
+      className={createStyles["wrapper"]}
+    >
+      <Entries  />
       <DataList />
     </div>
   );
