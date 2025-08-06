@@ -5,7 +5,10 @@ import soundStyles from "./styles";
 export default function Sound() {
   const [volume, setVolume] = useState<number>(0);
   return (
-    <div className={soundStyles["container"]}>
+    <div
+      data-name="sound-container"  
+      className={soundStyles["container"]}
+    >
       <Slider 
         value={volume} 
         setValue={setVolume} 

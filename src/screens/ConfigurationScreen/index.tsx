@@ -19,12 +19,12 @@ export default function ConfigurationScreen() {
         todayTitle="Hoje é segunda feira , 11/07/2025"
       />
       <div className="w-[93%] h-[1px] bg-[#D9D9D9]" />
-      <div className="w-[100%] h-[100%] flex flex-col justify-center items-start">
+      <div className="w-[100%] h-[100%] flex flex-col justify-center items-start gap-1">
         <ScreenTitle title="Configurações:" />
         <div
           className={`
           w-[100%] h-[100%] 
-          flex flex-col justify-center items-center
+          flex flex-col justify-center items-center gap-2
           pl-10 pr-10
         `}
         >
