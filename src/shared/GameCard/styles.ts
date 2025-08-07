@@ -3,6 +3,7 @@ const cardStyles = {
           relative 
           w-[100%] h-full max-w-[160px] max-h-[160px]
           flex justify-center items-center
+          fade-in-up
     `,
     colorPickArea: `
           absolute top-[8.4%] sm:top-[5%] 

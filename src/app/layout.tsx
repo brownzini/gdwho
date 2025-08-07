@@ -8,7 +8,7 @@ const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'], variable: '-
 const exo2 = Exo_2({
   subsets: ['latin'],
   variable: '--font-exo2',
-  weight: ['400', '600', '700'], // escolha os pesos que você usa
+  weight: ['400', '600', '700'],
 })
 
 const luckiest = Luckiest_Guy({

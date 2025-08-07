@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 body {
-  background-color: #F1E8DF;
+  background-color: #f1e8df;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .hide-scrollbar {
   -ms-overflow-style: none;
-  scrollbar-width: none; 
+  scrollbar-width: none;
 }
 
 input[type="color"] {
@@ -30,5 +30,67 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .transition500 {
-  transition: 0.5s ease-in-out;  
+  transition: 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+.serra {
+  background-image: repeating-linear-gradient(
+      45deg,
+      #000000,
+      #000000 1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      #000000,
+      #000000 1px,
+      transparent 1px,
+      transparent 20px
+    );
+
+    animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  25%{
+    background-color: #7d0a9d;
+  }
+  50% {
+    background-color: #02b57f;
+  }
+  100% {
+    background-position: -40px -400px;
+  }
+}
+
+.float {
+    animation: moveFloat 2s ease-in-out infinite;
+}
+
+@keyframes moveFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px); 
+  }
 }

@@ -1,7 +1,8 @@
-import InGame from "@/features/Game/InGame";
 import ScreenHeader from "@/shared/ScreenHeader";
 
 import inGameScreenStyles from "./styles";
+import CorrectAnswer from "@/features/Game/CorrectAnswer";
+import InGame from "@/features/Game/InGame";
 
 export default function InGameScreen() {
   return (
@@ -18,7 +19,8 @@ export default function InGameScreen() {
         data-name="in-game-screen-wrapper"
         className={inGameScreenStyles["wrapper"]}
       >
-        <InGame />
+        {/* <InGame /> */}
+        <CorrectAnswer />
       </div>
     </div>
   );
