@@ -5,10 +5,21 @@ import GAME_MODE_CARD from "@/constants/gameModeCards";
 import GameModeType from "@/types/GameMode";
 
 interface Props {
-  typeMode:GameModeType;
+  typeMode: GameModeType;
+  onOpenModal?: () => void;
 }
 
-export default function GameModeCard({ typeMode="randomMode" }: Props) {
+export default function GameModeCard({
+  typeMode = "randomMode",
+  onOpenModal,
+}: Props) {
+  
+  const hoverButton =
+    gameModeCardStyles["buttonDescription"] +
+    GAME_MODE_CARD[typeMode].colors.hoverButton;
+
+  const isPlayerMode = typeMode === "playerMode" && onOpenModal;
+
   return (
     <div
       data-name="game-mode-card-container"
@@ -39,20 +50,22 @@ export default function GameModeCard({ typeMode="randomMode" }: Props) {
           {GAME_MODE_CARD[typeMode].labelContent}
         </h3>
       </div>
-      <div 
+      <div
         data-name="game-mode-card-footer-area"
         className={gameModeCardStyles["footer"]}
       >
         <Button
           width="w-full"
+          height="h-[16px] sm:h-full"
           bgColor={GAME_MODE_CARD[typeMode].colors.button}
           borderRadius="rounded-[5px]"
           hoverBgColor="hover:bg-[#fff]"
           borderStyle={GAME_MODE_CARD[typeMode].colors.borderButton}
+          onClick={() => isPlayerMode && onOpenModal()}
         >
           <p
-            data-name="game-mode-card-footer-description" 
-            className={gameModeCardStyles["buttonDescription"]+GAME_MODE_CARD[typeMode].colors.hoverButton}
+            data-name="game-mode-card-footer-description"
+            className={hoverButton}
           >
             {GAME_MODE_CARD[typeMode].buttonDescription}
           </p>

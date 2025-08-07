@@ -15,6 +15,7 @@ interface Props {
   borderStyle?:string;
   display?:string;
   cursor?:string;
+  onClick?: () => void;
   children: ReactNode;
 }
 
@@ -32,6 +33,7 @@ export default function Button({
   borderStyle="border-none",
   display="",
   cursor="cursor-pointer",
+  onClick,
   children,
 }: Props) {
   const containerStyle = `
@@ -46,5 +48,10 @@ export default function Button({
           transition ease-in-out duration-500 
           ${cursor}
     `;
-  return <button className={containerStyle}>{children}</button>;
+  return <button 
+          className={containerStyle}
+          onClick={() => (onClick) && onClick()}
+        >
+          {children}
+        </button>;
 }

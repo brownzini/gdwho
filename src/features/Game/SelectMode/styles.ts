@@ -1,7 +1,8 @@
 const selectModeStyles = {
   container: `
-        w-[100%] h-[100%]
-        flex flex-row justify-start items-center gap-5
+        hide-scrollbar 
+        w-[100%] h-[100%] 
+        flex flex-col overflow-y-scroll sm:flex-row justify-start items-center gap-5
         pl-10 pr-10
   `,
 };

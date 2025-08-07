@@ -1,5 +1,7 @@
-import GameSelectScreen from "@/screens/GameSelectScreen";
+"use client";
+
 import HistoryScreen from "@/screens/HistoryScreen";
+import GameSelectScreen from "@/screens/GameSelectScreen";
 
 const homeStyles = {
   container: `
@@ -42,38 +44,38 @@ const homeStyles = {
 
 export default function Home() {
   return (
-    <div 
-      data-name="home-container" 
-      className={homeStyles["container"]}
-    >
-      <div
-        data-name="home-wrapper" 
-        className={homeStyles["wrapper"]}
+      <div 
+        data-name="home-container" 
+        className={homeStyles["container"]}
       >
-        <div
-          data-name="home-main-area" 
-          className={homeStyles["mainArea"]}
+        <div 
+          data-name="home-wrapper" 
+          className={homeStyles["wrapper"]}
         >
-          <div className={homeStyles["detail"]} />
-          <div
-            data-name="home-main-content-area" 
-            className={homeStyles["content"]}
+          <div 
+            data-name="home-main-area" 
+            className={homeStyles["mainArea"]}
           >
+            <div className={homeStyles["detail"]} />
             <div
-              data-name="home-main-screen-section"  
-              className={homeStyles["screenSection"]}
+              data-name="home-main-content-area"
+              className={homeStyles["content"]}
             >
-              <GameSelectScreen />
+              <div
+                data-name="home-main-screen-section"
+                className={homeStyles["screenSection"]}
+              >
+                <GameSelectScreen />
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          data-name="home-history-area"  
-          className={homeStyles["historyArea"]}
-        >
-          <HistoryScreen />
+          <div
+            data-name="home-history-area"
+            className={homeStyles["historyArea"]}
+          >
+            <HistoryScreen />
+          </div>
         </div>
       </div>
-    </div>
   );
 }

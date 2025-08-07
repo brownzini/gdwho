@@ -8,13 +8,13 @@ const gameModeCardStyles = {
         flex justify-start items-center
         pl-5 pr-5
     `,
-  headerTitle: `font-black font-["Exo_2"] leading-[30px] text-[2rem]`,
+  headerTitle: `font-black font-["Exo_2"] leading-[30px] text-[1.2rem] sm:text-[2rem]`,
   body: `
         w-full h-[40%]
         flex justify-start items-center
         pl-5 pr-5 
     `,
-  bodyLabel: `font-extralight font-["Roboto"] leading-[20px]`,
+  bodyLabel: `font-extralight font-["Roboto"] leading-[16px] sm:leading-[20px] text-[0.75rem] sm:text-[1rem]`,
   footer: `
         w-full h-[25%]
         flex justify-start items-center

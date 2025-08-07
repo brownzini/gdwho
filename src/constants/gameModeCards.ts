@@ -15,7 +15,7 @@ const GAME_MODE_CARD = {
   creativeMode: {
     titleContent: "Modo Criativo",
     labelContent: "Modo feito para testar o jogo desenvolvido por você mesmo",
-    buttonDescription: "SELECIONAR",
+    buttonDescription: "JOGAR",
     colors: {
       borderArea: "1px solid #1D4CDA",
       borderButton: "border-[1px] border-[#1D4CDA]",
