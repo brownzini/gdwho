@@ -12,7 +12,7 @@ const cardStyles = {
     `,
     cardBodyArea: `
           select-none
-          w-full h-[70%] max-w-[320px] max-h-[160px]
+          w-full h-[70%] max-w-[320px] max-h-[160px] shadow-md
           flex justify-center items-center
           rounded-[10px]
     `,
