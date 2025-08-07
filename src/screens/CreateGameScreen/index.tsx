@@ -2,7 +2,7 @@
 
 import SvgModel from "@/components/svg";
 import Create from "@/features/Game/Create";
-import Header from "@/shared/Header";
+import ScreenHeader from "@/shared/ScreenHeader";
 import ScreenTitle from "@/shared/ScreenTitle";
 
 import React from "react";
@@ -14,7 +14,7 @@ export default function CreateGameScreen() {
       data-name="create-game-screen-container"
       className={createGameScreenStyles["container"]}
     >
-      <Header
+      <ScreenHeader
         nameTitle="Gabriel"
         todayTitle="Hoje é segunda feira , 11/07/2025"
       />

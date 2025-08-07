@@ -7,6 +7,7 @@ const selectColorsStyles = {
     cardListArea:`
         w-full h-full 
         flex justify-start items-center gap-3
+        hide-scrollbar overflow-x-scroll
     `,
 };
 

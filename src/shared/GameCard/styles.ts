@@ -1,7 +1,7 @@
 const cardStyles = {
     container: `
           relative 
-          w-[30%] h-[100%] 
+          w-[100%] h-full max-w-[160px] max-h-[160px]
           flex justify-center items-center
     `,
     colorPickArea: `
@@ -12,11 +12,12 @@ const cardStyles = {
     `,
     cardBodyArea: `
           select-none
-          w-full h-[70%] max-w-[320px] max-h-[160px] shadow-md
+          w-full h-[70%] max-w-[320px] max-h-[160px] min-w-[150px]
+          bg-[#FFFFFF] shadow-md
           flex justify-center items-center
-          rounded-[10px]
+          rounded-[10px] 
     `,
-    cardDescription: `font-light font-["Inter"] text-[0.84rem] sm:text-[1rem] text-center`,
+    cardDescription: `pl-5 pr-5 text-left font-light font-["Inter"] text-[0.84rem] sm:text-[1rem] `,
 };
 
 export default cardStyles;

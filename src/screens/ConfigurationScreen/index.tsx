@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/shared/Header";
+import ScreenHeader from "@/shared/ScreenHeader";
 import ScreenTitle from "@/shared/ScreenTitle";
 
 import React from "react";
@@ -13,7 +13,7 @@ export default function ConfigurationScreen() {
       data-name="config-screen-container"
       className={configurationScreenStyles["container"]}
     >
-      <Header
+      <ScreenHeader
         nameTitle="Gabriel"
         todayTitle="Hoje é segunda feira , 11/07/2025"
       />

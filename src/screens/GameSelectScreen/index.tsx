@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Header from "@/shared/Header";
+import ScreenHeader from "@/shared/ScreenHeader";
 import Modal from "@/shared/Modal";
 import ScreenTitle from "@/shared/ScreenTitle";
 
@@ -59,7 +59,7 @@ export default function GameSelectScreen() {
         data-name="game-select-screen-container"
         className={gameSelectScreenStyles["container"]}
       >
-        <Header
+        <ScreenHeader
           nameTitle="Gabriel"
           todayTitle="Hoje é segunda feira , 11/07/2025"
         />

@@ -1,5 +1,5 @@
-import Body from "@/features/History/Body";
-import Header from "@/features/History/Header";
+import HistoryBody from "@/features/History/HistoryBody";
+import HistoryHeader from "@/features/History/HistoryHeader";
 
 import historyScreenStyles from "./styles";
 
@@ -9,8 +9,8 @@ export default function HistoryScreen() {
           data-name="history-screen-container" 
           className={historyScreenStyles["container"]}
         >
-            <Header />
-            <Body />
+            <HistoryHeader />
+            <HistoryBody   />
         </div>
     )
 }

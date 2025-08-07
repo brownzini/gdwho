@@ -7,7 +7,7 @@ import bodyStyles from "./styles";
 import HisotryCard from "../layouts/HisotryCard";
 import { HistoryCard } from "@/types/History";
 
-export default function Body() {
+export default function HistoryBody() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cards, setCards] = useState<HistoryCard[]>([
     {

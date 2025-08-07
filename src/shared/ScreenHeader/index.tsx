@@ -7,7 +7,7 @@ interface Props {
   todayTitle: string;
 }
 
-export default function Header({ nameTitle, todayTitle }: Props) {
+export default function ScreenHeader({ nameTitle, todayTitle }: Props) {
   return (
     <div className={headerStyle["container"]}>
       <div className={headerStyle["description"]}>

@@ -3,7 +3,7 @@
 import SvgModel from "@/components/svg";
 
 import Edit from "@/features/Game/Edit";
-import Header from "@/shared/Header";
+import ScreenHeader from "@/shared/ScreenHeader";
 import ScreenTitle from "@/shared/ScreenTitle";
 
 import React from "react";
@@ -15,7 +15,7 @@ export default function EditGameScreen() {
       data-name="edit-game-screen-container"
       className={editGameScreenStyles["container"]}
     >
-      <Header
+      <ScreenHeader
         nameTitle="Gabriel"
         todayTitle="Hoje é segunda feira , 11/07/2025"
       />
