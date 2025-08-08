@@ -9,7 +9,7 @@ interface Props {
   onOpenModal?: () => void;
 }
 
-export default function GameModeCard({
+export default function GameModeCardArea({
   typeMode = "randomMode",
   onOpenModal,
 }: Props) {

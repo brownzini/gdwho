@@ -9,7 +9,7 @@ interface Props {
   readMode?: boolean;
 }
 
-export default function Entries({ readMode = false }: Props) {
+export default function EntriesArea({ readMode = false }: Props) {
   const [response, setResponse] = useState<string>("");
   const [input, setInpuit] = useState<string>("");
   const [output, setOutput] = useState<string>("");

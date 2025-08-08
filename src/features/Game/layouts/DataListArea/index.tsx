@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import SvgModel from "@/components/svg";
 
-export default function DataList() {
+export default function DataListArea() {
   const [value, setValue] = useState<string>("");
   return (
     <div className={dataListStyles["container"]}>

@@ -1,4 +1,4 @@
-import GameModeCard from "../layouts/GameModeCard";
+import GameModeCard from "../layouts/GameModeCardArea";
 import selectModeStyles from "./styles";
 
 interface Props {

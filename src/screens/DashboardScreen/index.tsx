@@ -1,3 +1,4 @@
+"use client"
 
 import ScreenHeader from "../../shared/ScreenHeader";
 
