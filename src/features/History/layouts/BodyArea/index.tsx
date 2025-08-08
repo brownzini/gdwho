@@ -4,10 +4,10 @@ import { useState } from "react";
 
 import bodyStyles from "./styles";
 
-import HisotryCard from "../layouts/HisotryCard";
+import Card from "./Card";
 import { HistoryCard } from "@/types/History";
 
-export default function HistoryBody() {
+export default function BodyArea() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cards, setCards] = useState<HistoryCard[]>([
     {
@@ -228,7 +228,7 @@ export default function HistoryBody() {
     >
       {cards.map((element, index) => {
         return (
-          <HisotryCard
+          <Card
             key={index}
             date={element.date}
             items={element.items}

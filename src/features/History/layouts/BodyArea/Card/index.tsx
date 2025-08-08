@@ -8,7 +8,7 @@ interface Props {
   items: historyItemType[];
 }
 
-export default function HisotryCard({ date, items }: Props) {
+export default function Card({ date, items }: Props) {
   return (
     <div
       data-name="history-card-container" 

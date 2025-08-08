@@ -1,6 +1,6 @@
 import headerStyles from "./styles";
 
-export default function HistoryHeader() {
+export default function HeaderArea() {
     return (
         <div
           data-name="history-screen-header-container"  
