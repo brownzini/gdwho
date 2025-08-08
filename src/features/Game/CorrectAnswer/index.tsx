@@ -26,7 +26,7 @@ export default function CorrectAnswer() {
               priority
               className="w-full full object-cover rounded-tr-[25px] rounded-tl-[25px] "
               alt="image"
-              src="/logo.png"
+              src="/img/correct.png"
             />
           </div>
           <div

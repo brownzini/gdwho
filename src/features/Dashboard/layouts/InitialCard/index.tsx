@@ -76,7 +76,7 @@ export default function InitialCard() {
             priority 
             className="absolute w-[100%] h-[100%] object-cover"
             alt="image"
-            src="/logo.png"
+            src="/img/logo.png"
           />
         </div>
       </div>
