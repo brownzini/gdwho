@@ -3,7 +3,7 @@ import ItemCard from "./ItemCard";
 import PersonalizedButton from "./PersonalizedButton";
 import Button from "@/components/Button";
 
-export default function Statistics() {
+export default function StatisticsArea() {
   return (
     <div
       data-name="dashboard-statistics-container" 
@@ -39,11 +39,6 @@ export default function Statistics() {
             iconName="matchesWon"
             description="Partidas Ganhas"
           />
-          <ItemCard
-            value={10}
-            iconName="lostMatches"
-            description="Partidas Perdidas"
-          />
           <ItemCard 
             value={10} 
             iconName="created" 
@@ -61,7 +56,7 @@ export default function Statistics() {
           height="h-[50%] sm:h-[40%]"
           bgColor="bg-[#F5F5F5]"
           borderStyle="border-[1px] border-[#AB99B0]"
-          hoverBgColor="hover:bg-[#1f0826]"
+          hoverBgColor="hover:bg-[#8e4fa1]"
         >
           <p
             data-name="dashboard-statistics-my-game-label" 

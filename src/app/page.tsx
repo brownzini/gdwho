@@ -1,7 +1,7 @@
 "use client";
 
+import ConfigurationScreen from "@/screens/ConfigurationScreen";
 import HistoryScreen from "@/screens/HistoryScreen";
-import InGameScreen from "@/screens/InGameScreen";
 
 const homeStyles = {
   container: `
@@ -56,7 +56,7 @@ export default function Home() {
               data-name="home-main-screen-section"
               className={homeStyles["screenSection"]}
             >
-              <InGameScreen />
+              <ConfigurationScreen />
             </div>
           </div>
         </div>

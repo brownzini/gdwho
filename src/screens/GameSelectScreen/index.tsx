@@ -75,7 +75,7 @@ export default function GameSelectScreen() {
             className={gameSelectScreenStyles["backButtonArea"]}
           >
             <BackButton
-              xPosition="right"
+              xPosition="end"
               onClick={() => console.log("")} 
             />
           </div>

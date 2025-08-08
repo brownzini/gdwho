@@ -2,8 +2,8 @@ import Slider from "@/components/Slider";
 import { useState } from "react";
 import soundStyles from "./styles";
 
-export default function Sound() {
-  const [volume, setVolume] = useState<number>(0);
+export default function SoundArea() {
+  const [volume, setVolume] = useState<number>(100);
   return (
     <div
       data-name="sound-container"  

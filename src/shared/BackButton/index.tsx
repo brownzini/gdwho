@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import backButtonStyles from "./styles";
 
-type PositionType = "left" | "center" | "right";
+type PositionType = "start" | "center" | "end";
 
 interface Props {
   onClick: () => void;
@@ -10,20 +10,20 @@ interface Props {
 }
 
 export default function BackButton({
-  xPosition = "left",
+  xPosition = "start",
   yPosition = "center",
   onClick,
 }: Props) {
   const position = {
     horizontal: {
-      left: "justify-start",
+      start: "justify-start",
       center: "justify-center",
-      right: "justify-end",
+      end: "justify-end",
     },
     vertical: {
-      left: "items-start",
+      start: "items-start",
       center: "items-center",
-      right: "items-end",
+      end: "items-end",
     },
   };
   return (

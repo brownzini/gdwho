@@ -1,11 +1,11 @@
-import InitialCard from "./layouts/InitialCard";
-import Statistics from "./layouts/Statistics";
+import InitialCardArea from "./layouts/InitialCardArea";
+import StatisticsArea from "./layouts/StatisticsArea";
 
 export default function Dashboard() {
   return (
     <>
-      <InitialCard />
-      <Statistics />
+      <InitialCardArea />
+      <StatisticsArea />
     </>
   );
 }

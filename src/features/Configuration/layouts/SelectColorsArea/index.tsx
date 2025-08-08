@@ -6,7 +6,7 @@ import { useState } from "react";
 import GameCard from "@/shared/GameCard";
 import selectColorsStyles from "./styles";
 
-export default function SelectColors() {
+export default function SelectColorsArea() {
   const [colors, setColors] = useState<CardColorsType>({
     correct: "#1F7117",
     nearby: "#193495",
