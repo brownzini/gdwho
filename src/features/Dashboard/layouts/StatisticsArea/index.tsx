@@ -1,6 +1,9 @@
+
 import statisticsStyles from "./styles";
+
 import ItemCard from "./ItemCard";
 import PersonalizedButton from "./PersonalizedButton";
+
 import Button from "@/components/Button";
 
 export default function StatisticsArea() {
@@ -57,13 +60,9 @@ export default function StatisticsArea() {
           bgColor="bg-[#F5F5F5]"
           borderStyle="border-[1px] border-[#AB99B0]"
           hoverBgColor="hover:bg-[#8e4fa1]"
+          fontStyle={statisticsStyles["buttonTitle"]}
         >
-          <p
-            data-name="dashboard-statistics-my-game-label" 
-            className={statisticsStyles["buttonTitle"]}
-          >
-            Meu Jogo
-          </p>
+          Meu Jogo
         </Button>
         <Button
           display="flex md:hidden"
@@ -71,13 +70,9 @@ export default function StatisticsArea() {
           bgColor="bg-[#F5F5F5]"
           borderStyle="border-[1px] border-[#AB99B0]"
           hoverBgColor="hover:bg-[#1f0826]"
+          fontStyle={statisticsStyles["buttonTitle"]}
         >
-          <p
-            data-name="dashboard-statistics-history-label" 
-            className={statisticsStyles["buttonTitle"]}
-          >
-            Histórico
-          </p>
+          Histórico
         </Button>
       </div>
     </div>

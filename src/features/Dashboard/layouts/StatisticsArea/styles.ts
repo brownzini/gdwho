@@ -26,7 +26,7 @@ const statisticsStyles = {
   buttonTitle: `
       w-[100%] h-[100%]
       hover:text-[#fff] text-[#623E6C] font-medium
-      transition ease-in-out duration-500 
+      transition ease-in-out duration-840 
       grid items-center justify-center
   `,
 };

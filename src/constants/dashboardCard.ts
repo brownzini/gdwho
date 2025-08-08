@@ -1,0 +1,2 @@
+export const DASHBOARD_CARD_TITLE = "GDwho";
+export const DASHBOARD_CARD_SUBTITLE = "Este sistema foi desenvolvido para colocar em prática meus conhecimentos em machine learning e backend com spring boot";
