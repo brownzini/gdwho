@@ -72,7 +72,7 @@ export default function Home() {
         <div data-name="home-main-area" className={homeStyles["mainArea"]}>
           <div className={homeStyles["detail"]} />
           <div
-            data-name="home-main-content-area"
+            data-name="home-main-content"
             className={homeStyles["content"]}
           >
             <div
