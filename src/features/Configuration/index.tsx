@@ -3,8 +3,12 @@ import SelectColorsArea from "./layouts/SelectColorsArea";
 
 import configurationStyles from "./styles";
 import BackButton from "@/shared/BackButton";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function Configuration() {
+  
+  const { backScreen } = useScreen();
+
   return (
     <div
       data-name="configuration-content"
@@ -12,10 +16,10 @@ export default function Configuration() {
     >
       <SoundArea />
       <SelectColorsArea />
-      <BackButton 
-        xPosition="start" 
+      <BackButton
+        xPosition="start"
         yPosition="end"
-        onClick={() => console.log("")}
+        onClick={backScreen}
       />
     </div>
   );

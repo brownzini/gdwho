@@ -5,8 +5,12 @@ import {
   DASHBOARD_CARD_TITLE 
 } from "@/constants/dashboardCard";
 import Button from "@/components/Button";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function InitialCard() {
+
+  const { nextScreen } = useScreen();
+
   return (
     <div 
       data-name="dashboard-card-container"
@@ -48,6 +52,7 @@ export default function InitialCard() {
               hoverBgColor="hover:!bg-[#428B8D]"
               borderStyle="border-[1px] border-[#428B8D]"
               fontStyle={cardStyles["playButtonFont"]}
+              onClick={() => nextScreen("gameSelectScreen")}
             >
               JOGAR
             </Button>

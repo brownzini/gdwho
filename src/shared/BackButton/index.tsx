@@ -7,12 +7,14 @@ interface Props {
   onClick: () => void;
   xPosition?: PositionType;
   yPosition?: PositionType;
+  styles?:string;
 }
 
 export default function BackButton({
   xPosition = "start",
   yPosition = "center",
   onClick,
+  styles,
 }: Props) {
   const position = {
     horizontal: {
@@ -29,7 +31,7 @@ export default function BackButton({
   return (
     <div
       data-name="back-button-container"
-      className={backButtonStyles["buttonArea"](
+      className={styles+backButtonStyles["buttonArea"](
         position["horizontal"][xPosition],
         position["vertical"][yPosition]
       )}

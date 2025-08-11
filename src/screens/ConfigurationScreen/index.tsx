@@ -19,7 +19,7 @@ export default function ConfigurationScreen() {
       />
       <div className="w-[93%] h-[1px] bg-[#D9D9D9]" />
       <div
-        data-name="config-screen-wrapper" 
+        data-name="config-screen-wrapper"
         className={configurationScreenStyles["wrapper"]}
       >
         <ScreenTitle title="Configurações:" />

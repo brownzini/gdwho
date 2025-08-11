@@ -10,6 +10,7 @@ import React from "react";
 import editGameScreenStyles from "./styles";
 
 export default function EditGameScreen() {
+  
   return (
     <div
       data-name="edit-game-screen-container"

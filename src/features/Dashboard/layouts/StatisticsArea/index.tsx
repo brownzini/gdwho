@@ -5,8 +5,10 @@ import ItemCard from "./ItemCard";
 import PersonalizedButton from "./PersonalizedButton";
 
 import Button from "@/components/Button";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function StatisticsArea() {
+  const { nextScreen } = useScreen();
   return (
     <div
       data-name="dashboard-statistics-container" 
@@ -61,16 +63,18 @@ export default function StatisticsArea() {
           borderStyle="border-[1px] border-[#AB99B0]"
           hoverBgColor="hover:bg-[#8e4fa1]"
           fontStyle={statisticsStyles["buttonTitle"]}
+          onClick={() => nextScreen("editGameScreen")}
         >
           Meu Jogo
         </Button>
         <Button
           display="flex md:hidden"
-          height="h-[30%]"
+          height="h-[30%] max-h-[50px]"
           bgColor="bg-[#F5F5F5]"
           borderStyle="border-[1px] border-[#AB99B0]"
           hoverBgColor="hover:bg-[#1f0826]"
           fontStyle={statisticsStyles["buttonTitle"]}
+          onClick={() => nextScreen("historyScreen")}
         >
           Histórico
         </Button>

@@ -1,7 +1,15 @@
 "use client";
 
-import DashboardScreen from "@/screens/DashboardScreen";
+import { JSX, useMemo } from "react";
+import { useScreen } from "@/contexts/screen/useScreen";
+
+import InGameScreen from "@/screens/InGameScreen";
 import HistoryScreen from "@/screens/HistoryScreen";
+import EditGameScreen from "@/screens/EditGameScreen";
+import DashboardScreen from "@/screens/DashboardScreen";
+import CreateGameScreen from "@/screens/CreateGameScreen";
+import GameSelectScreen from "@/screens/GameSelectScreen";
+import ConfigurationScreen from "@/screens/ConfigurationScreen";
 
 const homeStyles = {
   container: `
@@ -42,7 +50,22 @@ const homeStyles = {
   `,
 };
 
+const screenComponents: Record<string, JSX.Element> = {
+  historyScreen: <HistoryScreen />,
+  createGameScreen: <CreateGameScreen />,
+  editGameScreen: <EditGameScreen />,
+  configurationScreen: <ConfigurationScreen />,
+  gameSelectScreen: <GameSelectScreen />,
+  inGameScreen: <InGameScreen />,
+};
+
 export default function Home() {
+  const { screenName } = useScreen();
+
+  const renderedScreen = useMemo(() => {
+    return screenComponents[screenName] ?? <DashboardScreen />;
+  }, [screenName]);
+
   return (
     <div data-name="home-container" className={homeStyles["container"]}>
       <div data-name="home-wrapper" className={homeStyles["wrapper"]}>
@@ -56,16 +79,18 @@ export default function Home() {
               data-name="home-main-screen-section"
               className={homeStyles["screenSection"]}
             >
-              <DashboardScreen />
+              {renderedScreen}
             </div>
           </div>
         </div>
-        <div
-          data-name="home-history-area"
-          className={homeStyles["historyArea"]}
-        >
-          <HistoryScreen />
-        </div>
+        {screenName !== "historyScreen" && (
+          <div
+            data-name="home-history-area"
+            className={homeStyles["historyArea"]}
+          >
+            <HistoryScreen />
+          </div>
+        )}
       </div>
     </div>
   );

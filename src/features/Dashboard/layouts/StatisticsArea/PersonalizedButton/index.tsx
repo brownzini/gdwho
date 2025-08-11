@@ -2,8 +2,11 @@
 import Button from "@/components/Button";
 import personalizedButtonStyles from "./styles";
 import SvgModel from "@/components/svg";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function PersonalizedButton() {
+    
+    const { nextScreen } = useScreen();
 
     return (
         <div
@@ -18,20 +21,17 @@ export default function PersonalizedButton() {
                     name="add" 
                     width="100%" 
                     height="100%" 
-                    onClick={() => console.log("")}
+                    onClick={() => nextScreen("createGameScreen")}
                 />
             </span>
             <Button 
                 height="h-[100%] sm:h-[70%]"
                 bgColor="bg-[#F5F5F5]"
                 borderStyle="border-[1px] border-[#C68F7E] border-dashed" 
+                fontStyle={personalizedButtonStyles["description"]}
+                onClick={() => nextScreen("createGameScreen")}
             >
-               <p
-                data-name="dashboard-statistics-personalizad-button-description"  
-                className={personalizedButtonStyles["description"]}
-               >
-                    criar novo jogo
-                </p>
+                criar novo jogo
             </Button>
         </div>
     );

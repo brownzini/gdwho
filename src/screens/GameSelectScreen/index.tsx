@@ -2,19 +2,22 @@
 
 import { useState } from "react";
 
-import ScreenHeader from "@/shared/ScreenHeader";
 import Modal from "@/shared/Modal";
 import ScreenTitle from "@/shared/ScreenTitle";
+import ScreenHeader from "@/shared/ScreenHeader";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 
 import gameSelectScreenStyles from "./styles";
 
-import SelectMode from "@/features/Game/SelectMode";
 import BackButton from "@/shared/BackButton";
+import SelectMode from "@/features/Game/SelectMode";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function GameSelectScreen() {
+
+  const { backScreen } = useScreen();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
@@ -44,16 +47,11 @@ export default function GameSelectScreen() {
             width="w-[25%]"
             height="min-h-[50px] max-h-[50px] p-5"
             bgColor="bg-[#EDB306]"
-            borderStyle="border-[1px] border-[#EDB306]"
             hoverBgColor="hover:bg-[#CB9610]"
-            borderRadius="rounded-[5px]"
+            borderStyle="border-[1px] border-[#EDB306] rounded-[5px]"
+            fontStyle={gameSelectScreenStyles["buttonDescription"]}
           >
-            <p 
-              data-name="modal-button-description"
-              className={gameSelectScreenStyles["buttonDescription"]}
-            >
-              JOGAR
-            </p>
+            JOGAR
           </Button>
         </div>
       </Modal>
@@ -78,7 +76,7 @@ export default function GameSelectScreen() {
           >
             <BackButton
               xPosition="end"
-              onClick={() => console.log("")} 
+              onClick={backScreen} 
             />
           </div>
         </div>
