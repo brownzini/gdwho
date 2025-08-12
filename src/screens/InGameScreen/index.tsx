@@ -2,9 +2,11 @@ import ScreenHeader from "@/shared/ScreenHeader";
 
 import inGameScreenStyles from "./styles";
 import CorrectAnswerFeature from "@/features/Game/CorrectAnswer";
-// import InGameFeature from "@/features/Game/InGame";
+import InGameFeature from "@/features/Game/InGame";
+import { useState } from "react";
 
 export default function InGameScreen() {
+  const [isThatCorrect, setIsThatCorrect] = useState<boolean>(false);
   return (
     <div
       data-name="in-game-screen-container"
@@ -19,8 +21,11 @@ export default function InGameScreen() {
         data-name="in-game-screen-wrapper"
         className={inGameScreenStyles["wrapper"]}
       >
-        {/* <InGameFeature /> */}
-        <CorrectAnswerFeature />
+        {isThatCorrect ? (
+          <CorrectAnswerFeature />
+        ) : (
+          <InGameFeature setIsThatCorrect={setIsThatCorrect} />
+        )}
       </div>
     </div>
   );

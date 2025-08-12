@@ -40,7 +40,7 @@ const homeStyles = {
   screenSection: `
         bg-[#FFFFFF]
         w-[100%] h-[100%]
-        rounded-bl-[25px] rounded-tr-[25px]
+        rounded-bl-[25px] rounded-tr-[25px] lg:pb-5 xl:pb-0
     `,
   historyArea: `
         bg-[#F8F9FC] 

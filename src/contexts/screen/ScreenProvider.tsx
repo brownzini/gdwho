@@ -25,7 +25,7 @@ export const ScreenProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const cachedScreenName = localStorage.getItem("cached_screen");
-    nextScreen(cachedScreenName ?? "dashboard");
+    setScreenName(cachedScreenName ?? "dashboard");
   }, []);
 
   const nextScreen = useCallback(

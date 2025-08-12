@@ -1,7 +1,9 @@
 import Button from "@/components/Button";
 import inGameFinishButtonStyles from "./styles";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function InGameFinishButtonArea() {
+  const { backScreen } = useScreen();
   return (
     <div 
       data-name="in-game-button-area" 
@@ -18,8 +20,9 @@ export default function InGameFinishButtonArea() {
           hoverBgColor="hover:bg-[#fff]"
           borderStyle="border-[1px] border-[#DC3333]"
           fontStyle={inGameFinishButtonStyles["description"]}
+          onClick={backScreen}
         >
-          ENCERRAR
+          FECHAR
         </Button>
       </div>
     </div>

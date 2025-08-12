@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import GuessType from "@/types/GuessType";
 
@@ -11,7 +11,11 @@ import InGameWorstGuessesArea from "../layouts/InGameWorstGuessesArea";
 import inGameStyles from "./styles";
 import InGameFinishButtonArea from "../layouts/InGameFinishButtonArea";
 
-export default function InGameFeature() {
+interface Props {
+  setIsThatCorrect: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function InGameFeature({ setIsThatCorrect }:Props) {
   const [value, setValue] = useState<string>("");
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

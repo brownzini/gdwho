@@ -6,19 +6,17 @@ import GameModeType from "@/types/GameMode";
 
 interface Props {
   typeMode: GameModeType;
-  onOpenModal?: () => void;
+  handleClick?: () => void;
 }
 
 export default function GameModeCardArea({
   typeMode = "randomMode",
-  onOpenModal,
+  handleClick,
 }: Props) {
   
   const hoverButton =
     gameModeCardStyles["buttonDescription"] +
     GAME_MODE_CARD[typeMode].colors.hoverButton;
-
-  const isPlayerMode = typeMode === "playerMode" && onOpenModal;
 
   return (
     <div
@@ -61,7 +59,7 @@ export default function GameModeCardArea({
           borderRadius="rounded-[5px]"
           hoverBgColor="hover:bg-[#fff]"
           borderStyle={GAME_MODE_CARD[typeMode].colors.borderButton}
-          onClick={() => isPlayerMode && onOpenModal()}
+          onClick={handleClick}
         >
           <p
             data-name="game-mode-card-footer-description"

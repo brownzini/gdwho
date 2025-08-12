@@ -1,7 +1,9 @@
 import Button from "@/components/Button";
 import correctAnswerBackButtonStyles from "./styles";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function CorrectAnswerBackButtonArea() {
+  const { backScreen } = useScreen();
   return (
     <div
       data-name="in-game-button-area"
@@ -18,6 +20,7 @@ export default function CorrectAnswerBackButtonArea() {
           hoverBgColor="hover:bg-[#fff]"
           borderStyle="hover:border-[1px] hover:border-[#35A2CC]"
           fontStyle={correctAnswerBackButtonStyles["description"]}
+          onClick={backScreen}
         >
           VOLTAR AO INICIO
         </Button>
