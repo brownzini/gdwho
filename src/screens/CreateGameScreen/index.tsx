@@ -7,8 +7,14 @@ import ScreenTitle from "@/shared/ScreenTitle";
 
 import React from "react";
 import createGameScreenStyles from "./styles";
+import { useUser } from "@/contexts/user/useUser";
 
 export default function CreateGameScreen() {
+  const { entries, dataList } = useUser();
+
+  const entriesTotal = entries.length;
+  const dataListTotal = dataList.length;
+
   return (
     <div
       data-name="create-game-screen-container"
@@ -38,7 +44,7 @@ export default function CreateGameScreen() {
               data-name="create-game-screen-entries-label"
               className={createGameScreenStyles["entrieLabel"]}
             >
-              :0
+              :{entriesTotal}
             </h2>
           </div>
           <div
@@ -55,7 +61,7 @@ export default function CreateGameScreen() {
               data-name="create-game-screen-dataList-label"
               className={createGameScreenStyles["dataListLabel"]}
             >
-              :0
+              :{dataListTotal}
             </h2>
           </div>
         </ScreenTitle>

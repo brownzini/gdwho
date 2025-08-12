@@ -1,15 +1,19 @@
 import Input from "@/components/Input";
 import dataListStyles from "./styles";
-import { useState } from "react";
+
 import Button from "@/components/Button";
 import SvgModel from "@/components/svg";
 import { useScreen } from "@/contexts/screen/useScreen";
+import { Dispatch, SetStateAction } from "react";
 
-export default function DataListArea() {
+interface Props {
+  value:string;
+  setValue: Dispatch<SetStateAction<string>>;
+}
+
+export default function DataListArea({ value, setValue }:Props) {
 
   const { backScreen } = useScreen();
-
-  const [value, setValue] = useState<string>("");
 
   return (
     <div className={dataListStyles["container"]}>

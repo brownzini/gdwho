@@ -1,29 +1,36 @@
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import entriesStyles from "./styles";
-import { useState } from "react";
 
 import EntryItem from "./EntryItem";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   readMode?: boolean;
+  response: string;
+  setResponse: Dispatch<SetStateAction<string>>;
+  input:string; 
+  setInput: Dispatch<SetStateAction<string>>;
+  output:string; 
+  setOutput: Dispatch<SetStateAction<string>>;
+  level:string; 
+  setLevel: Dispatch<SetStateAction<string>>;
 }
 
-export default function EntriesArea({ readMode = false }: Props) {
-  const [response, setResponse] = useState<string>("");
-  const [input, setInpuit] = useState<string>("");
-  const [output, setOutput] = useState<string>("");
-  const [level, setLevel] = useState<string>("100");
-
+export default function EntriesArea({ 
+  readMode = false,
+  response,
+  setResponse,
+  input, 
+  setInput,
+  output, 
+  setOutput,
+  level, 
+  setLevel,
+}: Props) {
   return (
-    <div 
-      data-name="entries-area" 
-      className={entriesStyles["entriesArea"]}
-    >
-      <div 
-        data-name="response-area" 
-        className={entriesStyles["response"]}
-      >
+    <div data-name="entries-area" className={entriesStyles["entriesArea"]}>
+      <div data-name="response-area" className={entriesStyles["response"]}>
         <b
           data-name="response-label"
           className={entriesStyles["responseLabel"]}
@@ -42,10 +49,7 @@ export default function EntriesArea({ readMode = false }: Props) {
       </div>
 
       {!readMode && (
-        <div 
-          data-name="entries-input-area" 
-          className={entriesStyles["input"]}
-        >
+        <div data-name="entries-input-area" className={entriesStyles["input"]}>
           <b
             data-name="entries-input-label"
             className={entriesStyles["inputLabel"]}
@@ -56,7 +60,7 @@ export default function EntriesArea({ readMode = false }: Props) {
             width="w-full"
             height="h-[50%]"
             value={input}
-            setValue={setInpuit}
+            setValue={setInput}
             fontColor="text-[#3A5F60]"
             placeHolder="Ex: trabalha com construções"
             borderStyle="border-[#31B3B5] border-[1px]"
@@ -86,10 +90,7 @@ export default function EntriesArea({ readMode = false }: Props) {
         </div>
       )}
       {!readMode && (
-        <div 
-          data-name="entries-level-area" 
-          className={entriesStyles["level"]}
-        >
+        <div data-name="entries-level-area" className={entriesStyles["level"]}>
           <div
             data-name="entries-level-wrapper-area"
             className={entriesStyles["levelWrapper"]}
@@ -126,14 +127,15 @@ export default function EntriesArea({ readMode = false }: Props) {
           >
             <b
               data-name="entries-button-title"
-              className={entriesStyles["buttonTitle"]}>
+              className={entriesStyles["buttonTitle"]}
+            >
               INSERIR ENTRADA
             </b>
           </Button>
         </div>
       )}
       {readMode && (
-        <div 
+        <div
           data-name="entries-list-container"
           className={entriesStyles["entryListContainer"]}
         >

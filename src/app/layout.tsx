@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Exo_2, Inter, Luckiest_Guy, Roboto } from "next/font/google";
 import { ScreenProvider } from "@/contexts/screen/ScreenProvider";
+import { UserProvider } from "@/contexts/user/UserProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const roboto = Roboto({
@@ -38,7 +39,9 @@ export default function RootLayout({
       className={`${inter.variable} ${roboto.variable} ${exo2.variable} ${luckiest.variable}`}
     >
       <body>
-        <ScreenProvider>{children}</ScreenProvider>
+        <ScreenProvider>
+          <UserProvider>{children}</UserProvider>
+        </ScreenProvider>
       </body>
     </html>
   );
