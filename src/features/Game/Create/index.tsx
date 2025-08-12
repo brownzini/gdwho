@@ -6,20 +6,32 @@ import createStyles from "./styles";
 import useGameForm from "../hooks/useGameForm";
 
 export default function CreateFeature() {
-
-  const { 
-      response, setResponse,
-      input, setInput,
-      output, setOutput,
-      level, setLevel,
-      dataListValue, setDataListValue,
+  const {
+    response,
+    setResponse,
+    input,
+    setInput,
+    output,
+    setOutput,
+    label,
+    setLabel,
+    dataListValue,
+    setDataListValue,
+    handleValidation,
+    responseError,
+    setResponseError,
+    inputError,
+    setInputError,
+    outputError,
+    setOutputError,
+    labelError,
+    setLabelError,
+    dataListValueError,
+    setDataListValueError,
   } = useGameForm();
 
   return (
-    <div 
-      data-name="create-game-container" 
-      className={createStyles["wrapper"]}
-    >
+    <div data-name="create-game-container" className={createStyles["wrapper"]}>
       <EntriesArea
         response={response}
         setResponse={setResponse}
@@ -27,12 +39,23 @@ export default function CreateFeature() {
         setInput={setInput}
         output={output}
         setOutput={setOutput}
-        level={level}
-        setLevel={setLevel}
+        level={label}
+        setLevel={setLabel}
+        responseError={responseError}
+        setResponseError={setResponseError}
+        inputError={inputError}
+        setInputError={setInputError}
+        outputError={outputError}
+        setOutputError={setOutputError}
+        labelError={labelError}
+        setLabelError={setLabelError}
       />
-      <DataListArea 
+      <DataListArea
         value={dataListValue}
         setValue={setDataListValue}
+        handleValidation={handleValidation}
+        dataListValueError={dataListValueError}
+        setDataListValueError={setDataListValueError}
       />
     </div>
   );

@@ -6,12 +6,11 @@ const dataListStyles = {
   dataListTitle: ` text-[#333124] font-black font-["Inter"] text-[0.75rem] sm:text-[1rem]`,
   containerList: `
       w-[100%] h-[100%]
-      border-[1px] border-[#333124] border-dashed rounded-[5px]
+      rounded-[5px]
   `,
   inputArea:`
       w-full h-[30%] sm:h-[20%] md:h-[16%] 
       flex justify-start items-center 
-      border-b-[#333124] border-b-[1px] border-dashed
   `,
   iconContainer:`
       w-[25%] h-[100%] 

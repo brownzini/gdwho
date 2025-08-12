@@ -1,7 +1,7 @@
 "use client";
 
 import SvgModel from "@/components/svg";
-import Create from "@/features/Game/Create";
+import CreateFeature from "@/features/Game/Create";
 import ScreenHeader from "@/shared/ScreenHeader";
 import ScreenTitle from "@/shared/ScreenTitle";
 
@@ -65,7 +65,7 @@ export default function CreateGameScreen() {
             </h2>
           </div>
         </ScreenTitle>
-        <Create />
+        <CreateFeature />
       </div>
     </div>
   );

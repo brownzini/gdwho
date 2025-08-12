@@ -9,8 +9,10 @@ interface Props {
   fontFamily?: string;
   fontSize?: string;
   placeHolder?: string;
+  styler?:string;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
+  onClick?: () => void;
 }
 
 export default function Input({
@@ -18,18 +20,21 @@ export default function Input({
   width = "w-[100%]",
   height = "h-[100%]",
   borderStyle = "border-none",
-  fontColor = "text-[#424242]",
+  fontColor = "",
   fontSize = "text-[1rem]",
   fontFamily = `font-["Inter"]`,
   placeHolder = "",
   value,
   setValue,
+  styler="",
+  onClick,
 }: Props) {
   const styles = `
         ${width} ${height}
         ${fontColor} ${fontSize} ${fontFamily}
         rounded-[4px] ${borderStyle}
-         outline-none pl-3
+        outline-none pl-3
+        ${styler}
     `;
   return (
     <input
@@ -38,6 +43,7 @@ export default function Input({
       className={styles}
       placeholder={placeHolder}
       onChange={(e) => setValue(e.target.value)}
+      onClick={onClick}
     />
   );
 }

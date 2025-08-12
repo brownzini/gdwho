@@ -7,19 +7,43 @@ import { useScreen } from "@/contexts/screen/useScreen";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
-  value:string;
+  value: string;
   setValue: Dispatch<SetStateAction<string>>;
+  handleValidation(): void;
+  dataListValueError: string;
+  setDataListValueError: Dispatch<SetStateAction<string>>;
 }
 
-export default function DataListArea({ value, setValue }:Props) {
-
+export default function DataListArea({
+  value,
+  setValue,
+  handleValidation,
+  dataListValueError,
+  setDataListValueError,
+}: Props) {
   const { backScreen } = useScreen();
 
+  const borderContainerStyle = dataListValueError ? "1px dashed #dc362e" : "1px dashed #333124";
+  const borderBottomStyle = dataListValueError ? "1px dashed #dc362e" : "1px dashed #333124"; 
+  const textInputStyle = dataListValueError ? "text-[#dc362e]" : "text-[#333124]";
+
   return (
-    <div className={dataListStyles["container"]}>
+    <div
+      data-name="data-list-container"
+      className={dataListStyles["container"]}
+    >
       <h2 className={dataListStyles["dataListTitle"]}>Lista de Dicas:</h2>
-      <div className={dataListStyles["containerList"]}>
-        <div className={dataListStyles["inputArea"]}>
+      <div
+        data-name="data-list-container-list"
+        className={dataListStyles["containerList"]}
+        style={{ border: borderContainerStyle }}
+      >
+        <div
+          data-name="data-list-input-area"
+          className={dataListStyles["inputArea"]}
+          style={{ borderBottom: borderBottomStyle }}
+          onClick={() => setDataListValueError("")}
+        >
           <Input
             width="w-full"
             height="h-[100%]"
@@ -27,16 +51,23 @@ export default function DataListArea({ value, setValue }:Props) {
             setValue={setValue}
             placeHolder="Ex: Usa cimento ..."
             borderStyle="border-none"
-            fontColor="text-[#603A41]"
+            fontColor={textInputStyle}
+            onClick={() => setDataListValueError("")}
           />
-          <div className={dataListStyles["iconContainer"]}>
+          <div
+            data-name="data-list-icon-container"
+            className={dataListStyles["iconContainer"]}
+          >
             <Button cursor="cursor-normal">
               <SvgModel name="add" width="75%" height="75%" />
             </Button>
           </div>
         </div>
-        <div className={dataListStyles["scrollArea"]}>
-          <div className={dataListStyles["data"]}>
+        <div
+          data-name="data-list-scroll-area"
+          className={dataListStyles["scrollArea"]}
+        >
+          <div data-name="data-list-data" className={dataListStyles["data"]}>
             <Input
               width="w-full"
               height="h-[100%]"
@@ -50,22 +81,27 @@ export default function DataListArea({ value, setValue }:Props) {
           </div>
         </div>
       </div>
-      <div className={dataListStyles["buttonsArea"]}>
-        <Button 
-          height="h-[57%] sm:h-[64%]" 
-          bgColor="bg-[#939292]" 
+      <div
+        data-name="data-list-button-area"
+        className={dataListStyles["buttonsArea"]}
+      >
+        <Button
+          height="h-[57%] sm:h-[64%]"
+          bgColor="bg-[#939292]"
           hoverBgColor="hover:bg-[#504c4c]"
           onClick={backScreen}
           fontStyle={dataListStyles["backButtonDescription"]}
         >
-         VOLTAR
+          VOLTAR
         </Button>
-        <Button 
-          height="h-[57%] sm:h-[64%]" 
+        <Button
+          height="h-[57%] sm:h-[64%]"
           bgColor="bg-[#C6518F]"
           hoverBgColor="hover:bg-[#cc0f74]"
+          fontStyle={dataListStyles["createButton"]}
+          onClick={handleValidation}
         >
-          <b className={dataListStyles["createButton"]}>CRIAR</b>
+          CRIAR
         </Button>
       </div>
     </div>

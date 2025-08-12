@@ -1,50 +1,80 @@
+import { Dispatch, SetStateAction } from "react";
+
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import entriesStyles from "./styles";
 
 import EntryItem from "./EntryItem";
-import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   readMode?: boolean;
   response: string;
   setResponse: Dispatch<SetStateAction<string>>;
-  input:string; 
+  input: string;
   setInput: Dispatch<SetStateAction<string>>;
-  output:string; 
+  output: string;
   setOutput: Dispatch<SetStateAction<string>>;
-  level:string; 
+  level: string;
   setLevel: Dispatch<SetStateAction<string>>;
+  responseError: string;
+  setResponseError: Dispatch<SetStateAction<string>>;
+  inputError: string;
+  setInputError: Dispatch<SetStateAction<string>>;
+  outputError: string;
+  setOutputError: Dispatch<SetStateAction<string>>;
+  labelError: string;
+  setLabelError: Dispatch<SetStateAction<string>>;
 }
 
-export default function EntriesArea({ 
+export default function EntriesArea({
   readMode = false,
   response,
   setResponse,
-  input, 
+  input,
   setInput,
-  output, 
+  output,
   setOutput,
-  level, 
+  level,
   setLevel,
+  responseError,
+  setResponseError,
+  inputError,
+  setInputError,
+  outputError,
+  setOutputError,
+  labelError,
+  setLabelError,
 }: Props) {
+
+  const errorResponseFieldStyles = responseError
+    ? "  border-[#dc362e] text-[#dc362e] "
+    : "  border-[#C4C4C4] text-[#424242] ";
+
+  const errorInputFieldStyles = inputError
+    ? "  border-[#dc362e] text-[#dc362e] "
+    : "  border-[#31B3B5] text-[#3A5F60] ";
+  
+  const errorOutputFieldStyles = outputError
+    ? "  border-[#dc362e] text-[#dc362e] "
+    : "  border-[#8B3D4B] text-[#603A41] ";
+
+  const errorLabelFieldStyles = labelError
+    ? "  border-[#dc362e] text-[#dc362e] text-center font-black "
+    : "  border-[#522161] text-[#522161] text-center font-black ";
+
   return (
     <div data-name="entries-area" className={entriesStyles["entriesArea"]}>
       <div data-name="response-area" className={entriesStyles["response"]}>
-        <b
-          data-name="response-label"
-          className={entriesStyles["responseLabel"]}
-        >
-          Resposta:
-        </b>
+        <b className={entriesStyles["responseLabel"]}>Resposta:</b>
         <Input
           width="w-full"
           height="h-[50%]"
           value={response}
+          borderStyle="border-[1px]"
           setValue={setResponse}
           placeHolder="Digite a resposta do seu jogo ..."
-          borderStyle="border-[#C4C4C4] border-[1px]"
-          fontColor="text-[#424242]"
+          styler={errorResponseFieldStyles}
+          onClick={() => setResponseError("")}
         />
       </div>
 
@@ -61,9 +91,10 @@ export default function EntriesArea({
             height="h-[50%]"
             value={input}
             setValue={setInput}
-            fontColor="text-[#3A5F60]"
             placeHolder="Ex: trabalha com construções"
-            borderStyle="border-[#31B3B5] border-[1px]"
+            borderStyle="border-[1px]"
+            onClick={() => setInputError("")}
+            styler={errorInputFieldStyles}
           />
         </div>
       )}
@@ -84,8 +115,9 @@ export default function EntriesArea({
             value={output}
             setValue={setOutput}
             placeHolder="Ex: mexe com cimento"
-            borderStyle="border-[#8B3D4B] border-[1px]"
-            fontColor="text-[#603A41]"
+            borderStyle="border-[1px]"
+            onClick={() => setOutputError("")}
+            styler={errorOutputFieldStyles}
           />
         </div>
       )}
@@ -107,9 +139,10 @@ export default function EntriesArea({
               height="h-[100%] p-3"
               value={level}
               setValue={setLevel}
-              borderStyle="border-[#522161] border-[1px]"
-              fontColor="text-[#522161] text-center font-black"
+              borderStyle="border-[1px]"
               fontSize="text-[0.7rem] sm:text-[1rem]"
+              styler={errorLabelFieldStyles}
+              onClick={() => setLabelError("")}
             />
           </div>
         </div>
@@ -124,13 +157,9 @@ export default function EntriesArea({
             height=" h-[75%]"
             bgColor="bg-[#FA6C3E]"
             hoverBgColor="hover:bg-[#cc471b]"
+            fontStyle={entriesStyles["buttonTitle"]}
           >
-            <b
-              data-name="entries-button-title"
-              className={entriesStyles["buttonTitle"]}
-            >
-              INSERIR ENTRADA
-            </b>
+            INSERIR ENTRADA
           </Button>
         </div>
       )}
