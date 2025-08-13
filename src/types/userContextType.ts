@@ -31,5 +31,4 @@ export type UserContextType = {
   setEntries: (entries: EntriesType[]) => void;
   dataList: DataType[];
   setDataList: (dataList: DataType[]) => void;
-  editValue(key:string, index: number, newValue: string): void;
 };

@@ -4,39 +4,68 @@ import DataListArea from "../layouts/DataListArea";
 import EntriesArea from "../layouts/EntriesArea";
 import createStyles from "./styles";
 import useGameForm from "../hooks/useGameForm";
+import useEntries from "../hooks/useEntries";
+import useDataList from "../hooks/useDataList";
+import useResponse from "../hooks/useResponse";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function CreateFeature() {
+
   const {
     response,
     setResponse,
+    responseError,
+    setResponseError,
+    responseValidation,
+  } = useResponse();
+
+  const {
+    entries,
     input,
     setInput,
     output,
     setOutput,
     label,
     setLabel,
-    dataListValue,
-    setDataListValue,
-    responseError,
-    setResponseError,
     inputError,
     setInputError,
     outputError,
     setOutputError,
     labelError,
     setLabelError,
+    addEntryInList,
+  } = useEntries();
+
+  const {
     dataList,
+    dataListValue,
+    setDataListValue,
     dataListValueError,
     setDataListValueError,
+    addDataInList,
     editDataListValue,
     removeDataListValueByIndex,
-    addEntryInList,
-    addDataInList,
-  } = useGameForm();
+  } = useDataList();
+
+  const { nextScreen } = useScreen();
+  
+  const { handleSubmit } = useGameForm({
+      id:1,
+      response,
+      entries,
+      dataList,
+      setResponseError,
+      responseValidation,
+      nextScreen,
+  });
 
   return (
-    <div data-name="create-game-container" className={createStyles["wrapper"]}>
+    <div 
+      data-name="create-game-container" 
+      className={createStyles["wrapper"]}
+    >
       <EntriesArea
+        createMode={true}
         response={response}
         setResponse={setResponse}
         input={input}
@@ -54,6 +83,7 @@ export default function CreateFeature() {
         labelError={labelError}
         setLabelError={setLabelError}
         addEntryInList={addEntryInList}
+        entries={entries}
       />
       <DataListArea
         value={dataListValue}
@@ -64,6 +94,7 @@ export default function CreateFeature() {
         editValue={editDataListValue}
         removeValueByIndex={removeDataListValueByIndex}
         addDataInList={addDataInList}
+        handleSubmit={handleSubmit}
       />
     </div>
   );

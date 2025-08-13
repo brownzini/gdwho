@@ -5,8 +5,11 @@ import Button from "@/components/Button";
 import entriesStyles from "./styles";
 
 import EntryItem from "./EntryItem";
+import { EntriesType } from "@/types/userContextType";
 
 interface Props {
+  createMode: boolean;
+  entries: EntriesType[];
   readMode?: boolean;
   response: string;
   setResponse: Dispatch<SetStateAction<string>>;
@@ -28,6 +31,8 @@ interface Props {
 }
 
 export default function EntriesArea({
+  entries,
+  createMode,
   readMode = false,
   response,
   setResponse,
@@ -66,7 +71,9 @@ export default function EntriesArea({
   return (
     <div data-name="entries-area" className={entriesStyles["entriesArea"]}>
       <div data-name="response-area" className={entriesStyles["response"]}>
-        <b className={entriesStyles["responseLabel"]}>Resposta:</b>
+        <b className={entriesStyles["responseLabel"]}>
+          Resposta:<span className={entriesStyles["requiredMark"]}>*</span>
+        </b>
         <Input
           width="w-full"
           height="h-[50%]"
@@ -89,7 +96,7 @@ export default function EntriesArea({
               data-name="entries-input-label"
               className={entriesStyles["inputLabel"]}
             >
-              Input:
+              Input:<span className={entriesStyles["requiredMark"]}>*</span>
             </b>
             <Input
               width="w-full"
@@ -111,7 +118,7 @@ export default function EntriesArea({
               data-name="entries-output-label"
               className={entriesStyles["outputLabel"]}
             >
-              Output:
+              Output:<span className={entriesStyles["requiredMark"]}>*</span>
             </b>
             <Input
               width="w-full"
@@ -138,6 +145,7 @@ export default function EntriesArea({
                 className={entriesStyles["levelTitle"]}
               >
                 Nivel de <br /> proximidade:
+                <span className={entriesStyles["requiredMark"]}>*</span>
               </h2>
               <Input
                 type="number"
@@ -151,6 +159,15 @@ export default function EntriesArea({
                 onClick={() => setLabelError("")}
               />
             </div>
+            {createMode && (
+              <div
+                data-name="entries-label-count-icon"
+                className={entriesStyles["iconStyle"]}
+              >
+                <h2 className={entriesStyles["entrieLabel"]}>Total:</h2>
+                <b className={entriesStyles["entrieCount"]}>{entries.length}</b>
+              </div>
+            )}
           </div>
 
           <div
@@ -158,10 +175,10 @@ export default function EntriesArea({
             className={entriesStyles["buttonArea"]}
           >
             <Button
-              width=" w-[100%] sm:w-[50%]"
-              height=" h-[75%]"
+              width=" w-full sm:w-[50%]"
+              height=" h-[50%] max-h-[25px] sm:max-h-[57px]"
               bgColor="bg-[#FA6C3E]"
-              hoverBgColor="hover:bg-[#cc471b]"
+              hoverBgColor="hover:bg-[#a13804]"
               fontStyle={entriesStyles["buttonTitle"]}
               onClick={addEntryInList}
             >

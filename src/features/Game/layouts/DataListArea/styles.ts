@@ -8,6 +8,7 @@ const dataListStyles = {
       w-[100%] h-[100%]
       rounded-[5px]
   `,
+  requiredMark:`text-extralight text-[#ff0000]`,
   inputArea:`
       w-full h-[30%] sm:h-[20%] md:h-[16%] 
       flex justify-start items-center 

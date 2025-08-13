@@ -34,7 +34,6 @@ export default function EditGameScreen() {
               name="entries"
               width="100%"
               height="100%"
-              onClick={() => console.log("")}
             />
             <h2
               data-name="edit-game-screen-entries-label"
@@ -51,7 +50,6 @@ export default function EditGameScreen() {
               name="dataList"
               width="100%"
               height="100%"
-              onClick={() => console.log("")}
             />
             <h2
               data-name="edit-game-screen-dataList-label"

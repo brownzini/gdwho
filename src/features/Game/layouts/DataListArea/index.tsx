@@ -18,6 +18,7 @@ interface Props {
   editValue: (key: string, index: number, newValue: string) => void;
   removeValueByIndex(index: number): void;
   addDataInList(): void;
+  handleSubmit: () => Promise<void>;
 }
 
 export default function DataListArea({
@@ -29,6 +30,7 @@ export default function DataListArea({
   editValue,
   removeValueByIndex,
   addDataInList,
+  handleSubmit,
 }: Props) {
   const { backScreen } = useScreen();
 
@@ -47,7 +49,10 @@ export default function DataListArea({
       data-name="data-list-container"
       className={dataListStyles["container"]}
     >
-      <h2 className={dataListStyles["dataListTitle"]}>Lista de Dicas:</h2>
+      <h2 className={dataListStyles["dataListTitle"]}>
+        Lista de Dicas:{" "}
+        <span className={dataListStyles["requiredMark"]}>*</span>
+      </h2>
       <div
         data-name="data-list-container-list"
         className={dataListStyles["containerList"]}
@@ -72,10 +77,7 @@ export default function DataListArea({
             data-name="data-list-icon-container"
             className={dataListStyles["iconContainer"]}
           >
-            <Button 
-              cursor="cursor-normal" 
-              onClick={addDataInList}
-            >
+            <Button cursor="cursor-normal" onClick={addDataInList}>
               <SvgModel name="add" width="75%" height="75%" />
             </Button>
           </div>
@@ -103,7 +105,7 @@ export default function DataListArea({
         className={dataListStyles["buttonsArea"]}
       >
         <Button
-          height="h-[57%] sm:h-[64%]"
+          height="h-[100%] sm:h-[64%] max-h-[50px]"
           bgColor="bg-[#939292]"
           hoverBgColor="hover:bg-[#504c4c]"
           onClick={backScreen}
@@ -112,11 +114,13 @@ export default function DataListArea({
           VOLTAR
         </Button>
         <Button
-          height="h-[57%] sm:h-[64%]"
+          height="h-[100%] sm:h-[64%] max-h-[50px]"
           bgColor="bg-[#C6518F]"
           hoverBgColor="hover:bg-[#cc0f74]"
           fontStyle={dataListStyles["createButton"]}
-          onClick={() => console.log("salvo kkkkk")}
+          onClick={async () =>
+            await handleSubmit()
+          }
         >
           CRIAR
         </Button>
