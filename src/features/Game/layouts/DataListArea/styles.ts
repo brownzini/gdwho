@@ -20,7 +20,7 @@ const dataListStyles = {
       hide-scrollbar
       pr-3 pt-2 
       h-[84%] max-h-[75px] sm:max-h-[250px] 
-      flex flex-col justify-start items-start gap-10 
+      flex flex-col justify-start items-start gap-1 
       overflow-y-scroll
   `,
   data:`

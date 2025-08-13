@@ -12,6 +12,12 @@ export type DataType = {
      value:string;
 }
 
+export type DataInputType = {
+     id:number;
+     value:string;
+     hasError?:boolean;
+}
+
 export type UserContextType = {
   userId:number;
   setUserId: (userId: number) => void;
@@ -25,6 +31,5 @@ export type UserContextType = {
   setEntries: (entries: EntriesType[]) => void;
   dataList: DataType[];
   setDataList: (dataList: DataType[]) => void;
-  addEntry: (newEntry: EntriesType) => void;
-  addValue: (newValue: DataType) => void;
+  editValue(key:string, index: number, newValue: string): void;
 };

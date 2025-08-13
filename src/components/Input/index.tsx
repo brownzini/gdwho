@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-
 interface Props {
+  max?: number;
   type?: string;
   width?: string;
   height?: string;
@@ -9,13 +8,15 @@ interface Props {
   fontFamily?: string;
   fontSize?: string;
   placeHolder?: string;
-  styler?:string;
+  styler?: string;
   value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  setValue: (value: string) => void;
   onClick?: () => void;
+  removeData?: () => void;
 }
 
 export default function Input({
+  max = 50,
   type = "text",
   width = "w-[100%]",
   height = "h-[100%]",
@@ -26,8 +27,9 @@ export default function Input({
   placeHolder = "",
   value,
   setValue,
-  styler="",
+  styler = "",
   onClick,
+  removeData,
 }: Props) {
   const styles = `
         ${width} ${height}
@@ -42,8 +44,13 @@ export default function Input({
       value={value}
       className={styles}
       placeholder={placeHolder}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => setValue((e.target.value).slice(0, max))}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if ((e.key === "Backspace" || e.key === "Delete") && removeData) {
+          removeData();
+        }
+      }}
     />
   );
 }

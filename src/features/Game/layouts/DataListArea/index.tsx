@@ -1,31 +1,46 @@
-import Input from "@/components/Input";
+import { Dispatch, SetStateAction } from "react";
 import dataListStyles from "./styles";
 
-import Button from "@/components/Button";
+import Item from "./Item";
+import Input from "@/components/Input";
 import SvgModel from "@/components/svg";
+import Button from "@/components/Button";
+
 import { useScreen } from "@/contexts/screen/useScreen";
-import { Dispatch, SetStateAction } from "react";
+import { DataInputType } from "@/types/userContextType";
 
 interface Props {
+  dataList: DataInputType[];
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
-  handleValidation(): void;
   dataListValueError: string;
   setDataListValueError: Dispatch<SetStateAction<string>>;
+  editValue: (key: string, index: number, newValue: string) => void;
+  removeValueByIndex(index: number): void;
+  addDataInList(): void;
 }
 
 export default function DataListArea({
+  dataList,
   value,
   setValue,
-  handleValidation,
   dataListValueError,
   setDataListValueError,
+  editValue,
+  removeValueByIndex,
+  addDataInList,
 }: Props) {
   const { backScreen } = useScreen();
 
-  const borderContainerStyle = dataListValueError ? "1px dashed #dc362e" : "1px dashed #333124";
-  const borderBottomStyle = dataListValueError ? "1px dashed #dc362e" : "1px dashed #333124"; 
-  const textInputStyle = dataListValueError ? "text-[#dc362e]" : "text-[#333124]";
+  const borderContainerStyle = dataListValueError
+    ? "1px dashed #dc362e"
+    : "1px dashed #333124";
+  const borderBottomStyle = dataListValueError
+    ? "1px dashed #dc362e"
+    : "1px dashed #333124";
+  const textInputStyle = dataListValueError
+    ? "text-[#dc362e]"
+    : "text-[#333124]";
 
   return (
     <div
@@ -42,11 +57,10 @@ export default function DataListArea({
           data-name="data-list-input-area"
           className={dataListStyles["inputArea"]}
           style={{ borderBottom: borderBottomStyle }}
-          onClick={() => setDataListValueError("")}
         >
           <Input
             width="w-full"
-            height="h-[100%]"
+            height="h-full"
             value={value}
             setValue={setValue}
             placeHolder="Ex: Usa cimento ..."
@@ -58,7 +72,10 @@ export default function DataListArea({
             data-name="data-list-icon-container"
             className={dataListStyles["iconContainer"]}
           >
-            <Button cursor="cursor-normal">
+            <Button 
+              cursor="cursor-normal" 
+              onClick={addDataInList}
+            >
               <SvgModel name="add" width="75%" height="75%" />
             </Button>
           </div>
@@ -67,18 +84,18 @@ export default function DataListArea({
           data-name="data-list-scroll-area"
           className={dataListStyles["scrollArea"]}
         >
-          <div data-name="data-list-data" className={dataListStyles["data"]}>
-            <Input
-              width="w-full"
-              height="h-[100%]"
-              value={value}
-              setValue={setValue}
-              borderStyle="border-none"
-              fontSize="text-[0.93rem] sm:text-[1.2rem] xl:text-[1.6rem]"
-              fontColor="text-[#8B803D] italic"
-              fontFamily={`font-["Roboto"] `}
-            />
-          </div>
+          {dataList.map((element, index) => {
+            return (
+              <Item
+                key={index}
+                index={index}
+                value={element.value}
+                editValue={editValue}
+                hasError={element.hasError}
+                removeValueByIndex={removeValueByIndex}
+              />
+            );
+          })}
         </div>
       </div>
       <div
@@ -99,7 +116,7 @@ export default function DataListArea({
           bgColor="bg-[#C6518F]"
           hoverBgColor="hover:bg-[#cc0f74]"
           fontStyle={dataListStyles["createButton"]}
-          onClick={handleValidation}
+          onClick={() => console.log("salvo kkkkk")}
         >
           CRIAR
         </Button>

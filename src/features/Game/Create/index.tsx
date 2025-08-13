@@ -17,7 +17,6 @@ export default function CreateFeature() {
     setLabel,
     dataListValue,
     setDataListValue,
-    handleValidation,
     responseError,
     setResponseError,
     inputError,
@@ -26,8 +25,13 @@ export default function CreateFeature() {
     setOutputError,
     labelError,
     setLabelError,
+    dataList,
     dataListValueError,
     setDataListValueError,
+    editDataListValue,
+    removeDataListValueByIndex,
+    addEntryInList,
+    addDataInList,
   } = useGameForm();
 
   return (
@@ -39,8 +43,8 @@ export default function CreateFeature() {
         setInput={setInput}
         output={output}
         setOutput={setOutput}
-        level={label}
-        setLevel={setLabel}
+        label={label}
+        setLabel={setLabel}
         responseError={responseError}
         setResponseError={setResponseError}
         inputError={inputError}
@@ -49,13 +53,17 @@ export default function CreateFeature() {
         setOutputError={setOutputError}
         labelError={labelError}
         setLabelError={setLabelError}
+        addEntryInList={addEntryInList}
       />
       <DataListArea
         value={dataListValue}
         setValue={setDataListValue}
-        handleValidation={handleValidation}
+        dataList={dataList}
         dataListValueError={dataListValueError}
         setDataListValueError={setDataListValueError}
+        editValue={editDataListValue}
+        removeValueByIndex={removeDataListValueByIndex}
+        addDataInList={addDataInList}
       />
     </div>
   );

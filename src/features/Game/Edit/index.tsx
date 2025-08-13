@@ -1,20 +1,36 @@
 "use client";
 
-import { useState } from "react";
-
 import editStyles from "./styles";
 import EntriesArea from "../layouts/EntriesArea";
 import DataListArea from "../layouts/DataListArea";
+import useGameForm from "../hooks/useGameForm";
 
 export default function EditFeature() {
-  
-  const [response, setResponse] = useState<string>("");
-  const [input, setInput] = useState<string>("");
-  const [output, setOutput] = useState<string>("");
-  const [level, setLevel] = useState<string>("100");
-
-  const [dataListValue, setDataListValue] = useState<string>("");
-
+  const {
+    response,
+    setResponse,
+    input,
+    setInput,
+    output,
+    setOutput,
+    label,
+    setLabel,
+    dataListValue,
+    setDataListValue,
+    responseError,
+    setResponseError,
+    inputError,
+    setInputError,
+    outputError,
+    setOutputError,
+    labelError,
+    setLabelError,
+    dataList,
+    dataListValueError,
+    setDataListValueError,
+    editDataListValue,
+    removeDataListValueByIndex,
+  } = useGameForm();
   return (
     <div data-name="edit-game-container" className={editStyles["wrapper"]}>
       <EntriesArea
@@ -24,12 +40,25 @@ export default function EditFeature() {
         setInput={setInput}
         output={output}
         setOutput={setOutput}
-        level={level}
-        setLevel={setLevel}
+        label={label}
+        setLabel={setLabel}
+        responseError={responseError}
+        setResponseError={setResponseError}
+        inputError={inputError}
+        setInputError={setInputError}
+        outputError={outputError}
+        setOutputError={setOutputError}
+        labelError={labelError}
+        setLabelError={setLabelError}
       />
-      <DataListArea 
+      <DataListArea
         value={dataListValue}
         setValue={setDataListValue}
+        dataList={dataList}
+        dataListValueError={dataListValueError}
+        setDataListValueError={setDataListValueError}
+        editValue={editDataListValue}
+        removeValueByIndex={removeDataListValueByIndex}
       />
     </div>
   );

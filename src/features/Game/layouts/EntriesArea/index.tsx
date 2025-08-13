@@ -14,8 +14,8 @@ interface Props {
   setInput: Dispatch<SetStateAction<string>>;
   output: string;
   setOutput: Dispatch<SetStateAction<string>>;
-  level: string;
-  setLevel: Dispatch<SetStateAction<string>>;
+  label: string;
+  setLabel: Dispatch<SetStateAction<string>>;
   responseError: string;
   setResponseError: Dispatch<SetStateAction<string>>;
   inputError: string;
@@ -24,6 +24,7 @@ interface Props {
   setOutputError: Dispatch<SetStateAction<string>>;
   labelError: string;
   setLabelError: Dispatch<SetStateAction<string>>;
+  addEntryInList(): void;
 }
 
 export default function EntriesArea({
@@ -34,8 +35,8 @@ export default function EntriesArea({
   setInput,
   output,
   setOutput,
-  level,
-  setLevel,
+  label,
+  setLabel,
   responseError,
   setResponseError,
   inputError,
@@ -44,8 +45,8 @@ export default function EntriesArea({
   setOutputError,
   labelError,
   setLabelError,
+  addEntryInList,
 }: Props) {
-
   const errorResponseFieldStyles = responseError
     ? "  border-[#dc362e] text-[#dc362e] "
     : "  border-[#C4C4C4] text-[#424242] ";
@@ -53,7 +54,7 @@ export default function EntriesArea({
   const errorInputFieldStyles = inputError
     ? "  border-[#dc362e] text-[#dc362e] "
     : "  border-[#31B3B5] text-[#3A5F60] ";
-  
+
   const errorOutputFieldStyles = outputError
     ? "  border-[#dc362e] text-[#dc362e] "
     : "  border-[#8B3D4B] text-[#603A41] ";
@@ -79,89 +80,95 @@ export default function EntriesArea({
       </div>
 
       {!readMode && (
-        <div data-name="entries-input-area" className={entriesStyles["input"]}>
-          <b
-            data-name="entries-input-label"
-            className={entriesStyles["inputLabel"]}
-          >
-            Input:
-          </b>
-          <Input
-            width="w-full"
-            height="h-[50%]"
-            value={input}
-            setValue={setInput}
-            placeHolder="Ex: trabalha com construções"
-            borderStyle="border-[1px]"
-            onClick={() => setInputError("")}
-            styler={errorInputFieldStyles}
-          />
-        </div>
-      )}
-      {!readMode && (
-        <div
-          data-name="entries-output-area"
-          className={entriesStyles["output"]}
-        >
-          <b
-            data-name="entries-output-label"
-            className={entriesStyles["outputLabel"]}
-          >
-            Output:
-          </b>
-          <Input
-            width="w-full"
-            height="h-[50%]"
-            value={output}
-            setValue={setOutput}
-            placeHolder="Ex: mexe com cimento"
-            borderStyle="border-[1px]"
-            onClick={() => setOutputError("")}
-            styler={errorOutputFieldStyles}
-          />
-        </div>
-      )}
-      {!readMode && (
-        <div data-name="entries-level-area" className={entriesStyles["level"]}>
+        <>
           <div
-            data-name="entries-level-wrapper-area"
-            className={entriesStyles["levelWrapper"]}
+            data-name="entries-input-area"
+            className={entriesStyles["input"]}
           >
-            <h2
-              data-name="entries-level-title"
-              className={entriesStyles["levelTitle"]}
+            <b
+              data-name="entries-input-label"
+              className={entriesStyles["inputLabel"]}
             >
-              Nivel de <br /> proximidade:
-            </h2>
+              Input:
+            </b>
             <Input
-              type="number"
-              width="w-[25%] min-w-[100px]"
-              height="h-[100%] p-3"
-              value={level}
-              setValue={setLevel}
+              width="w-full"
+              height="h-[50%]"
+              value={input}
+              setValue={setInput}
+              placeHolder="Ex: trabalha com construções"
               borderStyle="border-[1px]"
-              fontSize="text-[0.7rem] sm:text-[1rem]"
-              styler={errorLabelFieldStyles}
-              onClick={() => setLabelError("")}
+              onClick={() => setInputError("")}
+              styler={errorInputFieldStyles}
             />
           </div>
-        </div>
-      )}
-      {!readMode && (
-        <div
-          data-name="entries-button-area"
-          className={entriesStyles["buttonArea"]}
-        >
-          <Button
-            width=" w-[100%] sm:w-[50%]"
-            height=" h-[75%]"
-            bgColor="bg-[#FA6C3E]"
-            hoverBgColor="hover:bg-[#cc471b]"
-            fontStyle={entriesStyles["buttonTitle"]}
+
+          <div
+            data-name="entries-output-area"
+            className={entriesStyles["output"]}
           >
-            INSERIR ENTRADA
-          </Button>
-        </div>
+            <b
+              data-name="entries-output-label"
+              className={entriesStyles["outputLabel"]}
+            >
+              Output:
+            </b>
+            <Input
+              width="w-full"
+              height="h-[50%]"
+              value={output}
+              setValue={setOutput}
+              placeHolder="Ex: mexe com cimento"
+              borderStyle="border-[1px]"
+              onClick={() => setOutputError("")}
+              styler={errorOutputFieldStyles}
+            />
+          </div>
+
+          <div
+            data-name="entries-level-area"
+            className={entriesStyles["level"]}
+          >
+            <div
+              data-name="entries-level-wrapper-area"
+              className={entriesStyles["levelWrapper"]}
+            >
+              <h2
+                data-name="entries-level-title"
+                className={entriesStyles["levelTitle"]}
+              >
+                Nivel de <br /> proximidade:
+              </h2>
+              <Input
+                type="number"
+                width="w-[25%] min-w-[100px]"
+                height="h-[100%] p-3"
+                value={label}
+                setValue={setLabel}
+                borderStyle="border-[1px]"
+                fontSize="text-[0.7rem] sm:text-[1rem]"
+                styler={errorLabelFieldStyles}
+                onClick={() => setLabelError("")}
+              />
+            </div>
+          </div>
+
+          <div
+            data-name="entries-button-area"
+            className={entriesStyles["buttonArea"]}
+          >
+            <Button
+              width=" w-[100%] sm:w-[50%]"
+              height=" h-[75%]"
+              bgColor="bg-[#FA6C3E]"
+              hoverBgColor="hover:bg-[#cc471b]"
+              fontStyle={entriesStyles["buttonTitle"]}
+              onClick={addEntryInList}
+            >
+              INSERIR ENTRADA
+            </Button>
+          </div>
+        </>
       )}
       {readMode && (
         <div
