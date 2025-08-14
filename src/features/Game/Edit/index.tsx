@@ -19,7 +19,6 @@ export default function EditFeature() {
     setResponseError,
     responseValidation,
   } = useResponse();
-
   const {
     entries,
     input,
@@ -39,8 +38,9 @@ export default function EditFeature() {
     entryValidationFields,
     entrySelectedIndex,
     setEntrySelectedIndex,
+    editValueInEntries,
+    removeEntryByIndex,
   } = useEntries();
-
   const {
     dataList,
     setDataList,
@@ -55,27 +55,42 @@ export default function EditFeature() {
     dataSelectedIndex,
     setDataSelectedIndex,
   } = useDataList();
-
-  const { editEntriesSubmit, editResponseSubmit, editDataListSubmit } =
-    useGameEditForm({
-      response,
-      input,
-      output,
-      label,
-      dataList,
-      entrySelectedIndex,
-      setEntries,
-      setDataList,
-      setResponse,
-      setResponseError,
-      entryValidationFields,
-      responseValidation,
-      dataListValidationFields,
-      dataSelectedIndex,
-    });
+  const {
+    editEntriesSubmit,
+    editResponseSubmit,
+    editDataListSubmit,
+    deleteDataListSubmit,
+    deleteEntrySubmit,
+  } = useGameEditForm({
+    response,
+    input,
+    output,
+    label,
+    entries,
+    dataList,
+    entrySelectedIndex,
+    setEntries,
+    setDataList,
+    setResponse,
+    setResponseError,
+    entryValidationFields,
+    responseValidation,
+    dataListValidationFields,
+    dataSelectedIndex,
+    editDataListValue,
+    setInput,
+    setOutput,
+    setLabel,
+    editValueInEntries,
+    removeEntryByIndex,
+    removeDataListValueByIndex,
+  });
 
   return (
-    <div data-name="edit-game-container" className={editStyles["wrapper"]}>
+    <div 
+      data-name="edit-game-container" 
+      className={editStyles["wrapper"]}
+    >
       <EntriesArea
         createMode={false}
         entries={entries}
@@ -97,8 +112,9 @@ export default function EditFeature() {
         setLabelError={setLabelError}
         addEntryInList={addEntryInList}
         editEntriesSubmit={editEntriesSubmit}
-        setEntrySelectedIndex={setEntrySelectedIndex}
         editResponseSubmit={editResponseSubmit}
+        setEntrySelectedIndex={setEntrySelectedIndex}
+        deleteEntrySubmit={deleteEntrySubmit}
       />
       <DataListArea
         createMode={false}
@@ -112,6 +128,8 @@ export default function EditFeature() {
         addDataInList={addDataInList}
         editDataListSubmit={editDataListSubmit}
         setDataSelectedIndex={setDataSelectedIndex}
+        deleteDataListSubmit={deleteDataListSubmit}
+        
       />
     </div>
   );

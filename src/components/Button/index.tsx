@@ -17,6 +17,7 @@ interface Props {
   cursor?: string;
   onClick?: () => void;
   children: ReactNode;
+  disabled?:boolean;
 }
 
 export default function Button({
@@ -35,6 +36,7 @@ export default function Button({
   cursor = "cursor-pointer",
   onClick,
   children,
+  disabled,
 }: Props) {
   const containerStyle = `
           relative
@@ -54,7 +56,11 @@ export default function Button({
     } else if (onClick) onClick();
   };
   return (
-    <button className={containerStyle} onClick={(e) => actionControl(e.detail)}>
+    <button 
+      className={containerStyle} 
+      onClick={(e) => actionControl(e.detail)}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

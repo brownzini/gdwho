@@ -2,9 +2,10 @@ interface Props {
   name: string;
   width?: string;
   height?: string;
+  color?:string;
   onClick?: () => void;
 }
-export default function SvgModel({ name, width, height, onClick }: Props) {
+export default function SvgModel({ name, width, height, color="#000000", onClick }: Props) {
   switch (name) {
     case "settings":
       return (
@@ -336,6 +337,27 @@ export default function SvgModel({ name, width, height, onClick }: Props) {
             d="M31.8507 17.5963C31.8507 18.3915 31.206 19.0363 30.4107 19.0363C29.6154 19.0363 28.9707 18.3915 28.9707 17.5963C28.9707 16.801 29.6154 16.1562 30.4107 16.1562C31.206 16.1562 31.8507 16.801 31.8507 17.5963Z"
             fill="white"
           />
+        </svg>
+      );
+    case "loading":
+      return (
+        <svg
+          id={name + "_id"}
+          width={width}
+          height={height}
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          className="loading"
+        >
+          <g fill={color} fillRule="evenodd" clipRule="evenodd">
+            <path
+              d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"
+              opacity=".2"
+            />
+
+            <path d="M7.25.75A.75.75 0 018 0a8 8 0 018 8 .75.75 0 01-1.5 0A6.5 6.5 0 008 1.5a.75.75 0 01-.75-.75z" />
+          </g>
         </svg>
       );
     default:

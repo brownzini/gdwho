@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useMemo } from "react";
 import { gameCreate } from "@/services/game/api-service";
 import { DataInputType, EntriesType } from "@/types/userContextType";
+import { useUser } from "@/contexts/user/useUser";
 
 interface Props {
   id: number;
@@ -27,6 +28,12 @@ export default function useGameCreateForm({
   nextScreen,
 }: Props) {
 
+  const {
+    setResponse:userSetResponse, 
+    setEntries:userSetEntries, 
+    setDataList:userSetDataList 
+  } = useUser();
+
   const listToBackend = useMemo(
     () => dataList.map((item) => item.value),
     [dataList]
@@ -49,7 +56,7 @@ export default function useGameCreateForm({
     if (readyToSave) {
       await gameCreate({ requestData })
         .then(() => {
-          console.log("deu certo kkkkk");
+          updateContextStates();
           nextScreen("editGameScreen");
         })
         .catch(() => {
@@ -58,6 +65,12 @@ export default function useGameCreateForm({
     } else {
       console.log("nao ta pronto para salvar :(");
     }
+  }
+
+  function updateContextStates() {
+        userSetResponse(response);
+        userSetEntries(entries);
+        userSetDataList(dataList);
   }
 
   return {

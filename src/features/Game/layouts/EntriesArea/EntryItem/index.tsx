@@ -6,7 +6,7 @@ interface Props {
   output: string;
   label: number | string;
   onEdit: () => void;
-  onDelete: () => void;
+  onDelete: () => Promise<void>;
 }
 
 export default function EntryItem({

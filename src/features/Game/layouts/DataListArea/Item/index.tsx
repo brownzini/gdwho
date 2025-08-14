@@ -10,6 +10,7 @@ interface Props {
   removeValueByIndex(index: number): void;
   editDataListSubmit?: () => Promise<void>;
   setDataSelectedIndex?: Dispatch<SetStateAction<number>>;
+  loading:boolean;
 }
 
 export default function Item({
@@ -20,6 +21,7 @@ export default function Item({
   removeValueByIndex,
   editDataListSubmit,
   setDataSelectedIndex,
+  loading,
 }: Props) {
   const colorStyle = hasError
     ? "text-[#dc362e] italic"
@@ -49,11 +51,12 @@ export default function Item({
         setValue={handleEditValue}
         borderStyle="border-none"
         fontFamily={`font-["Roboto"] `}
-        alternativeAction={removeData}
+        firstAction={removeData}
         fontColor={colorStyle}
         fontSize="text-[0.93rem] sm:text-[1.2rem] xl:text-[1.6rem]"
         secondAction={handleSetValue}
         onClick={() => setDataSelectedIndex && setDataSelectedIndex(index)}
+        disabled={loading}
       />
     </div>
   );

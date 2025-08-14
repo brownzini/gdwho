@@ -7,6 +7,8 @@ import entriesStyles from "./styles";
 import EntryItem from "./EntryItem";
 import { EntriesType, EntryConstTYpes } from "@/types/userContextType";
 import { desnormalizeLabel, normalizeLabel } from "@/utils/fields";
+import useLoading from "../../hooks/useLoading";
+import SvgModel from "@/components/svg";
 
 interface Props {
   createMode: boolean;
@@ -18,7 +20,7 @@ interface Props {
   output: string;
   setOutput: Dispatch<SetStateAction<string>>;
   label: string;
-  setLabel: Dispatch<SetStateAction<string>>;
+  setLabel: Dispatch<SetStateAction<string | number>>;
   responseError: string;
   setResponseError: Dispatch<SetStateAction<string>>;
   inputError: string;
@@ -31,6 +33,7 @@ interface Props {
   setEntrySelectedIndex: Dispatch<SetStateAction<number>>;
   editEntriesSubmit?(key: EntryConstTYpes): Promise<void>;
   editResponseSubmit?: () => Promise<void>;
+  deleteEntrySubmit?: (id: number, index: number) => Promise<void>;
 }
 
 export default function EntriesArea({
@@ -56,7 +59,9 @@ export default function EntriesArea({
   editEntriesSubmit,
   setEntrySelectedIndex,
   editResponseSubmit,
+  deleteEntrySubmit,
 }: Props) {
+  const { loading, setLoading } = useLoading();
 
   const [readMode, setReadMode] = useState<boolean>(!createMode);
 
@@ -80,6 +85,10 @@ export default function EntriesArea({
     ? "bg-[#FA6C3E] hover:bg-[#FA6C3E]"
     : "bg-[#6014b0] hover:bg-[#140524]";
 
+  const renderingButtonDescription = createMode
+    ? "INSERIR ENTRADA"
+    : "VOLTAR PARA LISTA";
+
   const changeToEditMode = (
     index: number,
     oldInput: string,
@@ -92,23 +101,52 @@ export default function EntriesArea({
     setEntrySelectedIndex(index);
     setReadMode(false);
   };
-
   const handleButton = () => {
     if (createMode) addEntryInList();
     else setReadMode(true);
   };
-
-  const handleSetResponseField = async () => editResponseSubmit && await editResponseSubmit();
-  const handleSetInputField = async () => editEntriesSubmit && await editEntriesSubmit("input");
-  const handleSetOutputField = async () => editEntriesSubmit && await editEntriesSubmit("output");
-  const handleSetLabelField = async () => editEntriesSubmit && await editEntriesSubmit("label");
-
-  const customizedSetLabel = (value:string) => {
+  const handleSetResponseField = async () => {
+    if (editResponseSubmit) {
+      setLoading(true);
+      await editResponseSubmit();
+      setLoading(false);
+    }
+  };
+  const handleSetInputField = async () => {
+    if (editEntriesSubmit) {
+      setLoading(true);
+      await editEntriesSubmit("input");
+      setLoading(false);
+    }
+  };
+  const handleSetOutputField = async () => {
+    if (editEntriesSubmit) {
+      setLoading(true);
+      await editEntriesSubmit("output");
+      setLoading(false);
+    }
+  };
+  const handleSetLabelField = async () => {
+    if (editEntriesSubmit) {
+      setLoading(true);
+      await editEntriesSubmit("label");
+      setLoading(false);
+    }
+  };
+  const customizedSetLabel = (value: string) => {
     const normalized = desnormalizeLabel(value);
+    console.log(normalized);
     setLabel(normalized);
-  }
+  };
+  const handleDeleteEntry = async (id: number, index: number) => {
+    if (deleteEntrySubmit) {
+      setLoading(true);
+      await deleteEntrySubmit(id, index);
+      setLoading(false);
+    }
+  };
 
-  const renderingLabel = (createMode) ? label: normalizeLabel(label);
+  const renderingLabel = normalizeLabel(label);
 
   return (
     <div data-name="entries-area" className={entriesStyles["entriesArea"]}>
@@ -125,7 +163,8 @@ export default function EntriesArea({
           placeHolder="Digite a resposta do seu jogo ..."
           styler={errorResponseFieldStyles}
           onClick={() => setResponseError("")}
-          alternativeAction={handleSetResponseField}
+          secondAction={handleSetResponseField}
+          disabled={loading}
         />
       </div>
 
@@ -147,7 +186,8 @@ export default function EntriesArea({
               borderStyle="border-[1px]"
               onClick={() => setInputError("")}
               styler={errorInputFieldStyles}
-              alternativeAction={handleSetInputField}
+              secondAction={handleSetInputField}
+              disabled={loading}
             />
           </div>
 
@@ -167,7 +207,8 @@ export default function EntriesArea({
               borderStyle="border-[1px]"
               onClick={() => setOutputError("")}
               styler={errorOutputFieldStyles}
-              alternativeAction={handleSetOutputField}
+              secondAction={handleSetOutputField}
+              disabled={loading}
             />
           </div>
 
@@ -186,14 +227,15 @@ export default function EntriesArea({
               <Input
                 type="number"
                 width="w-[25%] min-w-[100px]"
-                height="h-[100%] p-3"
+                height="h-full p-3"
                 value={renderingLabel}
                 setValue={customizedSetLabel}
                 borderStyle="border-[1px]"
                 fontSize="text-[0.7rem] sm:text-[1rem]"
                 styler={errorLabelFieldStyles}
                 onClick={() => setLabelError("")}
-                alternativeAction={handleSetLabelField}
+                secondAction={handleSetLabelField}
+                disabled={loading}
               />
             </div>
             {createMode && (
@@ -217,8 +259,18 @@ export default function EntriesArea({
               bgColor={buttonStyles}
               fontStyle={entriesStyles["buttonTitle"]}
               onClick={handleButton}
+              disabled={loading}
             >
-              {createMode ? "INSERIR ENTRADA" : "CONFIRMAR ALTERAÇÃO"}
+              {loading ? (
+                <SvgModel 
+                  name="loading" 
+                  width="75%" 
+                  height="75%" 
+                  color="#FFF"
+                />
+              ) : (
+                renderingButtonDescription
+              )}
             </Button>
           </div>
         </>
@@ -243,7 +295,9 @@ export default function EntriesArea({
                     element.label
                   )
                 }
-                onDelete={() => console.log("deleta")}
+                onDelete={async () =>
+                  await handleDeleteEntry(element.id, index)
+                }
               />
             );
           })}

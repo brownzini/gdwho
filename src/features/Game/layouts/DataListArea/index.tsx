@@ -9,6 +9,7 @@ import dataListStyles from "./styles";
 
 import { useScreen } from "@/contexts/screen/useScreen";
 import { DataInputType } from "@/types/userContextType";
+import useLoading from "../../hooks/useLoading";
 
 interface Props {
   createMode: boolean;
@@ -20,9 +21,10 @@ interface Props {
   editValue: (key: string, index: number, newValue: string) => void;
   removeValueByIndex(index: number): void;
   addDataInList(): void;
-  handleSubmit?: () => Promise<void>;
-  editDataListSubmit?:() => Promise<void>;
+  handleSave?: () => Promise<void>;
+  editDataListSubmit?: () => Promise<void>;
   setDataSelectedIndex?: Dispatch<SetStateAction<number>>;
+  deleteDataListSubmit?: (id: number, index: number) => Promise<void>;
 }
 
 export default function DataListArea({
@@ -35,11 +37,13 @@ export default function DataListArea({
   editValue,
   removeValueByIndex,
   addDataInList,
-  handleSubmit,
+  handleSave,
   editDataListSubmit,
   setDataSelectedIndex,
+  deleteDataListSubmit,
 }: Props) {
   const { backScreen } = useScreen();
+  const { loading, setLoading } = useLoading();
 
   const borderContainerStyle = dataListValueError
     ? "1px dashed #dc362e"
@@ -51,6 +55,24 @@ export default function DataListArea({
     ? "text-[#dc362e]"
     : "text-[#333124]";
 
+  const handleSubmit = async () => {
+    if (handleSave) {
+      setLoading(true);
+      await handleSave();
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: number, index: number) => {
+    if (createMode) {
+      removeValueByIndex(index);
+    } else if (deleteDataListSubmit) {
+      setLoading(true);
+      await deleteDataListSubmit(id, index);
+      setLoading(false);
+    }
+  };
+
   return (
     <div
       data-name="data-list-container"
@@ -58,9 +80,7 @@ export default function DataListArea({
     >
       <h2 className={dataListStyles["dataListTitle"]}>
         Lista de Dicas:
-        <span className={dataListStyles["requiredMark"]}>
-          *
-        </span>
+        <span className={dataListStyles["requiredMark"]}>*</span>
       </h2>
       <div
         data-name="data-list-container-list"
@@ -88,10 +108,7 @@ export default function DataListArea({
               data-name="data-list-icon-container"
               className={dataListStyles["iconContainer"]}
             >
-              <Button 
-                cursor="cursor-normal" 
-                onClick={addDataInList}
-              >
+              <Button cursor="cursor-normal" onClick={addDataInList}>
                 <SvgModel name="add" width="75%" height="75%" />
               </Button>
             </div>
@@ -109,9 +126,12 @@ export default function DataListArea({
                 value={element.value}
                 editValue={editValue}
                 hasError={element.hasError}
-                removeValueByIndex={removeValueByIndex}
+                removeValueByIndex={async () =>
+                  await handleDelete(element.id, index)
+                }
                 editDataListSubmit={editDataListSubmit}
                 setDataSelectedIndex={setDataSelectedIndex}
+                loading={loading}
               />
             );
           })}
@@ -130,14 +150,21 @@ export default function DataListArea({
         >
           VOLTAR
         </Button>
-        {(createMode) && <Button
-          height="h-[100%] sm:h-[64%] max-h-[50px]"
-          bgColor="bg-[#C6518F] hover:bg-[#cc0f74]"
-          fontStyle={dataListStyles["createButton"]}
-          onClick={handleSubmit}
-        >
-          CRIAR
-        </Button>}
+        {createMode && (
+          <Button
+            height="h-[100%] sm:h-[64%] max-h-[50px]"
+            bgColor="bg-[#C6518F] hover:bg-[#cc0f74]"
+            fontStyle={dataListStyles["createButton"]}
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? (
+              <SvgModel name="loading" width="50%" height="50%" color="#FFF" />
+            ) : (
+              "CRIAR"
+            )}
+          </Button>
+        )}
       </div>
     </div>
   );

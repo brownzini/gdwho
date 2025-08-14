@@ -11,9 +11,16 @@ export default function useResponse() {
   ) {
     const notValidResponse = invalidResponseField(true, value);
     if (notValidResponse) {
-      setResponseError(notValidResponse);
+        setResponseError(notValidResponse);
+        emitError(setResponseError);
     }
     return !notValidResponse;
+  }
+
+  function emitError(setStateError: (value: SetStateAction<string>) => void) {
+    setTimeout(() => {
+      setStateError("");
+    }, 500);
   }
 
   return {

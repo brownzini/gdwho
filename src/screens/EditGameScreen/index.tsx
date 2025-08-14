@@ -9,9 +9,16 @@ import ScreenTitle from "@/shared/ScreenTitle";
 import React from "react";
 import editGameScreenStyles from "./styles";
 import { useUser } from "@/contexts/user/useUser";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function EditGameScreen() {
-  const { entries, dataList } = useUser();
+
+  const { nextScreen } = useScreen();
+  
+  const { response, entries, dataList } = useUser();
+  
+  if(response === "") nextScreen("dashboard"); 
+
   return (
     <div
       data-name="edit-game-screen-container"

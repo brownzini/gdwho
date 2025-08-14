@@ -64,14 +64,14 @@ input[type="color"]::-webkit-color-swatch {
       transparent 20px
     );
 
-    animation: moveBackground 20s linear infinite;
+  animation: moveBackground 20s linear infinite;
 }
 
 @keyframes moveBackground {
   0% {
     background-position: 0 0;
   }
-  25%{
+  25% {
     background-color: #7d0a9d;
   }
   50% {
@@ -83,14 +83,28 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .float {
-    animation: moveFloat 2s ease-in-out infinite;
+  animation: moveFloat 2s ease-in-out infinite;
 }
 
 @keyframes moveFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-15px); 
+    transform: translateY(-15px);
+  }
+}
+
+.loading {
+  animation: moveLoading 1s ease infinite;
+}
+
+@keyframes moveLoading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

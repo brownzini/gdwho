@@ -12,7 +12,7 @@ interface Props {
   value: string;
   setValue: (value: string) => void;
   onClick?: () => void;
-  alternativeAction?: () => void;
+  firstAction?: () => void;
   secondAction?: () => void;
   disabled?: boolean;
 }
@@ -31,7 +31,7 @@ export default function Input({
   setValue,
   styler = "",
   onClick,
-  alternativeAction,
+  firstAction,
   secondAction,
   disabled,
 }: Props) {
@@ -45,8 +45,8 @@ export default function Input({
   const handleActionClick = (pressedKey: string) => {
     const isDeleteMode = 
       (pressedKey === "Backspace" || pressedKey === "Delete") &&
-      alternativeAction;
-    if (isDeleteMode) alternativeAction();
+      firstAction;
+    if (isDeleteMode) firstAction();
     if (pressedKey === "Enter" && secondAction) secondAction();
   };
   return (

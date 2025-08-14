@@ -6,8 +6,16 @@ import ScreenTitle from "@/shared/ScreenTitle";
 
 import React from "react";
 import createGameScreenStyles from "./styles";
+import { useUser } from "@/contexts/user/useUser";
+import { useScreen } from "@/contexts/screen/useScreen";
 
 export default function CreateGameScreen() {
+
+  const { response } = useUser();
+  const { nextScreen } = useScreen();
+
+  if(response !== "") nextScreen("dashboard"); 
+
   return (
     <div
       data-name="create-game-screen-container"

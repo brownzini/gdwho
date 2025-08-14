@@ -23,7 +23,6 @@ export default function CreateFeature() {
   } = useResponse();
   const {
     entries,
-    setEntries,
     input,
     setInput,
     output,
@@ -36,8 +35,9 @@ export default function CreateFeature() {
     setOutputError,
     labelError,
     setLabelError,
-    setSelectedIndex,
     addEntryInList,
+    setEntries,
+    setEntrySelectedIndex,
   } = useEntries();
   const {
     dataList,
@@ -75,7 +75,7 @@ export default function CreateFeature() {
         setInput={setInput}
         output={output}
         setOutput={setOutput}
-        label={label}
+        label={label.toString()}
         setLabel={setLabel}
         responseError={responseError}
         setResponseError={setResponseError}
@@ -87,7 +87,7 @@ export default function CreateFeature() {
         setLabelError={setLabelError}
         addEntryInList={addEntryInList}
         entries={entries}
-        setSelectedIndex={setSelectedIndex}
+        setEntrySelectedIndex={setEntrySelectedIndex}
       />
       <DataListArea
         createMode={true}
@@ -99,7 +99,7 @@ export default function CreateFeature() {
         editValue={editDataListValue}
         removeValueByIndex={removeDataListValueByIndex}
         addDataInList={addDataInList}
-        handleSubmit={saveSubmit}
+        handleSave={saveSubmit}
       />
     </div>
   );
