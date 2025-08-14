@@ -22,6 +22,7 @@ interface Props {
   addDataInList(): void;
   handleSubmit?: () => Promise<void>;
   editDataListSubmit?:() => Promise<void>;
+  setDataSelectedIndex?: Dispatch<SetStateAction<number>>;
 }
 
 export default function DataListArea({
@@ -36,6 +37,7 @@ export default function DataListArea({
   addDataInList,
   handleSubmit,
   editDataListSubmit,
+  setDataSelectedIndex,
 }: Props) {
   const { backScreen } = useScreen();
 
@@ -64,6 +66,7 @@ export default function DataListArea({
         data-name="data-list-container-list"
         className={dataListStyles["containerList"]}
         style={{ border: borderContainerStyle }}
+        onClick={() => setDataListValueError("")}
       >
         {createMode && (
           <div
@@ -108,6 +111,7 @@ export default function DataListArea({
                 hasError={element.hasError}
                 removeValueByIndex={removeValueByIndex}
                 editDataListSubmit={editDataListSubmit}
+                setDataSelectedIndex={setDataSelectedIndex}
               />
             );
           })}

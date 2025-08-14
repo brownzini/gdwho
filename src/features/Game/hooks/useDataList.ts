@@ -3,10 +3,11 @@ import { DataInputType } from "@/types/userContextType";
 import { invalidDataListValueField } from "@/services/game/businessRuleValidations-service";
 
 export default function useDataList() {
-
   const [dataList, setDataList] = useState<DataInputType[]>([]);
   const [dataListValue, setDataListValue] = useState<string>("");
   const [dataListValueError, setDataListValueError] = useState<string>("");
+
+  const [dataSelectedIndex, setDataSelectedIndex] = useState<number>(0);
 
   function resetFields() {
     setDataListValue("");
@@ -60,5 +61,8 @@ export default function useDataList() {
     addDataInList,
     editDataListValue,
     removeDataListValueByIndex,
+    dataListValidationFields,
+    dataSelectedIndex,
+    setDataSelectedIndex,
   };
 }

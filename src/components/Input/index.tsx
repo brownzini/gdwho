@@ -12,9 +12,9 @@ interface Props {
   value: string;
   setValue: (value: string) => void;
   onClick?: () => void;
-  enterTyper?: string;
   alternativeAction?: () => void;
-  disabled?:boolean;
+  secondAction?: () => void;
+  disabled?: boolean;
 }
 
 export default function Input({
@@ -31,9 +31,9 @@ export default function Input({
   setValue,
   styler = "",
   onClick,
-  enterTyper,
   alternativeAction,
-  disabled
+  secondAction,
+  disabled,
 }: Props) {
   const styles = `
         ${width} ${height}
@@ -42,16 +42,12 @@ export default function Input({
         outline-none pl-3
         ${styler}
     `;
-  const handleActionClick = (pressedKey:string, type?: string) => {
-    if (type === "remove") {
-      if ((pressedKey === "Backspace" || pressedKey === "Delete") && alternativeAction) {
-           alternativeAction();
-      }
-    } else if(alternativeAction) {
-        if (pressedKey === "Enter") {
-           alternativeAction();
-        }
-    }
+  const handleActionClick = (pressedKey: string) => {
+    const isDeleteMode = 
+      (pressedKey === "Backspace" || pressedKey === "Delete") &&
+      alternativeAction;
+    if (isDeleteMode) alternativeAction();
+    if (pressedKey === "Enter" && secondAction) secondAction();
   };
   return (
     <input
@@ -61,7 +57,7 @@ export default function Input({
       placeholder={placeHolder}
       onChange={(e) => setValue(e.target.value.slice(0, max))}
       onClick={onClick}
-      onKeyDown={(e) => handleActionClick(e.key, enterTyper)}
+      onKeyDown={(e) => handleActionClick(e.key)}
       disabled={disabled}
     />
   );

@@ -14,7 +14,7 @@ export default function useEntries() {
   const [output, setOutput] = useState<string>("");
   const [label, setLabel] = useState<string>("100");
 
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [entrySelectedIndex, setEntrySelectedIndex] = useState<number>(0);
 
   const [inputError, setInputError] = useState<string>("");
   const [outputError, setOutputError] = useState<string>("");
@@ -76,7 +76,7 @@ export default function useEntries() {
     setLabelError,
     addEntryInList,
     entryValidationFields,
-    selectedIndex, 
-    setSelectedIndex
+    entrySelectedIndex,
+    setEntrySelectedIndex,
   };
 }

@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import {
   DataInputType,
+  DataType,
   EntriesType,
   EntryConstTYpes,
 } from "@/types/userContextType";
@@ -11,8 +12,8 @@ interface Props {
   input: string;
   output: string;
   label: string | number;
-  dataListValue: string;
-  selectedIndex: number;
+  dataList: DataType[];
+  entrySelectedIndex: number;
   setEntries: Dispatch<SetStateAction<EntriesType[]>>;
   setDataList: Dispatch<SetStateAction<DataInputType[]>>;
   setResponse: Dispatch<SetStateAction<string>>;
@@ -22,6 +23,8 @@ interface Props {
     value: string,
     setResponseError: Dispatch<SetStateAction<string>>
   ) => boolean;
+  dataListValidationFields(value: string): boolean;
+  dataSelectedIndex: number;
 }
 
 export default function useGameEditForm({
@@ -29,14 +32,16 @@ export default function useGameEditForm({
   input,
   output,
   label,
-  dataListValue,
-  selectedIndex,
+  dataList,
+  entrySelectedIndex,
   setEntries,
   setDataList,
   setResponse,
   setResponseError,
   responseValidation,
   entryValidationFields,
+  dataListValidationFields,
+  dataSelectedIndex,
 }: Props) {
   const {
     response: userResponse,
@@ -61,7 +66,8 @@ export default function useGameEditForm({
   }
 
   function hasChangedValueValidation(userValue: string) {
-    return userValue !== dataListValue;
+    const dataValue = dataList[dataSelectedIndex].value;
+    return userValue !== dataValue;
   }
 
   async function editResponseSubmit() {
@@ -80,7 +86,7 @@ export default function useGameEditForm({
 
   async function editEntriesSubmit(key: EntryConstTYpes) {
 
-    const userEntry = userEntries[selectedIndex] ?? [];
+    const userEntry = userEntries[entrySelectedIndex] ?? [];
     const hasChanged = {
       input: hasChangedInputValidation(userEntry.input),
       output: hasChangedOutputValidation(userEntry.output),
@@ -100,10 +106,12 @@ export default function useGameEditForm({
   }
 
   async function editDataListSubmit() {
-    const userData = userDatalist[selectedIndex] ?? [];
+    const userData = userDatalist[dataSelectedIndex] ?? [];
     const hasChanged = hasChangedValueValidation(userData.value);
+  
     if (hasChanged) {
-      const readyToSave = responseValidation(dataListValue, setResponseError);
+      const value = dataList[dataSelectedIndex].value;
+      const readyToSave = dataListValidationFields(value);
       if (readyToSave) {
         console.log("alterado kkkk");
       } else {

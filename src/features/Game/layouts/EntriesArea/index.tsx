@@ -28,7 +28,7 @@ interface Props {
   labelError: string;
   setLabelError: Dispatch<SetStateAction<string>>;
   addEntryInList(): void;
-  setSelectedIndex: Dispatch<SetStateAction<number>>;
+  setEntrySelectedIndex: Dispatch<SetStateAction<number>>;
   editEntriesSubmit?(key: EntryConstTYpes): Promise<void>;
   editResponseSubmit?: () => Promise<void>;
 }
@@ -54,7 +54,7 @@ export default function EntriesArea({
   setLabelError,
   addEntryInList,
   editEntriesSubmit,
-  setSelectedIndex,
+  setEntrySelectedIndex,
   editResponseSubmit,
 }: Props) {
 
@@ -89,7 +89,7 @@ export default function EntriesArea({
     setInput(oldInput);
     setOutput(oldOutput);
     setLabel(oldLabel.toString());
-    setSelectedIndex(index);
+    setEntrySelectedIndex(index);
     setReadMode(false);
   };
 

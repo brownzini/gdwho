@@ -1,5 +1,6 @@
 import Input from "@/components/Input";
 import itemStyles from "./styles";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   index: number;
@@ -8,6 +9,7 @@ interface Props {
   hasError?: boolean;
   removeValueByIndex(index: number): void;
   editDataListSubmit?: () => Promise<void>;
+  setDataSelectedIndex?: Dispatch<SetStateAction<number>>;
 }
 
 export default function Item({
@@ -17,6 +19,7 @@ export default function Item({
   hasError,
   removeValueByIndex,
   editDataListSubmit,
+  setDataSelectedIndex,
 }: Props) {
   const colorStyle = hasError
     ? "text-[#dc362e] italic"
@@ -30,7 +33,11 @@ export default function Item({
     if (!value) removeValueByIndex(index);
   };
 
-  const handleSetValue = async () => editDataListSubmit && await editDataListSubmit();
+  const handleSetValue = async () => {
+    if (editDataListSubmit) {
+        await editDataListSubmit();
+    }
+  };
 
   return (
     <div data-name="data-list-data" className={itemStyles["data"]}>
@@ -45,6 +52,8 @@ export default function Item({
         alternativeAction={removeData}
         fontColor={colorStyle}
         fontSize="text-[0.93rem] sm:text-[1.2rem] xl:text-[1.6rem]"
+        secondAction={handleSetValue}
+        onClick={() => setDataSelectedIndex && setDataSelectedIndex(index)}
       />
     </div>
   );

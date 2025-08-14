@@ -12,7 +12,6 @@ import editStyles from "./styles";
 import useGameEditForm from "../hooks/useGameEditForm";
 
 export default function EditFeature() {
-  
   const {
     response,
     setResponse,
@@ -38,8 +37,8 @@ export default function EditFeature() {
     addEntryInList,
     setEntries,
     entryValidationFields,
-    selectedIndex,
-    setSelectedIndex,
+    entrySelectedIndex,
+    setEntrySelectedIndex,
   } = useEntries();
 
   const {
@@ -52,26 +51,28 @@ export default function EditFeature() {
     addDataInList,
     editDataListValue,
     removeDataListValueByIndex,
+    dataListValidationFields,
+    dataSelectedIndex,
+    setDataSelectedIndex,
   } = useDataList();
-  
-  const { 
-    editEntriesSubmit, 
-    editResponseSubmit,
-    editDataListSubmit,
-  } = useGameEditForm({
-    response,
-    input,
-    output,
-    label,
-    dataListValue,
-    selectedIndex,
-    setEntries,
-    setDataList,
-    setResponse,
-    setResponseError,
-    entryValidationFields,
-    responseValidation,
-  });
+
+  const { editEntriesSubmit, editResponseSubmit, editDataListSubmit } =
+    useGameEditForm({
+      response,
+      input,
+      output,
+      label,
+      dataList,
+      entrySelectedIndex,
+      setEntries,
+      setDataList,
+      setResponse,
+      setResponseError,
+      entryValidationFields,
+      responseValidation,
+      dataListValidationFields,
+      dataSelectedIndex,
+    });
 
   return (
     <div data-name="edit-game-container" className={editStyles["wrapper"]}>
@@ -96,20 +97,21 @@ export default function EditFeature() {
         setLabelError={setLabelError}
         addEntryInList={addEntryInList}
         editEntriesSubmit={editEntriesSubmit}
-        setSelectedIndex={setSelectedIndex}
+        setEntrySelectedIndex={setEntrySelectedIndex}
         editResponseSubmit={editResponseSubmit}
       />
       <DataListArea
         createMode={false}
+        dataList={dataList}
         value={dataListValue}
         setValue={setDataListValue}
-        dataList={dataList}
         dataListValueError={dataListValueError}
         setDataListValueError={setDataListValueError}
         editValue={editDataListValue}
         removeValueByIndex={removeDataListValueByIndex}
         addDataInList={addDataInList}
         editDataListSubmit={editDataListSubmit}
+        setDataSelectedIndex={setDataSelectedIndex}
       />
     </div>
   );
