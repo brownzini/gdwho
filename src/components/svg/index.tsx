@@ -221,7 +221,7 @@ export default function SvgModel({ name, width, height, onClick }: Props) {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer w-auto"
           onClick={() => onClick && onClick()}
         >
           <path
@@ -241,7 +241,7 @@ export default function SvgModel({ name, width, height, onClick }: Props) {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer w-auto"
           onClick={() => onClick && onClick()}
         >
           <path

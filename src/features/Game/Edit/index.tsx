@@ -1,15 +1,18 @@
 "use client";
 
-import editStyles from "./styles";
 import EntriesArea from "../layouts/EntriesArea";
 import DataListArea from "../layouts/DataListArea";
-import useGameForm from "../hooks/useGameForm";
+
 import useDataList from "../hooks/useDataList";
 import useEntries from "../hooks/useEntries";
 import useResponse from "../hooks/useResponse";
-import { useScreen } from "@/contexts/screen/useScreen";
+
+import editStyles from "./styles";
+
+import useGameEditForm from "../hooks/useGameEditForm";
 
 export default function EditFeature() {
+  
   const {
     response,
     setResponse,
@@ -19,6 +22,7 @@ export default function EditFeature() {
   } = useResponse();
 
   const {
+    entries,
     input,
     setInput,
     output,
@@ -32,44 +36,55 @@ export default function EditFeature() {
     labelError,
     setLabelError,
     addEntryInList,
-    entries,
+    setEntries,
+    entryValidationFields,
+    selectedIndex,
+    setSelectedIndex,
   } = useEntries();
 
   const {
     dataList,
+    setDataList,
     dataListValue,
     setDataListValue,
     dataListValueError,
     setDataListValueError,
+    addDataInList,
     editDataListValue,
     removeDataListValueByIndex,
-    addDataInList,
   } = useDataList();
-
-  const { nextScreen } = useScreen();
-
-  const { handleSubmit } = useGameForm({
-    id: 1,
+  
+  const { 
+    editEntriesSubmit, 
+    editResponseSubmit,
+    editDataListSubmit,
+  } = useGameEditForm({
     response,
-    entries,
-    dataList,
+    input,
+    output,
+    label,
+    dataListValue,
+    selectedIndex,
+    setEntries,
+    setDataList,
+    setResponse,
     setResponseError,
+    entryValidationFields,
     responseValidation,
-    nextScreen,
   });
 
   return (
     <div data-name="edit-game-container" className={editStyles["wrapper"]}>
       <EntriesArea
-        readMode={true}
         createMode={false}
+        entries={entries}
         response={response}
         setResponse={setResponse}
         input={input}
         setInput={setInput}
         output={output}
         setOutput={setOutput}
-        label={label}
+        label={label.toString()}
         setLabel={setLabel}
         responseError={responseError}
         setResponseError={setResponseError}
@@ -80,9 +95,12 @@ export default function EditFeature() {
         labelError={labelError}
         setLabelError={setLabelError}
         addEntryInList={addEntryInList}
-        entries={entries}
+        editEntriesSubmit={editEntriesSubmit}
+        setSelectedIndex={setSelectedIndex}
+        editResponseSubmit={editResponseSubmit}
       />
       <DataListArea
+        createMode={false}
         value={dataListValue}
         setValue={setDataListValue}
         dataList={dataList}
@@ -91,7 +109,7 @@ export default function EditFeature() {
         editValue={editDataListValue}
         removeValueByIndex={removeDataListValueByIndex}
         addDataInList={addDataInList}
-        handleSubmit={handleSubmit}
+        editDataListSubmit={editDataListSubmit}
       />
     </div>
   );

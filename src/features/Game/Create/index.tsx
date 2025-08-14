@@ -1,13 +1,16 @@
 "use client";
 
+import { useScreen } from "@/contexts/screen/useScreen";
+
 import DataListArea from "../layouts/DataListArea";
 import EntriesArea from "../layouts/EntriesArea";
-import createStyles from "./styles";
-import useGameForm from "../hooks/useGameForm";
+
 import useEntries from "../hooks/useEntries";
 import useDataList from "../hooks/useDataList";
 import useResponse from "../hooks/useResponse";
-import { useScreen } from "@/contexts/screen/useScreen";
+
+import createStyles from "./styles";
+import useGameCreateForm from "../hooks/useGameCreateForm";
 
 export default function CreateFeature() {
 
@@ -18,9 +21,9 @@ export default function CreateFeature() {
     setResponseError,
     responseValidation,
   } = useResponse();
-
   const {
     entries,
+    setEntries,
     input,
     setInput,
     output,
@@ -33,11 +36,12 @@ export default function CreateFeature() {
     setOutputError,
     labelError,
     setLabelError,
+    setSelectedIndex,
     addEntryInList,
   } = useEntries();
-
   const {
     dataList,
+    setDataList,
     dataListValue,
     setDataListValue,
     dataListValueError,
@@ -46,19 +50,18 @@ export default function CreateFeature() {
     editDataListValue,
     removeDataListValueByIndex,
   } = useDataList();
-
   const { nextScreen } = useScreen();
-  
-  const { handleSubmit } = useGameForm({
-      id:1,
-      response,
-      entries,
-      dataList,
-      setResponseError,
-      responseValidation,
-      nextScreen,
+  const { saveSubmit } = useGameCreateForm({
+    id: 1,
+    response,
+    entries,
+    dataList,
+    setResponseError,
+    responseValidation,
+    nextScreen,
+    setDataList,
+    setEntries,
   });
-
   return (
     <div 
       data-name="create-game-container" 
@@ -84,8 +87,10 @@ export default function CreateFeature() {
         setLabelError={setLabelError}
         addEntryInList={addEntryInList}
         entries={entries}
+        setSelectedIndex={setSelectedIndex}
       />
       <DataListArea
+        createMode={true}
         value={dataListValue}
         setValue={setDataListValue}
         dataList={dataList}
@@ -94,7 +99,7 @@ export default function CreateFeature() {
         editValue={editDataListValue}
         removeValueByIndex={removeDataListValueByIndex}
         addDataInList={addDataInList}
-        handleSubmit={handleSubmit}
+        handleSubmit={saveSubmit}
       />
     </div>
   );

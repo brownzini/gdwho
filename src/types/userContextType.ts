@@ -4,8 +4,10 @@ export type EntriesType = {
      id:number;
      input:string;
      output:string;
-     label: number;
+     label: string | number;
 }
+
+export type EntryConstTYpes = "input" | "output" | "label" ;
 
 export type DataType = {
      id:number;
@@ -31,4 +33,6 @@ export type UserContextType = {
   setEntries: (entries: EntriesType[]) => void;
   dataList: DataType[];
   setDataList: (dataList: DataType[]) => void;
+  editDataListValue: (key: string, index: number, newValue: string) => void;
+  removeDataListValueByIndex: (index: number) => void;
 };

@@ -4,58 +4,53 @@ import entryItemStyles from "./entryItemStyles";
 interface Props {
   input: string;
   output: string;
-  label: number;
+  label: number | string;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
-export default function EntryItem({ input, output, label }: Props) {
+export default function EntryItem({
+  input,
+  output,
+  label,
+  onEdit,
+  onDelete,
+}: Props) {
   return (
-    <div
-      data-name="entry-wrapper" 
-      className={entryItemStyles["wrapper"]}
-    >
-      <h3
-        data-name="entry-input-text" 
-        className={entryItemStyles["input"]} 
-        title="Esse é o tooltip"
-      >
+    <div data-name="entry-wrapper" className={entryItemStyles["wrapper"]}>
+      <h3 className={entryItemStyles["input"]}>
         {input}
       </h3>
-      <h3
-        data-name="entry-output-text"  
-        className={entryItemStyles["output"]}
-      >
+      <h3 className={entryItemStyles["output"]}>
         {output}
       </h3>
-      <span 
-        data-name="entry-level-label" 
-        className={entryItemStyles["label"]}
-      >
+      <span className={entryItemStyles["label"]}>
         {label}
       </span>
-      <div
-        data-name="entry-action-area"  
+      <div 
+        data-name="entry-action-area" 
         className={entryItemStyles["action"]}
       >
         <div
-          data-name="entry-edit-icon-area"  
+          data-name="entry-edit-icon-area"
           className={entryItemStyles["iconArea"]}
         >
           <SvgModel 
             name="edit" 
             width="100%" 
-            height="75%" 
-            onClick={() => console.log("")}
+            height="84%" 
+            onClick={onEdit} 
           />
         </div>
         <div
           data-name="entry-delete-icon-area"
           className={entryItemStyles["iconArea"]}
         >
-          <SvgModel 
-            name="delete" 
-            width="100%" 
-            height="100%" 
-            onClick={() => console.log("")}
+          <SvgModel
+            name="delete"
+            width="100%"
+            height="100%"
+            onClick={onDelete}
           />
         </div>
       </div>

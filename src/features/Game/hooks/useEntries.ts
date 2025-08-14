@@ -4,14 +4,17 @@ import {
   invalidOutputField,
 } from "@/services/game/businessRuleValidations-service";
 import { EntriesType } from "@/types/userContextType";
+import { normalizeLabel } from "@/utils/fields";
 import { useState } from "react";
 
 export default function useEntries() {
-    
   const [entries, setEntries] = useState<EntriesType[]>([]);
+
   const [input, setInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
   const [label, setLabel] = useState<string>("100");
+
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const [inputError, setInputError] = useState<string>("");
   const [outputError, setOutputError] = useState<string>("");
@@ -30,8 +33,9 @@ export default function useEntries() {
     const notValidOutput = invalidOutputField(true, output);
     if (notValidOutput) setOutputError(notValidOutput);
 
-    const normalizedLabel = label ? Math.abs(parseInt(label)) : 0;
-    const notValidLabel = invalidLabelField(true, normalizedLabel);
+    const toPositive = Math.abs(Number(label));
+    const normalizedLabel = normalizeLabel(toPositive);
+    const notValidLabel = invalidLabelField(true, Number(normalizedLabel));
     if (notValidLabel) setLabelError(notValidLabel);
 
     return !notValidInput && !notValidOutput && !notValidLabel;
@@ -40,7 +44,7 @@ export default function useEntries() {
   function addEntryInList() {
     const id = entries.length + 1;
     const normalizedLabel = label ? Math.abs(parseInt(label)) : 0;
-    const calculatedLabel = normalizedLabel/100;
+    const calculatedLabel = normalizedLabel / 100;
     const entrie = {
       id,
       input,
@@ -71,5 +75,8 @@ export default function useEntries() {
     labelError,
     setLabelError,
     addEntryInList,
+    entryValidationFields,
+    selectedIndex, 
+    setSelectedIndex
   };
 }

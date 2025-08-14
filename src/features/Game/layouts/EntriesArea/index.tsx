@@ -1,16 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import entriesStyles from "./styles";
 
 import EntryItem from "./EntryItem";
-import { EntriesType } from "@/types/userContextType";
+import { EntriesType, EntryConstTYpes } from "@/types/userContextType";
+import { desnormalizeLabel, normalizeLabel } from "@/utils/fields";
 
 interface Props {
   createMode: boolean;
   entries: EntriesType[];
-  readMode?: boolean;
   response: string;
   setResponse: Dispatch<SetStateAction<string>>;
   input: string;
@@ -28,12 +28,14 @@ interface Props {
   labelError: string;
   setLabelError: Dispatch<SetStateAction<string>>;
   addEntryInList(): void;
+  setSelectedIndex: Dispatch<SetStateAction<number>>;
+  editEntriesSubmit?(key: EntryConstTYpes): Promise<void>;
+  editResponseSubmit?: () => Promise<void>;
 }
 
 export default function EntriesArea({
   entries,
   createMode,
-  readMode = false,
   response,
   setResponse,
   input,
@@ -51,7 +53,13 @@ export default function EntriesArea({
   labelError,
   setLabelError,
   addEntryInList,
+  editEntriesSubmit,
+  setSelectedIndex,
+  editResponseSubmit,
 }: Props) {
+
+  const [readMode, setReadMode] = useState<boolean>(!createMode);
+
   const errorResponseFieldStyles = responseError
     ? "  border-[#dc362e] text-[#dc362e] "
     : "  border-[#C4C4C4] text-[#424242] ";
@@ -68,6 +76,40 @@ export default function EntriesArea({
     ? "  border-[#dc362e] text-[#dc362e] text-center font-black "
     : "  border-[#522161] text-[#522161] text-center font-black ";
 
+  const buttonStyles = createMode
+    ? "bg-[#FA6C3E] hover:bg-[#FA6C3E]"
+    : "bg-[#6014b0] hover:bg-[#140524]";
+
+  const changeToEditMode = (
+    index: number,
+    oldInput: string,
+    oldOutput: string,
+    oldLabel: string | number
+  ) => {
+    setInput(oldInput);
+    setOutput(oldOutput);
+    setLabel(oldLabel.toString());
+    setSelectedIndex(index);
+    setReadMode(false);
+  };
+
+  const handleButton = () => {
+    if (createMode) addEntryInList();
+    else setReadMode(true);
+  };
+
+  const handleSetResponseField = async () => editResponseSubmit && await editResponseSubmit();
+  const handleSetInputField = async () => editEntriesSubmit && await editEntriesSubmit("input");
+  const handleSetOutputField = async () => editEntriesSubmit && await editEntriesSubmit("output");
+  const handleSetLabelField = async () => editEntriesSubmit && await editEntriesSubmit("label");
+
+  const customizedSetLabel = (value:string) => {
+    const normalized = desnormalizeLabel(value);
+    setLabel(normalized);
+  }
+
+  const renderingLabel = (createMode) ? label: normalizeLabel(label);
+
   return (
     <div data-name="entries-area" className={entriesStyles["entriesArea"]}>
       <div data-name="response-area" className={entriesStyles["response"]}>
@@ -83,6 +125,7 @@ export default function EntriesArea({
           placeHolder="Digite a resposta do seu jogo ..."
           styler={errorResponseFieldStyles}
           onClick={() => setResponseError("")}
+          alternativeAction={handleSetResponseField}
         />
       </div>
 
@@ -92,10 +135,7 @@ export default function EntriesArea({
             data-name="entries-input-area"
             className={entriesStyles["input"]}
           >
-            <b
-              data-name="entries-input-label"
-              className={entriesStyles["inputLabel"]}
-            >
+            <b className={entriesStyles["inputLabel"]}>
               Input:<span className={entriesStyles["requiredMark"]}>*</span>
             </b>
             <Input
@@ -107,6 +147,7 @@ export default function EntriesArea({
               borderStyle="border-[1px]"
               onClick={() => setInputError("")}
               styler={errorInputFieldStyles}
+              alternativeAction={handleSetInputField}
             />
           </div>
 
@@ -114,10 +155,7 @@ export default function EntriesArea({
             data-name="entries-output-area"
             className={entriesStyles["output"]}
           >
-            <b
-              data-name="entries-output-label"
-              className={entriesStyles["outputLabel"]}
-            >
+            <b className={entriesStyles["outputLabel"]}>
               Output:<span className={entriesStyles["requiredMark"]}>*</span>
             </b>
             <Input
@@ -129,6 +167,7 @@ export default function EntriesArea({
               borderStyle="border-[1px]"
               onClick={() => setOutputError("")}
               styler={errorOutputFieldStyles}
+              alternativeAction={handleSetOutputField}
             />
           </div>
 
@@ -140,10 +179,7 @@ export default function EntriesArea({
               data-name="entries-level-wrapper-area"
               className={entriesStyles["levelWrapper"]}
             >
-              <h2
-                data-name="entries-level-title"
-                className={entriesStyles["levelTitle"]}
-              >
+              <h2 className={entriesStyles["levelTitle"]}>
                 Nivel de <br /> proximidade:
                 <span className={entriesStyles["requiredMark"]}>*</span>
               </h2>
@@ -151,12 +187,13 @@ export default function EntriesArea({
                 type="number"
                 width="w-[25%] min-w-[100px]"
                 height="h-[100%] p-3"
-                value={label}
-                setValue={setLabel}
+                value={renderingLabel}
+                setValue={customizedSetLabel}
                 borderStyle="border-[1px]"
                 fontSize="text-[0.7rem] sm:text-[1rem]"
                 styler={errorLabelFieldStyles}
                 onClick={() => setLabelError("")}
+                alternativeAction={handleSetLabelField}
               />
             </div>
             {createMode && (
@@ -177,12 +214,11 @@ export default function EntriesArea({
             <Button
               width=" w-full sm:w-[50%]"
               height=" h-[50%] max-h-[25px] sm:max-h-[57px]"
-              bgColor="bg-[#FA6C3E]"
-              hoverBgColor="hover:bg-[#a13804]"
+              bgColor={buttonStyles}
               fontStyle={entriesStyles["buttonTitle"]}
-              onClick={addEntryInList}
+              onClick={handleButton}
             >
-              INSERIR ENTRADA
+              {createMode ? "INSERIR ENTRADA" : "CONFIRMAR ALTERAÇÃO"}
             </Button>
           </div>
         </>
@@ -192,41 +228,25 @@ export default function EntriesArea({
           data-name="entries-list-container"
           className={entriesStyles["entryListContainer"]}
         >
-          <EntryItem
-            input={"Trabalha com cons..."}
-            output={"Mexe com ciment..."}
-            label={100}
-          />
-          <EntryItem
-            input={"Trabalha com cons..."}
-            output={"Mexe com ciment..."}
-            label={100}
-          />
-          <EntryItem
-            input={"Trabalha com cons..."}
-            output={"Mexe com ciment..."}
-            label={100}
-          />
-          <EntryItem
-            input={"Trabalha com cons..."}
-            output={"Mexe com ciment..."}
-            label={100}
-          />
-          <EntryItem
-            input={"Trabalha com cons..."}
-            output={"Mexe com ciment..."}
-            label={100}
-          />
-          <EntryItem
-            input={"Trabalha com cons..."}
-            output={"Mexe com ciment..."}
-            label={100}
-          />
-          <EntryItem
-            input={"Trabalha com cons..."}
-            output={"Mexe com ciment..."}
-            label={100}
-          />
+          {entries.map((element, index) => {
+            return (
+              <EntryItem
+                key={index}
+                input={element.input}
+                output={element.output}
+                label={normalizeLabel(element.label)}
+                onEdit={() =>
+                  changeToEditMode(
+                    index,
+                    element.input,
+                    element.output,
+                    element.label
+                  )
+                }
+                onDelete={() => console.log("deleta")}
+              />
+            );
+          })}
         </div>
       )}
     </div>

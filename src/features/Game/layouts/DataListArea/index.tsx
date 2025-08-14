@@ -1,15 +1,17 @@
 import { Dispatch, SetStateAction } from "react";
-import dataListStyles from "./styles";
 
 import Item from "./Item";
 import Input from "@/components/Input";
 import SvgModel from "@/components/svg";
 import Button from "@/components/Button";
 
+import dataListStyles from "./styles";
+
 import { useScreen } from "@/contexts/screen/useScreen";
 import { DataInputType } from "@/types/userContextType";
 
 interface Props {
+  createMode: boolean;
   dataList: DataInputType[];
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
@@ -18,10 +20,12 @@ interface Props {
   editValue: (key: string, index: number, newValue: string) => void;
   removeValueByIndex(index: number): void;
   addDataInList(): void;
-  handleSubmit: () => Promise<void>;
+  handleSubmit?: () => Promise<void>;
+  editDataListSubmit?:() => Promise<void>;
 }
 
 export default function DataListArea({
+  createMode,
   dataList,
   value,
   setValue,
@@ -31,6 +35,7 @@ export default function DataListArea({
   removeValueByIndex,
   addDataInList,
   handleSubmit,
+  editDataListSubmit,
 }: Props) {
   const { backScreen } = useScreen();
 
@@ -50,38 +55,45 @@ export default function DataListArea({
       className={dataListStyles["container"]}
     >
       <h2 className={dataListStyles["dataListTitle"]}>
-        Lista de Dicas:{" "}
-        <span className={dataListStyles["requiredMark"]}>*</span>
+        Lista de Dicas:
+        <span className={dataListStyles["requiredMark"]}>
+          *
+        </span>
       </h2>
       <div
         data-name="data-list-container-list"
         className={dataListStyles["containerList"]}
         style={{ border: borderContainerStyle }}
       >
-        <div
-          data-name="data-list-input-area"
-          className={dataListStyles["inputArea"]}
-          style={{ borderBottom: borderBottomStyle }}
-        >
-          <Input
-            width="w-full"
-            height="h-full"
-            value={value}
-            setValue={setValue}
-            placeHolder="Ex: Usa cimento ..."
-            borderStyle="border-none"
-            fontColor={textInputStyle}
-            onClick={() => setDataListValueError("")}
-          />
+        {createMode && (
           <div
-            data-name="data-list-icon-container"
-            className={dataListStyles["iconContainer"]}
+            data-name="data-list-input-area"
+            className={dataListStyles["inputArea"]}
+            style={{ borderBottom: borderBottomStyle }}
           >
-            <Button cursor="cursor-normal" onClick={addDataInList}>
-              <SvgModel name="add" width="75%" height="75%" />
-            </Button>
+            <Input
+              width="w-full"
+              height="h-full"
+              value={value}
+              setValue={setValue}
+              placeHolder="Ex: Usa cimento ..."
+              borderStyle="border-none"
+              fontColor={textInputStyle}
+              onClick={() => setDataListValueError("")}
+            />
+            <div
+              data-name="data-list-icon-container"
+              className={dataListStyles["iconContainer"]}
+            >
+              <Button 
+                cursor="cursor-normal" 
+                onClick={addDataInList}
+              >
+                <SvgModel name="add" width="75%" height="75%" />
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
         <div
           data-name="data-list-scroll-area"
           className={dataListStyles["scrollArea"]}
@@ -95,6 +107,7 @@ export default function DataListArea({
                 editValue={editValue}
                 hasError={element.hasError}
                 removeValueByIndex={removeValueByIndex}
+                editDataListSubmit={editDataListSubmit}
               />
             );
           })}
@@ -113,17 +126,14 @@ export default function DataListArea({
         >
           VOLTAR
         </Button>
-        <Button
+        {(createMode) && <Button
           height="h-[100%] sm:h-[64%] max-h-[50px]"
-          bgColor="bg-[#C6518F]"
-          hoverBgColor="hover:bg-[#cc0f74]"
+          bgColor="bg-[#C6518F] hover:bg-[#cc0f74]"
           fontStyle={dataListStyles["createButton"]}
-          onClick={async () =>
-            await handleSubmit()
-          }
+          onClick={handleSubmit}
         >
           CRIAR
-        </Button>
+        </Button>}
       </div>
     </div>
   );

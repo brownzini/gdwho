@@ -52,6 +52,7 @@ export default function useDataList() {
 
   return {
     dataList,
+    setDataList,
     dataListValue,
     setDataListValue,
     dataListValueError,

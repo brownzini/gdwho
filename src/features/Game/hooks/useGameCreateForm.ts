@@ -8,11 +8,16 @@ interface Props {
   entries: EntriesType[];
   dataList: DataInputType[];
   setResponseError: Dispatch<SetStateAction<string>>;
-  responseValidation: (value: string, setResponseError: Dispatch<SetStateAction<string>>) => boolean;
+  responseValidation: (
+    value: string,
+    setResponseError: Dispatch<SetStateAction<string>>
+  ) => boolean;
   nextScreen: (name: string) => void;
+  setEntries: Dispatch<SetStateAction<EntriesType[]>>;
+  setDataList: Dispatch<SetStateAction<DataInputType[]>>;
 }
 
-export default function useGameForm({
+export default function useGameCreateForm({
   id,
   response,
   entries,
@@ -20,46 +25,42 @@ export default function useGameForm({
   setResponseError,
   responseValidation,
   nextScreen,
- }: Props) {
+}: Props) {
 
   const listToBackend = useMemo(
     () => dataList.map((item) => item.value),
-    [dataList] 
+    [dataList]
   );
 
-  async function handleSubmit() {
-    
-    const validResponse = responseValidation(
-      response,
-      setResponseError
-    );
-    
+  async function saveSubmit() {
+    const validResponse = responseValidation(response, setResponseError);
+
     const validEntries = entries.length > 0;
     const validDataList = listToBackend.length > 0;
     const readyToSave = validResponse && validEntries && validDataList;
 
     const requestData = {
-        id, 
-        response,
-        entries,
-        dataList: listToBackend,
-    }
+      id,
+      response,
+      entries,
+      dataList: listToBackend,
+    };
 
     if (readyToSave) {
-        await gameCreate({ requestData })
-          .then(() => {
-            console.log("deu certo kkkkk");
-            nextScreen("editGameScreen");
-          })
-          .catch(() => {
-            console.log("deu errado kkkkk");
-          });
+      await gameCreate({ requestData })
+        .then(() => {
+          console.log("deu certo kkkkk");
+          nextScreen("editGameScreen");
+        })
+        .catch(() => {
+          console.log("deu errado kkkkk");
+        });
     } else {
       console.log("nao ta pronto para salvar :(");
     }
   }
 
   return {
-    handleSubmit,
+    saveSubmit
   };
 }

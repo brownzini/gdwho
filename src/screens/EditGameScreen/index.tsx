@@ -8,9 +8,10 @@ import ScreenTitle from "@/shared/ScreenTitle";
 
 import React from "react";
 import editGameScreenStyles from "./styles";
+import { useUser } from "@/contexts/user/useUser";
 
 export default function EditGameScreen() {
-  
+  const { entries, dataList } = useUser();
   return (
     <div
       data-name="edit-game-screen-container"
@@ -39,7 +40,7 @@ export default function EditGameScreen() {
               data-name="edit-game-screen-entries-label"
               className={editGameScreenStyles["entrieLabel"]}
             >
-              :0
+              :{entries.length}
             </h2>
           </div>
           <div
@@ -55,7 +56,7 @@ export default function EditGameScreen() {
               data-name="edit-game-screen-dataList-label"
               className={editGameScreenStyles["dataListLabel"]}
             >
-              :0
+              :{dataList.length}
             </h2>
           </div>
         </ScreenTitle>

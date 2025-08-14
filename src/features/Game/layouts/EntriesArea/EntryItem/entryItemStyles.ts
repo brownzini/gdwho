@@ -9,11 +9,11 @@ const entryItemStyles = {
       font-black text-[#fff]
   `,
   action: `
-      relative
-      max-w-[100px] min-h-[25px] w-[100%] h-[100%] 
+      relative pl-9
+      max-w-[100px] min-h-[25px] w-full h-[100%] 
       flex justify-center sm:justify-end items-center gap-3 
   `,
-  iconArea: `flex justify-center items-center w-[20%] h-full`,
+  iconArea: `flex justify-center items-center w-[100%] h-full`,
 };
 
 export default entryItemStyles;
