@@ -9,7 +9,8 @@ const GAME_MODE_CARD = {
       title: "#4C3273",
       label: "#311F35",
       button: "bg-[#4C3273]",
-      hoverButton: "hover:text-[#4C3273]"
+      hoverButton: "hover:text-[#4C3273]",
+      loading: "#4C3273"
     },
   },
   creativeMode: {
@@ -22,7 +23,8 @@ const GAME_MODE_CARD = {
       title: "#1D4CDA",
       label: "#0C1F56",
       button: "bg-[#11349C]",
-      hoverButton: "hover:text-[#1D4CDA]"
+      hoverButton: "hover:text-[#1D4CDA]",
+      loading: "#1D4CDA"
     },
   },
   playerMode: {
@@ -35,7 +37,8 @@ const GAME_MODE_CARD = {
       title: "#75720B",
       label: "#3F3E10",
       button: "bg-[#59571E]",
-      hoverButton: "hover:text-[#75720B]"
+      hoverButton: "hover:text-[#75720B]",
+      loading: "#75720B"
     },
   },
 };

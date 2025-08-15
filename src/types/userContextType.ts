@@ -1,3 +1,6 @@
+import { Dispatch, SetStateAction } from "react";
+import { CardColorsType } from "./CardColors";
+
 export type RoleType = "admin" | "user";
 
 export type EntriesType = {
@@ -33,6 +36,8 @@ export type UserContextType = {
   setEntries: (entries: EntriesType[]) => void;
   dataList: DataType[];
   setDataList: (dataList: DataType[]) => void;
+  volume:number;
+  setVolume: Dispatch<SetStateAction<number>>;
   editContextDataListValue: (
     key: string,
     index: number,
@@ -45,4 +50,6 @@ export type UserContextType = {
   ) => void;
   removeContextDataListValueByIndex: (index: number) => void;
   removeContextEntryByIndex(index: number): void;
+  colors:CardColorsType;
+  setColors: Dispatch<SetStateAction<CardColorsType>>;
 };

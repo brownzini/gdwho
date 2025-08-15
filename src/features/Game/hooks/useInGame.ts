@@ -5,19 +5,23 @@ import { sendGuess } from "@/services/game/api-service";
 import GuessType from "@/types/GuessType";
 
 import { useGame } from "@/contexts/game/useGame";
+import soundEffect from "@/components/SoundEffect";
 
 interface Props {
-  setIsThatCorrect: Dispatch<SetStateAction<boolean>>;
+  volume:number;
+  setIsThatCorrect?: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function useInGame({ setIsThatCorrect }: Props) {
+export default function useInGame({ setIsThatCorrect, volume }: Props) {
 
   const { selectedGameIndex, listOfGameIDs } = useGame();
 
   const [value, setValue] = useState<string>("");
 
-  const [bestGuessses, setBestGuessses] = useState<GuessType[]>([]);
-  const [worstGuessses, setWorstGuessses] = useState<GuessType[]>([]);
+  const [bestGuessses, setBestGuessses] = useState<GuessType[]>([ { type:"correct", description:"sdksdkds" } ]);
+  const [worstGuessses, setWorstGuessses] = useState<GuessType[]>([
+    { type:"nearby", description:"sdksdkds" }, { type:"distant", description:"sdksdkds" }
+  ]);
 
   const WON_THE_GAME = 102;
 
@@ -46,11 +50,12 @@ export default function useInGame({ setIsThatCorrect }: Props) {
     if (averageAccuracy) addNewGuess(setWorstGuessses, "correct");
     if (highAccuracy) addNewGuess(setBestGuessses, "correct");
   }
-
+  
   function addNewGuess(
     setAccuracyValue: (description: SetStateAction<GuessType[]>) => void,
     type: "correct" | "nearby" | "distant"
   ) {
+    soundEffect(type, volume);
     setAccuracyValue((prevState) => [
       ...prevState,
       {
@@ -78,7 +83,7 @@ export default function useInGame({ setIsThatCorrect }: Props) {
           const { result } = resp.data;
           if (result) {
             if (WON_THE_GAME === result) {
-              setIsThatCorrect(true);
+              if(setIsThatCorrect) setIsThatCorrect(true);
             } else {
               measureGuessLevel(result);
             }

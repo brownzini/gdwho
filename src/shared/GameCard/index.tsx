@@ -46,7 +46,6 @@ export default function GameCard({
         style={{ border }}
       >
         <h3
-          data-name="card-description"
           className={cardStyles["cardDescription"]}
           style={{ color }}
         >

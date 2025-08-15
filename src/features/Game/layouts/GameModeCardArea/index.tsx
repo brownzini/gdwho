@@ -70,7 +70,7 @@ export default function GameModeCardArea({
               name="loading" 
               width="50%" 
               height="50%" 
-              color="#FFF" 
+              color={GAME_MODE_CARD[typeMode].colors.title}
             />
           ) : (
             GAME_MODE_CARD[typeMode].buttonDescription

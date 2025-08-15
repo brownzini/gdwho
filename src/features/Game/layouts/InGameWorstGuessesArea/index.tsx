@@ -5,9 +5,13 @@ import inGameWorstGuessesArea from "./styles";
 
 interface Props {
     worstGuessses: GuessType[];
+    worstColors: {
+        nearby: string;
+        distant: string;
+    }
 }
 
-export default function InGameWorstGuessesArea({ worstGuessses }:Props) {
+export default function InGameWorstGuessesArea({ worstGuessses, worstColors }:Props) {
   return (
     <div
       data-name="in-game-worst-guesses-area"
@@ -19,7 +23,7 @@ export default function InGameWorstGuessesArea({ worstGuessses }:Props) {
             key={index}
             type={element.type}
             editMode={false}
-            color={element.type === "distant" ? "#d20e0e" : "#0e49d2"}
+            color={element.type === "distant" ? worstColors.distant : worstColors.nearby}
             description={element.description}
           />
         );

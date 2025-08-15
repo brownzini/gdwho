@@ -5,6 +5,7 @@ import { useState, type ReactNode } from "react";
 import { UserContext } from "./UserContext";
 
 import { DataType, EntriesType, RoleType } from "@/types/userContextType";
+import { CardColorsType } from "@/types/CardColors";
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userId, setUserId] = useState<number>(1);
@@ -16,6 +17,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const [entries, setEntries] = useState<EntriesType[]>([]);
   const [dataList, setDataList] = useState<DataType[]>([]);
+
+  const [volume, setVolume] = useState<number>(100);
+  const [colors, setColors] = useState<CardColorsType>({
+         correct: "#1F7117",
+         nearby: "#193495",
+         distant: "#A51212",
+  });
 
   function editContextValueInEntries(
     key: string,
@@ -67,6 +75,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setEntries,
     dataList,
     setDataList,
+    volume,
+    setVolume,
+    colors,
+    setColors,
     editContextDataListValue,
     editContextValueInEntries,
     removeContextDataListValueByIndex,

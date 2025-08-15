@@ -1,17 +1,17 @@
 "use client";
 
 import { CardColorsType } from "@/types/CardColors";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import GameCard from "@/shared/GameCard";
 import selectColorsStyles from "./styles";
 
-export default function SelectColorsArea() {
-  const [colors, setColors] = useState<CardColorsType>({
-    correct: "#1F7117",
-    nearby: "#193495",
-    distant: "#A51212",
-  });
+interface Props {
+  colors: CardColorsType;
+  setColors: Dispatch<SetStateAction<CardColorsType>>;
+}
+
+export default function SelectColorsArea({ colors, setColors }:Props) {
 
   const updateColor = (key: string, value: string) => {
     setColors((prevColors) => ({
@@ -25,10 +25,7 @@ export default function SelectColorsArea() {
       data-name="select-colors-container"
       className={selectColorsStyles["container"]}
     >
-      <h2
-        data-name="label-select-colors"
-        className={selectColorsStyles["label"]}
-      >
+      <h2 className={selectColorsStyles["label"]}>
         Cores:
       </h2>
       <div 

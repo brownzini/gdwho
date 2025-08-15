@@ -1,9 +1,19 @@
 import Button from "@/components/Button";
 import inGameFinishButtonStyles from "./styles";
 import { useScreen } from "@/contexts/screen/useScreen";
+import soundEffect from "@/components/SoundEffect";
 
-export default function InGameFinishButtonArea() {
+interface Props {
+  volume:number;
+}
+
+export default function InGameFinishButtonArea({ volume }:Props) {
   const { backScreen } = useScreen();
+
+  const handleBack = () => {
+      backScreen();
+      soundEffect("out", volume);
+  }
   return (
     <div 
       data-name="in-game-button-area" 
@@ -20,7 +30,7 @@ export default function InGameFinishButtonArea() {
           hoverBgColor="hover:bg-[#fff]"
           borderStyle="border-[1px] border-[#DC3333]"
           fontStyle={inGameFinishButtonStyles["description"]}
-          onClick={backScreen}
+          onClick={handleBack}
         >
           FECHAR
         </Button>

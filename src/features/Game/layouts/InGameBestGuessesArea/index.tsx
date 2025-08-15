@@ -4,10 +4,12 @@ import GameCard from "@/shared/GameCard";
 import inGameBestGuessesStyles from "./styles";
 
 interface Props {
+    correctColor:string;
     bestGuessses: GuessType[];
 }
 
-export default function InGameBestGuessesArea({ bestGuessses }:Props) {
+export default function InGameBestGuessesArea({ correctColor, bestGuessses }:Props) {
+  
   return (
     <div
       data-name="in-game-best-guesses-area"
@@ -19,7 +21,7 @@ export default function InGameBestGuessesArea({ bestGuessses }:Props) {
             key={index}
             type={element.type}
             editMode={false}
-            color={"#0ed21c"}
+            color={correctColor}
             description={element.description}
           />
         );

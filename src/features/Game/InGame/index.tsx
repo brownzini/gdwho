@@ -8,12 +8,15 @@ import InGameWorstGuessesArea from "../layouts/InGameWorstGuessesArea";
 import inGameStyles from "./styles";
 import InGameFinishButtonArea from "../layouts/InGameFinishButtonArea";
 import useInGame from "../hooks/useInGame";
+import { useUser } from "@/contexts/user/useUser";
 
 interface Props {
   setIsThatCorrect: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function InGameFeature({ setIsThatCorrect }: Props) {
+  const { colors, volume } = useUser();
+
   const {
     bestGuessses,
     worstGuessses,
@@ -21,26 +24,28 @@ export default function InGameFeature({ setIsThatCorrect }: Props) {
     setValue,
     handleSubmit,
     getCreatorGameName,
-  } = useInGame({ setIsThatCorrect });
+  } = useInGame({ volume, setIsThatCorrect });
+
+  const worstColors = {
+    nearby: colors.nearby,
+    distant: colors.distant,
+  };
 
   return (
-    <div 
-      data-name="in-game-container" 
-      className={inGameStyles["container"]}
-    >
+    <div data-name="in-game-container" className={inGameStyles["container"]}>
       <InGameHeaderArea creatorUsername={getCreatorGameName()} />
-      <div 
-        data-name="in-game-content" 
-        className={inGameStyles["content"]}
-      >
-        <InGameBestGuessesArea bestGuessses={bestGuessses} />
-        <InGameWorstGuessesArea worstGuessses={worstGuessses} />
+      <div data-name="in-game-content" className={inGameStyles["content"]}>
+        <InGameBestGuessesArea
+          correctColor={colors.correct}
+          bestGuessses={bestGuessses}
+        />
+        <InGameWorstGuessesArea worstColors={worstColors} worstGuessses={worstGuessses} />
         <InGameInputArea
           value={value}
           setValue={setValue}
           handleSubmit={handleSubmit}
         />
-        <InGameFinishButtonArea />
+        <InGameFinishButtonArea volume={volume} />
       </div>
     </div>
   );
