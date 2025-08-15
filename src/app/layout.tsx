@@ -4,6 +4,7 @@ import "./globals.css";
 import { Exo_2, Inter, Luckiest_Guy, Roboto } from "next/font/google";
 import { ScreenProvider } from "@/contexts/screen/ScreenProvider";
 import { UserProvider } from "@/contexts/user/UserProvider";
+import { GameProvider } from "@/contexts/game/GameProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const roboto = Roboto({
@@ -40,7 +41,9 @@ export default function RootLayout({
     >
       <body>
         <ScreenProvider>
-          <UserProvider>{children}</UserProvider>
+          <UserProvider>
+            <GameProvider>{children}</GameProvider>
+          </UserProvider>
         </ScreenProvider>
       </body>
     </html>

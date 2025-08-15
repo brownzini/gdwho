@@ -1,60 +1,47 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 
-import Modal from "@/shared/Modal";
 import ScreenTitle from "@/shared/ScreenTitle";
 import ScreenHeader from "@/shared/ScreenHeader";
+import BackButton from "@/shared/BackButton";
+import PlayerModeModal from "@/features/Game/PlayerModeModal";
+import SelectMode from "@/features/Game/SelectMode";
 
-import Input from "@/components/Input";
-import Button from "@/components/Button";
+import useSelectMode from "@/features/Game/hooks/useSelectMode";
+
+import { useScreen } from "@/contexts/screen/useScreen";
 
 import gameSelectScreenStyles from "./styles";
-
-import BackButton from "@/shared/BackButton";
-import SelectMode from "@/features/Game/SelectMode";
-import { useScreen } from "@/contexts/screen/useScreen";
+import GameModeType from "@/types/GameMode";
+import useLoading from "@/features/Game/hooks/useLoading";
 
 export default function GameSelectScreen() {
 
   const { backScreen } = useScreen();
+  const { loading, setLoading } = useLoading();
+  const { playerModeId, setPlayerModeId, handleSearch } = useSelectMode();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
 
   const onCloseModal = () => setIsOpen(false);
   const onOpenModal = () => setIsOpen(true);
 
+  const handleAction = async (type: GameModeType) => {
+    setLoading(true);
+    await handleSearch(type);
+    setLoading(false);
+  };
+
   return (
     <>
-      <Modal 
-        title="Modo Player"
+      <PlayerModeModal
         isOpen={isOpen}
         onCloseModal={onCloseModal}
-      >
-        <div 
-          data-name="modal-content-area"
-          className={gameSelectScreenStyles["modalContentArea"]}
-        >
-          <Input
-            value={value}
-            setValue={setValue}
-            height="h-[auto] pl-7"
-            borderStyle="border-[1px] border-[#686666] p-3 rounded-[5px]"
-            placeHolder="Digite o código ..."
-          />
-          <Button
-            width="w-[25%]"
-            height="min-h-[50px] max-h-[50px] p-5"
-            bgColor="bg-[#EDB306]"
-            hoverBgColor="hover:bg-[#CB9610]"
-            borderStyle="border-[1px] border-[#EDB306] rounded-[5px]"
-            fontStyle={gameSelectScreenStyles["buttonDescription"]}
-          >
-            JOGAR
-          </Button>
-        </div>
-      </Modal>
+        value={playerModeId}
+        setValue={setPlayerModeId}
+        handleAction={handleAction}
+      />
       <div
         data-name="game-select-screen-container"
         className={gameSelectScreenStyles["container"]}
@@ -69,15 +56,16 @@ export default function GameSelectScreen() {
           className={gameSelectScreenStyles["wrapper"]}
         >
           <ScreenTitle title="Modo de Jogo:" />
-          <SelectMode onOpenModal={onOpenModal} />
+          <SelectMode 
+            loading={loading}
+            handleAction={handleAction} 
+            onOpenModal={onOpenModal} 
+          />
           <div
             data-name="game-select-back-button-area"
             className={gameSelectScreenStyles["backButtonArea"]}
           >
-            <BackButton
-              xPosition="end"
-              onClick={backScreen} 
-            />
+            <BackButton xPosition="end" onClick={backScreen} />
           </div>
         </div>
       </div>

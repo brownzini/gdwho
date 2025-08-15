@@ -4,12 +4,18 @@ import { validateText } from "@/utils/validators/textField";
 import { sendGuess } from "@/services/game/api-service";
 import GuessType from "@/types/GuessType";
 
+import { useGame } from "@/contexts/game/useGame";
+
 interface Props {
   setIsThatCorrect: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function useInGame({ setIsThatCorrect }: Props) {
+
+  const { selectedGameIndex, listOfGameIDs } = useGame();
+
   const [value, setValue] = useState<string>("");
+
   const [bestGuessses, setBestGuessses] = useState<GuessType[]>([]);
   const [worstGuessses, setWorstGuessses] = useState<GuessType[]>([]);
 
@@ -94,25 +100,18 @@ export default function useInGame({ setIsThatCorrect }: Props) {
     setValue("");
   }
 
+  function getCreatorGameName() {
+      const validPlayer = listOfGameIDs[Number(selectedGameIndex)];
+      const username = (validPlayer) ? validPlayer.username : "não identificado";
+      return username;
+  }
+
   return {
     bestGuessses,
     worstGuessses,
     value,
     setValue,
     handleSubmit,
+    getCreatorGameName,
   };
 }
-
-// {
-//   type: "correct",
-//   description: "muito proximo",
-// },
-
-// {
-//   type: "nearby",
-//   description: "proximo",
-// },
-// {
-//   type: "distant",
-//   description: "distante",
-// },

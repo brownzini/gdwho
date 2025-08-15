@@ -3,17 +3,19 @@ import gameModeCardStyles from "./styles";
 
 import GAME_MODE_CARD from "@/constants/gameModeCards";
 import GameModeType from "@/types/GameMode";
+import SvgModel from "@/components/svg";
 
 interface Props {
+  loading: boolean;
   typeMode: GameModeType;
   handleClick?: () => void;
 }
 
 export default function GameModeCardArea({
+  loading,
   typeMode = "randomMode",
   handleClick,
 }: Props) {
-  
   const hoverButton =
     gameModeCardStyles["buttonDescription"] +
     GAME_MODE_CARD[typeMode].colors.hoverButton;
@@ -59,14 +61,20 @@ export default function GameModeCardArea({
           borderRadius="rounded-[5px]"
           hoverBgColor="hover:bg-[#fff]"
           borderStyle={GAME_MODE_CARD[typeMode].colors.borderButton}
+          fontStyle={hoverButton}
           onClick={handleClick}
+          disabled={loading}
         >
-          <p
-            data-name="game-mode-card-footer-description"
-            className={hoverButton}
-          >
-            {GAME_MODE_CARD[typeMode].buttonDescription}
-          </p>
+          {loading ? (
+            <SvgModel 
+              name="loading" 
+              width="50%" 
+              height="50%" 
+              color="#FFF" 
+            />
+          ) : (
+            GAME_MODE_CARD[typeMode].buttonDescription
+          )}
         </Button>
       </div>
     </div>

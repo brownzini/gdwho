@@ -8,7 +8,7 @@ import { DataType, EntriesType, RoleType } from "@/types/userContextType";
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
 
-  const [userId, setUserId] = useState<number>(0);
+  const [userId, setUserId] = useState<number>(1);
   const [username, setUsername] = useState<string>("");
 
   const [role, setRole] = useState<RoleType>("user");

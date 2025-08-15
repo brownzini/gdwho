@@ -14,16 +14,21 @@ interface Props {
 }
 
 export default function InGameFeature({ setIsThatCorrect }: Props) {
-  const { bestGuessses, worstGuessses, value, setValue, handleSubmit } = useInGame(
-    { setIsThatCorrect }
-  );
+  const {
+    bestGuessses,
+    worstGuessses,
+    value,
+    setValue,
+    handleSubmit,
+    getCreatorGameName,
+  } = useInGame({ setIsThatCorrect });
 
   return (
     <div 
       data-name="in-game-container" 
       className={inGameStyles["container"]}
     >
-      <InGameHeaderArea creatorUsername="Gabriel Robinho Alves da silva" />
+      <InGameHeaderArea creatorUsername={getCreatorGameName()} />
       <div 
         data-name="in-game-content" 
         className={inGameStyles["content"]}

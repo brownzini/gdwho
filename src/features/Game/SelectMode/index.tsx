@@ -1,31 +1,37 @@
-import { useScreen } from "@/contexts/screen/useScreen";
 import GameModeCard from "../layouts/GameModeCardArea";
 import selectModeStyles from "./styles";
+import GameModeType from "@/types/GameMode";
 
 interface Props {
+  loading: boolean;
   onOpenModal: () => void;
+  handleAction: (key: GameModeType) => Promise<void>;
 }
 
-export default function SelectMode({ onOpenModal }:Props) {
-
-  const { nextScreen } = useScreen();
-
+export default function SelectMode({
+  loading,
+  onOpenModal,
+  handleAction,
+}: Props) {
   return (
     <div
       data-name="select-game-mode-container"
       className={selectModeStyles["container"]}
     >
-      <GameModeCard 
-        typeMode="randomMode"   
-        handleClick={() => nextScreen("inGameScreen")}
+      <GameModeCard
+        loading={loading}
+        typeMode="randomMode"
+        handleClick={async () => await handleAction("randomMode")}
       />
-      <GameModeCard 
-        typeMode="creativeMode" 
-        handleClick={() => nextScreen("inGameScreen")}
+      <GameModeCard
+        loading={loading}
+        typeMode="creativeMode"
+        handleClick={async () => await handleAction("creativeMode")}
       />
-      <GameModeCard 
-        typeMode="playerMode" 
-        handleClick={onOpenModal}  
+      <GameModeCard
+        loading={loading}
+        typeMode="playerMode"
+        handleClick={onOpenModal}
       />
     </div>
   );

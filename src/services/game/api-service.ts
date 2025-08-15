@@ -17,6 +17,17 @@ interface GameUpdateEntryProps {
   requestData: JsonPatchOp[];
 }
 
+export async function findAllGames() {
+  const token = localStorage.getItem("token");
+  const config: AxiosRequestConfig = {
+    method: "GET",
+    url: "/game/search/total",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return await makeRequest(config);
+}
 export async function gameCreate({ requestData }: GameCreateProps) {
   const token = localStorage.getItem("token");
   const config: AxiosRequestConfig = {
