@@ -2,8 +2,8 @@ const entryItemStyles = {
   wrapper: `flex justify-between  items-center gap-2`,
   input: `  text-[#112BCD] font-bold  whitespace-pre-wrap`,
   output: ` text-[#3C478B] font-bold  whitespace-pre-wrap`,
-  label: `
-      bg-[#3143B5] 
+  label: (bgColor:string) => `
+      ${bgColor}
       w-[12%] max-h-[25px] min-w-[70px] 
       flex justify-center items-center rounded-[30px] 
       font-black text-[#fff]
