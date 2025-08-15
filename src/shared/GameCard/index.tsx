@@ -50,7 +50,7 @@ export default function GameCard({
           className={cardStyles["cardDescription"]}
           style={{ color }}
         >
-          {description}
+          {description.slice(0, 30)+" ..."}
         </h3>
       </div>
     </div>

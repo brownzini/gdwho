@@ -16,16 +16,18 @@ export default function EntryItem({
   onEdit,
   onDelete,
 }: Props) {
+  const shortedText = (value:string) => value.slice(0, 21); 
   return (
+    
     <div data-name="entry-wrapper" className={entryItemStyles["wrapper"]}>
       <h3 className={entryItemStyles["input"]}>
-        {input}
+        {shortedText(input)}
       </h3>
       <h3 className={entryItemStyles["output"]}>
-        {output}
+        {shortedText(output)}
       </h3>
       <span className={entryItemStyles["label"]}>
-        {label}
+        {shortedText(label.toString())}
       </span>
       <div 
         data-name="entry-action-area" 

@@ -18,7 +18,7 @@ const cardStyles = {
           flex justify-center items-center
           rounded-[10px] 
     `,
-    cardDescription: `pl-5 pr-5 text-left font-light font-["Inter"] text-[0.84rem] sm:text-[1rem] `,
+    cardDescription: `pl-5 pr-5 text-left font-light font-["Inter"] text-[0.84rem] sm:text-[1rem] break-word`,
 };
 
 export default cardStyles;

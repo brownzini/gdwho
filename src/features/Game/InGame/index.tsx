@@ -1,7 +1,4 @@
-
-import { Dispatch, SetStateAction, useState } from "react";
-
-import GuessType from "@/types/GuessType";
+import { Dispatch, SetStateAction } from "react";
 
 import InGameInputArea from "../layouts/InGameInputArea";
 import InGameHeaderArea from "../layouts/InGameHeaderArea";
@@ -10,54 +7,33 @@ import InGameWorstGuessesArea from "../layouts/InGameWorstGuessesArea";
 
 import inGameStyles from "./styles";
 import InGameFinishButtonArea from "../layouts/InGameFinishButtonArea";
+import useInGame from "../hooks/useInGame";
 
 interface Props {
   setIsThatCorrect: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function InGameFeature({ setIsThatCorrect }:Props) {
-  const [value, setValue] = useState<string>("");
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [bestGuessses, setBestGuessses] = useState<GuessType[]>([
-    {
-      type: "correct",
-      description: "teste",
-    },
-    {
-      type: "correct",
-      description: "muito proximo",
-    },
-  ]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [worstGuessses, setWorstGuessses] = useState<GuessType[]>([
-    {
-      type: "nearby",
-      description: "proximo",
-    },
-    {
-      type: "distant",
-      description: "distante",
-    },
-  ]);
+export default function InGameFeature({ setIsThatCorrect }: Props) {
+  const { bestGuessses, worstGuessses, value, setValue, handleSubmit } = useInGame(
+    { setIsThatCorrect }
+  );
 
   return (
     <div 
       data-name="in-game-container" 
       className={inGameStyles["container"]}
     >
-      <InGameHeaderArea 
-        creatorUsername="Gabriel Robinho Alves da silva" 
-      />
+      <InGameHeaderArea creatorUsername="Gabriel Robinho Alves da silva" />
       <div 
         data-name="in-game-content" 
         className={inGameStyles["content"]}
       >
         <InGameBestGuessesArea bestGuessses={bestGuessses} />
         <InGameWorstGuessesArea worstGuessses={worstGuessses} />
-        <InGameInputArea 
-          value={value} 
-          setValue={setValue} 
+        <InGameInputArea
+          value={value}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
         />
         <InGameFinishButtonArea />
       </div>

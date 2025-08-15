@@ -29,6 +29,17 @@ export async function gameCreate({ requestData }: GameCreateProps) {
   };
   return await makeRequest(config);
 }
+export async function sendGuess(id:number, input:string) {
+  const token = localStorage.getItem("token");
+  const config: AxiosRequestConfig = {
+    method: "GET",
+    url: `/game/${id}/guess?input="${input}"`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return await makeRequest(config);
+}
 export async function updateResponse(response:string) {
   const token = localStorage.getItem("token");
   const config: AxiosRequestConfig = {

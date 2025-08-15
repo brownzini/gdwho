@@ -1,7 +1,6 @@
 "use client";
 
 import { JSX, useMemo } from "react";
-import { useScreen } from "@/contexts/screen/useScreen";
 
 import InGameScreen from "@/screens/InGameScreen";
 import HistoryScreen from "@/screens/HistoryScreen";
@@ -10,7 +9,8 @@ import DashboardScreen from "@/screens/DashboardScreen";
 import CreateGameScreen from "@/screens/CreateGameScreen";
 import GameSelectScreen from "@/screens/GameSelectScreen";
 import ConfigurationScreen from "@/screens/ConfigurationScreen";
-import { useUser } from "@/contexts/user/useUser";
+
+import { useScreen } from "@/contexts/screen/useScreen";
 
 const homeStyles = {
   container: `
@@ -60,19 +60,18 @@ const screenComponents: Record<string, JSX.Element> = {
   inGameScreen: <InGameScreen />,
 };
 
-
 export default function Home() {
-  const { screenName } = useScreen();
-  const { entries } = useUser();
-    localStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJBRE1JTiIsInN1YiI6Im1hc3RlciIsImV4cCI6MTc1NTI3NjE2NH0.sJAVvfQJkAM4Vk6_Zu7xpj0Gce5WXmToiT_ZZ2AIWCg")
 
+  const { screenName } = useScreen();
+
+  // localStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJBRE1JTiIsInN1YiI6Im1hc3RlciIsImV4cCI6MTc1NTI3NjE2NH0.sJAVvfQJkAM4Vk6_Zu7xpj0Gce5WXmToiT_ZZ2AIWCg")
 
   const renderedScreen = useMemo(() => {
     return screenComponents[screenName] ?? <DashboardScreen />;
   }, [screenName]);
 
   return (
-    <div data-name="home-container" className={homeStyles["container"]} onClick={() => console.log(entries)}>
+    <div data-name="home-container" className={homeStyles["container"]}>
       <div data-name="home-wrapper" className={homeStyles["wrapper"]}>
         <div data-name="home-main-area" className={homeStyles["mainArea"]}>
           <div className={homeStyles["detail"]} />
