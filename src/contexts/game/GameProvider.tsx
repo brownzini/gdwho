@@ -7,7 +7,7 @@ import { GameListType } from "@/types/GameContextType";
 
 export const GameProvider = ({ children }: { children: ReactNode }) => {
   
-  const [listOfGameIDs, setListOfGameIDs] = useState<GameListType[]>([]);
+  const [listOfGameIDs, setListOfGameIDs] = useState<GameListType[]>([ { id:1, username:"dssd" } ]);
   const [selectedGameIndex, setSelectedGameIndex] = useState<number | null>(null);
 
   const value = {

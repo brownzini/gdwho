@@ -39,7 +39,10 @@ export default function InGameFeature({ setIsThatCorrect }: Props) {
           correctColor={colors.correct}
           bestGuessses={bestGuessses}
         />
-        <InGameWorstGuessesArea worstColors={worstColors} worstGuessses={worstGuessses} />
+        <InGameWorstGuessesArea
+          worstColors={worstColors}
+          worstGuessses={worstGuessses}
+        />
         <InGameInputArea
           value={value}
           setValue={setValue}

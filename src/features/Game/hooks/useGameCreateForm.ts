@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useMemo } from "react";
 import { gameCreate } from "@/services/game/api-service";
 import { DataInputType, EntriesType } from "@/types/userContextType";
 import { useUser } from "@/contexts/user/useUser";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 
 interface Props {
   id: number;
@@ -27,12 +28,13 @@ export default function useGameCreateForm({
   responseValidation,
   nextScreen,
 }: Props) {
-
   const {
-    setResponse:userSetResponse, 
-    setEntries:userSetEntries, 
-    setDataList:userSetDataList 
+    setResponse: userSetResponse,
+    setEntries: userSetEntries,
+    setDataList: userSetDataList,
   } = useUser();
+
+  const { dispatchMessageBox } = useMessageBox();
 
   const listToBackend = useMemo(
     () => dataList.map((item) => item.value),
@@ -56,24 +58,37 @@ export default function useGameCreateForm({
     if (readyToSave) {
       await gameCreate({ requestData })
         .then(() => {
+          dispatchMessageBox(
+            "success",
+            "JOGO CRIADO:",
+            "Seu jogo foi criado com sucesso"
+          );
           updateContextStates();
-          nextScreen("editGameScreen");
+          nextScreen("dashboard");
         })
         .catch(() => {
-          console.log("deu errado kkkkk");
+          dispatchMessageBox(
+            "error",
+            "FALHA NA CRIAÇÃO:",
+            "Não foi possivel criar seu modelo"
+          );
         });
     } else {
-      console.log("nao ta pronto para salvar :(");
+      dispatchMessageBox(
+        "error",
+        "NÃO PODE SALVAR:",
+        "Você não pode salvar até todos os campos estarem completos"
+      );
     }
   }
 
   function updateContextStates() {
-        userSetResponse(response);
-        userSetEntries(entries);
-        userSetDataList(dataList);
+    userSetResponse(response);
+    userSetEntries(entries);
+    userSetDataList(dataList);
   }
 
   return {
-    saveSubmit
+    saveSubmit,
   };
 }

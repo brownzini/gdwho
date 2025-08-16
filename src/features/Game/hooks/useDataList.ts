@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DataInputType } from "@/types/userContextType";
 import { invalidDataListValueField } from "@/services/game/businessRuleValidations-service";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 
 export default function useDataList() {
   const [dataList, setDataList] = useState<DataInputType[]>([]);
@@ -8,6 +9,8 @@ export default function useDataList() {
   const [dataListValueError, setDataListValueError] = useState<string>("");
 
   const [dataSelectedIndex, setDataSelectedIndex] = useState<number>(0);
+
+  const { dispatchMessageBox } = useMessageBox();
 
   function resetFields() {
     setDataListValue("");
@@ -17,6 +20,7 @@ export default function useDataList() {
     const notValidDataListValue = invalidDataListValueField(true, value);
     if (notValidDataListValue) {
       setDataListValueError(notValidDataListValue);
+      dispatchMessageBox("error", "ERRO NO INPUT:", notValidDataListValue);
     }
     return !notValidDataListValue;
   }

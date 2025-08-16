@@ -6,22 +6,22 @@ import GuessType from "@/types/GuessType";
 
 import { useGame } from "@/contexts/game/useGame";
 import soundEffect from "@/components/SoundEffect";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 
 interface Props {
-  volume:number;
+  volume: number;
   setIsThatCorrect?: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function useInGame({ setIsThatCorrect, volume }: Props) {
-
   const { selectedGameIndex, listOfGameIDs } = useGame();
 
   const [value, setValue] = useState<string>("");
 
-  const [bestGuessses, setBestGuessses] = useState<GuessType[]>([ { type:"correct", description:"sdksdkds" } ]);
-  const [worstGuessses, setWorstGuessses] = useState<GuessType[]>([
-    { type:"nearby", description:"sdksdkds" }, { type:"distant", description:"sdksdkds" }
-  ]);
+  const [bestGuessses, setBestGuessses] = useState<GuessType[]>([]);
+  const [worstGuessses, setWorstGuessses] = useState<GuessType[]>([]);
+
+  const { dispatchMessageBox } = useMessageBox();
 
   const WON_THE_GAME = 102;
 
@@ -31,7 +31,7 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
       minLength: 3,
       maxLength: 50,
       messages: {
-        required: "Response é obrigatório.",
+        required: "Campo obrigatório",
         minLength: "Mínimo 3 letras.",
         maxLength: "Máximo 50 letras.",
       },
@@ -50,7 +50,7 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
     if (averageAccuracy) addNewGuess(setWorstGuessses, "correct");
     if (highAccuracy) addNewGuess(setBestGuessses, "correct");
   }
-  
+
   function addNewGuess(
     setAccuracyValue: (description: SetStateAction<GuessType[]>) => void,
     type: "correct" | "nearby" | "distant"
@@ -68,7 +68,7 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
   async function handleSubmit() {
     const hasValidField = fieldValidation();
     if (hasValidField) {
-      console.log("[ERRO]: " + hasValidField);
+      dispatchMessageBox("error", "ERRO ENVIO DE PALPITE", hasValidField);
     } else {
       await sendGuessToApi();
     }
@@ -83,19 +83,31 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
           const { result } = resp.data;
           if (result) {
             if (WON_THE_GAME === result) {
-              if(setIsThatCorrect) setIsThatCorrect(true);
+              if (setIsThatCorrect) setIsThatCorrect(true);
             } else {
               measureGuessLevel(result);
             }
           } else {
-            console.log("erro não existe resultado");
+            dispatchMessageBox(
+              "error",
+              "ERRO ENVIO DE PALPITE",
+              "Não foi possivel enviar seu palpite"
+            );
           }
         } else {
-          console.log("erro não existe data");
+          dispatchMessageBox(
+            "error",
+            "ERRO ENVIO DE PALPITE",
+            "Não foi possivel enviar seu palpite"
+          );
         }
       })
       .catch(() => {
-        console.log("deu errado kkkkk");
+        dispatchMessageBox(
+          "error",
+          "ERRO ENVIO DE PALPITE",
+          "Não foi possivel  enviar seu palpite"
+        );
       });
     resetField();
     return;
@@ -106,9 +118,9 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
   }
 
   function getCreatorGameName() {
-      const validPlayer = listOfGameIDs[Number(selectedGameIndex)];
-      const username = (validPlayer) ? validPlayer.username : "não identificado";
-      return username;
+    const validPlayer = listOfGameIDs[Number(selectedGameIndex)];
+    const username = validPlayer ? validPlayer.username : "não identificado";
+    return username;
   }
 
   return {

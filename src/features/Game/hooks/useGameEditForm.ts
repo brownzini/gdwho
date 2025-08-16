@@ -13,6 +13,7 @@ import {
   updateEntry,
   updateResponse,
 } from "@/services/game/api-service";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 
 type OperationType = "edit" | "delete";
 
@@ -83,6 +84,8 @@ export default function useGameEditForm({
     removeContextDataListValueByIndex,
   } = useUser();
 
+  const { dispatchMessageBox } = useMessageBox();
+
   function hasChangedResponseValidation(userResponse: string) {
     return userResponse !== response;
   }
@@ -116,7 +119,7 @@ export default function useGameEditForm({
         userSetResponse(response);
       })
       .catch(() => {
-        console.log("deu errado kkkkk");
+       dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
       });
     return;
   }
@@ -156,10 +159,10 @@ export default function useGameEditForm({
     await updateEntry({ id, requestData })
       .then(() => {
         updateEntryState("edit", key, value[key]);
-        console.log("ta editado kkkkkkkk");
+        dispatchMessageBox("success", "ENTRADA ALTERADA", "A operação foi realizada com sucesso !!!");
       })
       .catch(() => {
-        console.log("deu errado kkkkk");
+        dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
       });
     return;
   }
@@ -170,10 +173,10 @@ export default function useGameEditForm({
     await deleteEntry(id)
       .then(() => {
         updateEntryState("delete", "input", index);
-        console.log("ta apagado kkkkkkkk");
+        dispatchMessageBox("success", "CAMPO DELETEADO", "Entrada removida com sucesso !!!");
       })
       .catch(() => {
-        console.log("deu errado kkkkk");
+         dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
       });
     return;
   }
@@ -195,9 +198,10 @@ export default function useGameEditForm({
     await updateData(id, value)
       .then(() => {
         updateDataListState(dataSelectedIndex, value);
+        dispatchMessageBox("success", "CAMPO ALTERADO", "A alteração foi concluida com sucesso !!");
       })
       .catch(() => {
-        console.log("deu errado kkkkk");
+         dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
       });
     return;
   }
@@ -209,6 +213,7 @@ export default function useGameEditForm({
       .then(() => {
         removeDataListValueByIndex(index);
         removeContextDataListValueByIndex(index);
+        dispatchMessageBox("success", "CAMPO DELETEADO", "Dica removida com sucesso !!!");
       })
       .catch(() => {
         returnDefaultValue();

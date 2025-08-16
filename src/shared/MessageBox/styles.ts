@@ -2,7 +2,7 @@ const messageBoxStyles = {
     container:`
         openNotification 
         w-[93%] sm:w-[50%] max-w-[400px] h-[25%] 
-        absolute z-25 
+        absolute z-100 
         flex justify-center items-center
     `,
     wrapper:`

@@ -7,7 +7,7 @@ export const invalidResponseField = (required:boolean, value?: string) => {
     minLength: 3,
     maxLength: 50,
     messages: {
-      required: "Response é obrigatório.",
+      required: "O campo não pode ficar vazio",
       minLength: "Mínimo 3 letras.",
       maxLength: "Máximo 50 letras.",
     },
@@ -49,7 +49,7 @@ export const invalidLabelField = (required:boolean, value?: number) => {
     min: 1,
     max: 100,
     messages: {
-      required: "Nivel é obrigatório.",
+      required: "O campo não pode estar vazio",
     },
   });
   return validationResponse;
@@ -61,9 +61,9 @@ export const invalidDataListValueField = (required:boolean, value?: string) => {
     minLength: 3,
     maxLength: 100,
     messages: {
-      required: "Lista é obrigatória.",
-      minLength: "Mínimo 3 letras.",
-      maxLength: "Máximo 100 letras.",
+      required: "O campo não pode estar vazio",
+      minLength: "Mínimo 3 caracteres",
+      maxLength: "Máximo 100 caracteres",
     },
   });
   return validationResponse;

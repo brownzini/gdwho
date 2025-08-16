@@ -7,6 +7,7 @@ import { useUser } from "@/contexts/user/useUser";
 import { findAllGames } from "@/services/game/api-service";
 import { useScreen } from "@/contexts/screen/useScreen";
 import { GameListType } from "@/types/GameContextType";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 
 export default function useSelectMode() {
   const { userId } = useUser();
@@ -14,6 +15,8 @@ export default function useSelectMode() {
   const { listOfGameIDs, setListOfGameIDs, setSelectedGameIndex } = useGame();
 
   const [playerModeId, setPlayerModeId] = useState<string>("");
+
+  const { dispatchMessageBox } = useMessageBox();
 
   const actionMode = {
     randomMode: (gameList: GameListType[]) => findRandomGame(gameList),
@@ -40,7 +43,11 @@ export default function useSelectMode() {
       setSelectedGameIndex(gameIndex);
       nextScreen("inGameScreen");
     } else {
-      console.log("não foi possivel encontrar partida, teve novamente");
+      dispatchMessageBox(
+        "error",
+        "ERRO SELEÇÃO DE JOGO",
+        "Não foi possivel encontrar partida, teve novamente"
+      );
     }
   }
 
@@ -53,7 +60,11 @@ export default function useSelectMode() {
       setSelectedGameIndex(userGameIndex);
       nextScreen("inGameScreen");
     } else {
-      console.log("Você ainda não tem nenhum jogo criado");
+      dispatchMessageBox(
+        "error",
+        "ERRO SELEÇÃO DE JOGO",
+        "Você ainda não tem nenhum jogo criado"
+      );
     }
   }
 
@@ -66,7 +77,11 @@ export default function useSelectMode() {
       setSelectedGameIndex(hasFind);
       nextScreen("inGameScreen");
     } else {
-      console.log("Essa partida não existe ou não está disponivel");
+      dispatchMessageBox(
+        "error",
+        "ERRO SELEÇÃO DE JOGO",
+        "Essa partida não existe ou não está disponivel"
+      );
     }
   }
 
@@ -80,14 +95,22 @@ export default function useSelectMode() {
             setListOfGameIDs(() => result);
             actionMode[key](result);
           } else {
-            console.log("erro não existe resultado");
+            dispatchMessageBox(
+              "error",
+              "ERRO ENVIO DE PALPITE",
+              "Não foi possivel encontrar partida"
+            );
           }
         } else {
-          console.log("erro não existe data");
+          dispatchMessageBox(
+            "error",
+            "ERRO SELEÇÃO DE JOGO",
+            "Não há partidas"
+          );
         }
       })
       .catch(() => {
-        console.log("deu errado kkkkk");
+        dispatchMessageBox("error", "ERRO AO BUSCAR JOGO", "Não foi possivel buscar por novas partidas");
       });
     return;
   }

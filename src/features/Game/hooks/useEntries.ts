@@ -1,3 +1,4 @@
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 import {
   invalidInputField,
   invalidLabelField,
@@ -20,6 +21,8 @@ export default function useEntries() {
   const [outputError, setOutputError] = useState<string>("");
   const [labelError, setLabelError] = useState<string>("");
 
+  const { dispatchMessageBox } = useMessageBox();
+
   function resetFields() {
     setInput("");
     setOutput("");
@@ -31,12 +34,14 @@ export default function useEntries() {
     if (notValidInput) {
       setInputError(notValidInput);
       emitError(setInputError);
+      dispatchMessageBox("error", "ERRO AO ATUALIZAR:", notValidInput);
     }
 
     const notValidOutput = invalidOutputField(true, output);
     if (notValidOutput) {
       setOutputError(notValidOutput);
       emitError(setOutputError);
+      dispatchMessageBox("error", "ERRO AO ATUALIZAR:", notValidOutput);
     }
 
     const toPositive = Math.abs(Number(label));
@@ -46,6 +51,7 @@ export default function useEntries() {
     if (notValidLabel) {
       setLabelError(notValidLabel);
       emitError(setLabelError);
+      dispatchMessageBox("error", "ERRO AO ATUALIZAR:", notValidLabel);
     }
 
     return !notValidInput && !notValidOutput && !notValidLabel;

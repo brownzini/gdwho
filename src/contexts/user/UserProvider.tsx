@@ -6,6 +6,7 @@ import { UserContext } from "./UserContext";
 
 import { DataType, EntriesType, RoleType } from "@/types/userContextType";
 import { CardColorsType } from "@/types/CardColors";
+import CARD_COLORS from "@/constants/cardColors";
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userId, setUserId] = useState<number>(1);
@@ -20,9 +21,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const [volume, setVolume] = useState<number>(100);
   const [colors, setColors] = useState<CardColorsType>({
-         correct: "#1F7117",
-         nearby: "#193495",
-         distant: "#A51212",
+         correct: CARD_COLORS.correct,
+         nearby: CARD_COLORS.nearby,
+         distant: CARD_COLORS.distant,
   });
 
   function editContextValueInEntries(
