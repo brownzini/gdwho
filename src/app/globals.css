@@ -37,17 +37,6 @@ input[type="color"]::-webkit-color-swatch {
   overflow-wrap: anywhere;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .fade-in-up {
   animation: fadeInUp 0.7s ease-out forwards;
 }
@@ -71,6 +60,33 @@ input[type="color"]::-webkit-color-swatch {
   animation: moveBackground 20s linear infinite;
 }
 
+.float {
+  animation: moveFloat 2s ease-in-out infinite;
+}
+
+.loading {
+  animation: moveLoading 1s ease infinite;
+}
+
+.openNotification {
+  animation: slideIn 0.5s ease-out forwards, slideOut 0.5s ease-in forwards 3.5s;
+}
+
+.closeNotification {
+  animation: slideOut 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes moveBackground {
   0% {
     background-position: 0 0;
@@ -86,10 +102,6 @@ input[type="color"]::-webkit-color-swatch {
   }
 }
 
-.float {
-  animation: moveFloat 2s ease-in-out infinite;
-}
-
 @keyframes moveFloat {
   0%,
   100% {
@@ -100,15 +112,29 @@ input[type="color"]::-webkit-color-swatch {
   }
 }
 
-.loading {
-  animation: moveLoading 1s ease infinite;
-}
-
 @keyframes moveLoading {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    left: -400px;
+  }
+  to {
+    left: 20px;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    left: 20px;
+  }
+  to {
+    left: -400px;
   }
 }

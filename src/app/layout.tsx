@@ -5,6 +5,7 @@ import { Exo_2, Inter, Luckiest_Guy, Roboto } from "next/font/google";
 import { ScreenProvider } from "@/contexts/screen/ScreenProvider";
 import { UserProvider } from "@/contexts/user/UserProvider";
 import { GameProvider } from "@/contexts/game/GameProvider";
+import { MessageBoxProvider } from "@/contexts/messageBox/MessageBoxProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const roboto = Roboto({
@@ -42,7 +43,9 @@ export default function RootLayout({
       <body>
         <ScreenProvider>
           <UserProvider>
-            <GameProvider>{children}</GameProvider>
+            <MessageBoxProvider>
+              <GameProvider>{children}</GameProvider>
+            </MessageBoxProvider>
           </UserProvider>
         </ScreenProvider>
       </body>

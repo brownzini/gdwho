@@ -74,7 +74,7 @@ export default function InitialCard() {
           <Image
             fill
             priority 
-            className="absolute w-[100%] h-[100%] object-cover"
+            className="absolute w-full h-full object-cover"
             alt="image"
             src="/img/logo.png"
           />

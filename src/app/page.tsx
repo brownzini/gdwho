@@ -11,6 +11,8 @@ import GameSelectScreen from "@/screens/GameSelectScreen";
 import ConfigurationScreen from "@/screens/ConfigurationScreen";
 
 import { useScreen } from "@/contexts/screen/useScreen";
+import MessageBox from "@/shared/MessageBox";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 
 const homeStyles = {
   container: `
@@ -63,39 +65,41 @@ const screenComponents: Record<string, JSX.Element> = {
 export default function Home() {
 
   const { screenName } = useScreen();
-
-  // localStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJBRE1JTiIsInN1YiI6Im1hc3RlciIsImV4cCI6MTc1NTI3NjE2NH0.sJAVvfQJkAM4Vk6_Zu7xpj0Gce5WXmToiT_ZZ2AIWCg")
+  const { isOpenMB } = useMessageBox();
 
   const renderedScreen = useMemo(() => {
     return screenComponents[screenName] ?? <DashboardScreen />;
   }, [screenName]);
 
   return (
-    <div data-name="home-container" className={homeStyles["container"]}>
-      <div data-name="home-wrapper" className={homeStyles["wrapper"]}>
-        <div data-name="home-main-area" className={homeStyles["mainArea"]}>
-          <div className={homeStyles["detail"]} />
-          <div
-            data-name="home-main-content"
-            className={homeStyles["content"]}
-          >
+    <>
+      {isOpenMB && <MessageBox />}
+      <div data-name="home-container" className={homeStyles["container"]}>
+        <div data-name="home-wrapper" className={homeStyles["wrapper"]}>
+          <div data-name="home-main-area" className={homeStyles["mainArea"]}>
+            <div className={homeStyles["detail"]} />
             <div
-              data-name="home-main-screen-section"
-              className={homeStyles["screenSection"]}
+              data-name="home-main-content"
+              className={homeStyles["content"]}
             >
-              {renderedScreen}
+              <div
+                data-name="home-main-screen-section"
+                className={homeStyles["screenSection"]}
+              >
+                {renderedScreen}
+              </div>
             </div>
           </div>
+          {screenName !== "historyScreen" && (
+            <div
+              data-name="home-history-area"
+              className={homeStyles["historyArea"]}
+            >
+              <HistoryScreen />
+            </div>
+          )}
         </div>
-        {screenName !== "historyScreen" && (
-          <div
-            data-name="home-history-area"
-            className={homeStyles["historyArea"]}
-          >
-            <HistoryScreen />
-          </div>
-        )}
       </div>
-    </div>
+    </>
   );
 }
