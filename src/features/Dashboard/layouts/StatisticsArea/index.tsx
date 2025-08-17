@@ -1,3 +1,5 @@
+"use client";
+
 import statisticsStyles from "./styles";
 
 import ItemCard from "./ItemCard";
@@ -6,10 +8,14 @@ import PersonalizedButton from "./PersonalizedButton";
 import Button from "@/components/Button";
 import { useScreen } from "@/contexts/screen/useScreen";
 import { useUser } from "@/contexts/user/useUser";
+import useStatistics from "../../hooks/useStatistics";
 
 export default function StatisticsArea() {
-  const { nextScreen } = useScreen();
   const { response } = useUser();
+  const { nextScreen } = useScreen();
+
+  const { matchesTotal, matchesWon, matchesCreated } = useStatistics();
+
   return (
     <div
       data-name="dashboard-statistics-container"
@@ -36,16 +42,20 @@ export default function StatisticsArea() {
           className={statisticsStyles["cardsWrapper"]}
         >
           <ItemCard
-            value={10}
+            value={matchesTotal}
             iconName="matchesTotal"
             description="Total de Partidas"
           />
           <ItemCard
-            value={10}
+            value={matchesWon}
             iconName="matchesWon"
             description="Partidas Ganhas"
           />
-          <ItemCard value={10} iconName="created" description="Jogos Criados" />
+          <ItemCard
+            value={matchesCreated}
+            iconName="created"
+            description="Jogos Criados"
+          />
         </div>
       </div>
 
@@ -74,7 +84,7 @@ export default function StatisticsArea() {
           fontStyle={statisticsStyles["buttonTitle"]}
           onClick={() => nextScreen("")}
         >
-          Com Funciona
+          Como Funciona
         </Button>
         <Button
           display="flex md:hidden"

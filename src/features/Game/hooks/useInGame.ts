@@ -1,13 +1,16 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import { validateText } from "@/utils/validators/textField";
-import { sendGuess } from "@/services/game/api-service";
-import GuessType from "@/types/GuessType";
+import soundEffect from "@/components/SoundEffect";
 
 import { useGame } from "@/contexts/game/useGame";
-import soundEffect from "@/components/SoundEffect";
-import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 import { useHistory } from "@/contexts/history/useHistory";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
+
+import GuessType from "@/types/GuessType";
+import { validateText } from "@/utils/validators/textField";
+
+import { sendGuess } from "@/services/game/api-service";
+import { increaseStoragedStatistic } from "@/utils/storage/statistics-storage";
 
 interface Props {
   volume: number;
@@ -85,13 +88,14 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
           const { result } = resp.data;
           if (result) {
             if (WON_THE_GAME === result) {
-              if (setIsThatCorrect) { 
-                  const creatorPlayerName = listOfGameIDs[selectedGameIndex??0].username;
+              if (setIsThatCorrect) {
+                  const creatorPlayerName = listOfGameIDs[selectedGameIndex ?? 0].username;
                   setIsThatCorrect(true);
                   addHistoryItem({
-                    type:"acertou",
-                    field: "o jogo de "+creatorPlayerName,
+                    type: "acertou",
+                    field: "o jogo de " + creatorPlayerName,
                   });
+                  increaseStoragedStatistic("matchesWon");
               }
             } else {
               measureGuessLevel(result);
@@ -131,6 +135,10 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
     const username = validPlayer ? validPlayer.username : "não identificado";
     return username;
   }
+
+  useEffect(() => {
+    increaseStoragedStatistic("matchesTotal");
+  }, []);
 
   return {
     bestGuessses,

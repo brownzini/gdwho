@@ -1,9 +1,13 @@
 import { Dispatch, SetStateAction, useMemo } from "react";
+
+import { useUser } from "@/contexts/user/useUser";
+import { useHistory } from "@/contexts/history/useHistory";
+import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
+
 import { gameCreate } from "@/services/game/api-service";
 import { DataInputType, EntriesType } from "@/types/userContextType";
-import { useUser } from "@/contexts/user/useUser";
-import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
-import { useHistory } from "@/contexts/history/useHistory";
+
+import { increaseStoragedStatistic } from "@/utils/storage/statistics-storage";
 
 interface Props {
   id: number;
@@ -70,6 +74,7 @@ export default function useGameCreateForm({
             field: "um jogo",
           });
           updateContextStates();
+          increaseStoragedStatistic("matchesCreated");
           nextScreen("dashboard");
         })
         .catch(() => {

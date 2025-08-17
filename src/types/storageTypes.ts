@@ -1,0 +1,1 @@
+export type HandleType = "matchesTotal" | "matchesWon" | "matchesCreated";
