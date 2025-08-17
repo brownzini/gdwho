@@ -11,7 +11,11 @@ import editGameScreenStyles from "./styles";
 import { useUser } from "@/contexts/user/useUser";
 import { useScreen } from "@/contexts/screen/useScreen";
 
-export default function EditGameScreen() {
+interface Props {
+  username:string;
+}
+
+export default function EditGameScreen({ username }:Props) {
 
   const { nextScreen } = useScreen();
   
@@ -25,8 +29,7 @@ export default function EditGameScreen() {
       className={editGameScreenStyles["container"]}
     >
       <ScreenHeader
-        nameTitle="Gabriel"
-        todayTitle="Hoje é segunda feira , 11/07/2025"
+        nameTitle={username}
       />
       <div className={editGameScreenStyles["divisor"]} />
       <div

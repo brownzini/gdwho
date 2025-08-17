@@ -16,7 +16,11 @@ import gameSelectScreenStyles from "./styles";
 import GameModeType from "@/types/GameMode";
 import useLoading from "@/features/Game/hooks/useLoading";
 
-export default function GameSelectScreen() {
+interface Props {
+  username:string;
+}
+
+export default function GameSelectScreen({ username }:Props) {
 
   const { backScreen } = useScreen();
   const { loading, setLoading } = useLoading();
@@ -47,8 +51,7 @@ export default function GameSelectScreen() {
         className={gameSelectScreenStyles["container"]}
       >
         <ScreenHeader
-          nameTitle="Gabriel"
-          todayTitle="Hoje é segunda feira , 11/07/2025"
+          nameTitle={username}
         />
         <div className="w-[93%] h-[1px] bg-[#D9D9D9]" />
         <div

@@ -14,6 +14,7 @@ import {
   updateResponse,
 } from "@/services/game/api-service";
 import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
+import { useHistory } from "@/contexts/history/useHistory";
 
 type OperationType = "edit" | "delete";
 
@@ -84,6 +85,7 @@ export default function useGameEditForm({
     removeContextDataListValueByIndex,
   } = useUser();
 
+  const { addHistoryItem } = useHistory();
   const { dispatchMessageBox } = useMessageBox();
 
   function hasChangedResponseValidation(userResponse: string) {
@@ -107,9 +109,9 @@ export default function useGameEditForm({
     if (hasChanged) {
       const readyToSave = responseValidation(response, setResponseError);
       if (readyToSave) {
-          await sendUpdatedResponseToApi();
+        await sendUpdatedResponseToApi();
       } else {
-          returnDefaultResponse();
+        returnDefaultResponse();
       }
     }
   }
@@ -119,7 +121,11 @@ export default function useGameEditForm({
         userSetResponse(response);
       })
       .catch(() => {
-       dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
+        dispatchMessageBox(
+          "error",
+          "ALTERAÇÃO FALHOU",
+          "Não foi possivel atualizar o campo"
+        );
       });
     return;
   }
@@ -159,10 +165,22 @@ export default function useGameEditForm({
     await updateEntry({ id, requestData })
       .then(() => {
         updateEntryState("edit", key, value[key]);
-        dispatchMessageBox("success", "ENTRADA ALTERADA", "A operação foi realizada com sucesso !!!");
+        dispatchMessageBox(
+          "success",
+          "ENTRADA ALTERADA",
+          "A operação foi realizada com sucesso !!!"
+        );
+        addHistoryItem({
+          type: "atualizou",
+          field: "entrada",
+        });
       })
       .catch(() => {
-        dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
+        dispatchMessageBox(
+          "error",
+          "ALTERAÇÃO FALHOU",
+          "Não foi possivel atualizar o campo"
+        );
       });
     return;
   }
@@ -173,10 +191,22 @@ export default function useGameEditForm({
     await deleteEntry(id)
       .then(() => {
         updateEntryState("delete", "input", index);
-        dispatchMessageBox("success", "CAMPO DELETEADO", "Entrada removida com sucesso !!!");
+        dispatchMessageBox(
+          "success",
+          "CAMPO DELETEADO",
+          "Entrada removida com sucesso !!!"
+        );
+        addHistoryItem({
+          type: "removeu",
+          field: "entrada",
+        });
       })
       .catch(() => {
-         dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
+        dispatchMessageBox(
+          "error",
+          "ALTERAÇÃO FALHOU",
+          "Não foi possivel atualizar o campo"
+        );
       });
     return;
   }
@@ -198,10 +228,22 @@ export default function useGameEditForm({
     await updateData(id, value)
       .then(() => {
         updateDataListState(dataSelectedIndex, value);
-        dispatchMessageBox("success", "CAMPO ALTERADO", "A alteração foi concluida com sucesso !!");
+        dispatchMessageBox(
+          "success",
+          "CAMPO ALTERADO",
+          "A alteração foi concluida com sucesso !!"
+        );
+        addHistoryItem({
+          type: "atualizou",
+          field: "dica na lista",
+        });
       })
       .catch(() => {
-         dispatchMessageBox("error", "ALTERAÇÃO FALHOU", "Não foi possivel atualizar o campo");
+        dispatchMessageBox(
+          "error",
+          "ALTERAÇÃO FALHOU",
+          "Não foi possivel atualizar o campo"
+        );
       });
     return;
   }
@@ -213,7 +255,15 @@ export default function useGameEditForm({
       .then(() => {
         removeDataListValueByIndex(index);
         removeContextDataListValueByIndex(index);
-        dispatchMessageBox("success", "CAMPO DELETEADO", "Dica removida com sucesso !!!");
+        dispatchMessageBox(
+          "success",
+          "CAMPO DELETEADO",
+          "Dica removida com sucesso !!!"
+        );
+        addHistoryItem({
+          type: "removeu",
+          field: "dica da lista",
+        });
       })
       .catch(() => {
         returnDefaultValue();

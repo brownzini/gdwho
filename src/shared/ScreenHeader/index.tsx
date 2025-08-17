@@ -3,16 +3,17 @@ import SvgModel from "@/components/svg";
 import Button from "@/components/Button";
 
 import { useScreen } from "@/contexts/screen/useScreen";
+import { getDateName } from "@/utils/date";
 
 interface Props {
   nameTitle: string;
-  todayTitle: string;
 }
 
-export default function ScreenHeader({ nameTitle, todayTitle }: Props) {
+export default function ScreenHeader({ nameTitle }: Props) {
 
+  const date = getDateName();
   const { nextScreen } = useScreen();
-  
+
   return (
     <div
       data-name="screen-header-container" 
@@ -22,14 +23,11 @@ export default function ScreenHeader({ nameTitle, todayTitle }: Props) {
         data-name="screen-header-description" 
         className={headerStyle["description"]}
       >
-        <h2
-          data-name="screen-header-title"  
-          className={headerStyle["title"]}
-        >
-          {nameTitle}
+        <h2 className={headerStyle["title"]}>
+          Olá {nameTitle}
         </h2>
         <p className={headerStyle["subtitle"]}>
-          {todayTitle}
+          {date}
         </p>
       </div>
       <div

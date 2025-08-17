@@ -1,30 +1,32 @@
-type ActionType = "criou" | "listou" | "atualizou" | "removeu";
+import HISTORY_CARD_COLOR from "@/constants/historyCardColors";
+import { HistoryActionType } from "@/types/historyContextType";
 
 interface Props {
-  type: ActionType;
-  quantity: number;
+  type: HistoryActionType;
   field: string;
 }
 
-export default function CardItem({ type, quantity, field }: Props) {
-  const colors: Record<ActionType, string> = {
-    criou: "border border[#911893] text-[#911893] ",
-    listou: "border border[#1B2B62] text-[#1B2B62] ",
-    atualizou: "border border[#0D8E99] text-[#0D8E99] ",
-    removeu: "border border[#99250D] text-[#99250D] ",
+export default function CardItem({ type, field }: Props) {
+
+  const colors: Record<HistoryActionType, string> = {
+    criou: HISTORY_CARD_COLOR.CREATE,
+    listou: HISTORY_CARD_COLOR.LIST,
+    atualizou: HISTORY_CARD_COLOR.UPDATE,
+    removeu: HISTORY_CARD_COLOR.REMOVE,
+    acertou: HISTORY_CARD_COLOR.WON,
   };
 
   const cardItemContainer =
-    "flex justify-center items-center w-[100%] h-[16%] 2xl:max-h-[4vh] text-center " +
+    "fade-in-up flex justify-center items-center w-full h-[30%] 2xl:max-h-[4vh] text-center " +
     colors[type] +
-    " p-1 rounded-[5px] font-semibold leading-none";
+    " p-1 rounded-[5px] font-semibold leading-[21px]";
 
   return (
     <div
       data-name="card-item-container" 
       className={cardItemContainer}
     >
-      <h2>{type + " " + quantity + " " + field}</h2>
+      <h2>{type + " " + " " + field}</h2>
     </div>
   );
 }

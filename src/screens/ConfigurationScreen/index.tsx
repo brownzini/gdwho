@@ -7,15 +7,18 @@ import React from "react";
 import configurationScreenStyles from "./styles";
 import Configuration from "@/features/Configuration";
 
-export default function ConfigurationScreen() {
+interface Props {
+  username:string;
+}
+
+export default function ConfigurationScreen({ username }:Props) {
   return (
     <div
       data-name="config-screen-container"
       className={configurationScreenStyles["container"]}
     >
       <ScreenHeader
-        nameTitle="Gabriel"
-        todayTitle="Hoje é segunda feira , 11/07/2025"
+        nameTitle={username}
       />
       <div className="w-[93%] h-[1px] bg-[#D9D9D9]" />
       <div

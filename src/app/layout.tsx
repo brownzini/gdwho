@@ -6,6 +6,7 @@ import { ScreenProvider } from "@/contexts/screen/ScreenProvider";
 import { UserProvider } from "@/contexts/user/UserProvider";
 import { GameProvider } from "@/contexts/game/GameProvider";
 import { MessageBoxProvider } from "@/contexts/messageBox/MessageBoxProvider";
+import { HistoryProvider } from "@/contexts/history/HistoryProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const roboto = Roboto({
@@ -43,9 +44,11 @@ export default function RootLayout({
       <body>
         <ScreenProvider>
           <UserProvider>
-            <MessageBoxProvider>
-              <GameProvider>{children}</GameProvider>
-            </MessageBoxProvider>
+            <HistoryProvider>
+              <MessageBoxProvider>
+                <GameProvider>{children}</GameProvider>
+              </MessageBoxProvider>
+            </HistoryProvider>
           </UserProvider>
         </ScreenProvider>
       </body>

@@ -11,10 +11,7 @@ const headerStyle = {
      justify-center
      items-start 
   `,
-  title: `
-     font-black font-["Inter"] text-[#311F35] xl:text-[1.4rem]
-
-  `,
+  title: ` font-black font-["Inter"] text-[#311F35] xl:text-[1.4rem] break-word`,
   subtitle: `
      font-light font-["Inter"] text-[#4E4848] text-[0.84rem] sm:text-[1rem] xl:text-[1rem]
   `,

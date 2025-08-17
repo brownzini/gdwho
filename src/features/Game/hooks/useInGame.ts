@@ -7,6 +7,7 @@ import GuessType from "@/types/GuessType";
 import { useGame } from "@/contexts/game/useGame";
 import soundEffect from "@/components/SoundEffect";
 import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
+import { useHistory } from "@/contexts/history/useHistory";
 
 interface Props {
   volume: number;
@@ -21,6 +22,7 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
   const [bestGuessses, setBestGuessses] = useState<GuessType[]>([]);
   const [worstGuessses, setWorstGuessses] = useState<GuessType[]>([]);
 
+  const { addHistoryItem } = useHistory();
   const { dispatchMessageBox } = useMessageBox();
 
   const WON_THE_GAME = 102;
@@ -83,7 +85,14 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
           const { result } = resp.data;
           if (result) {
             if (WON_THE_GAME === result) {
-              if (setIsThatCorrect) setIsThatCorrect(true);
+              if (setIsThatCorrect) { 
+                  const creatorPlayerName = listOfGameIDs[selectedGameIndex??0].username;
+                  setIsThatCorrect(true);
+                  addHistoryItem({
+                    type:"acertou",
+                    field: "o jogo de "+creatorPlayerName,
+                  });
+              }
             } else {
               measureGuessLevel(result);
             }

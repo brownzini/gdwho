@@ -10,7 +10,7 @@ import CARD_COLORS from "@/constants/cardColors";
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userId, setUserId] = useState<number>(1);
-  const [username, setUsername] = useState<string>("");
+  const [username, setUsername] = useState<string>("BrownziniBrownziniBrownziniBro");
 
   const [role, setRole] = useState<RoleType>("user");
 

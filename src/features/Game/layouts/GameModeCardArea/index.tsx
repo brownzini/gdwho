@@ -55,7 +55,7 @@ export default function GameModeCardArea({
         className={gameModeCardStyles["footer"]}
       >
         <Button
-          width="w-full"
+          width="w-full max-w-[160px]"
           height="h-[16px] sm:h-full"
           bgColor={GAME_MODE_CARD[typeMode].colors.button}
           borderRadius="rounded-[5px]"

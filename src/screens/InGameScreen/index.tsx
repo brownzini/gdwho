@@ -5,17 +5,18 @@ import CorrectAnswerFeature from "@/features/Game/CorrectAnswer";
 import InGameFeature from "@/features/Game/InGame";
 import { useState } from "react";
 
-export default function InGameScreen() {
+interface Props {
+  username:string;
+}
+
+export default function InGameScreen({ username }:Props) {
   const [isThatCorrect, setIsThatCorrect] = useState<boolean>(false);
   return (
     <div
       data-name="in-game-screen-container"
       className={inGameScreenStyles["container"]}
     >
-      <ScreenHeader
-        nameTitle="Gabriel"
-        todayTitle="Hoje é segunda feira , 11/07/2025"
-      />
+      <ScreenHeader nameTitle={username} />
       <div className="w-[93%] h-[1px] bg-[#D9D9D9]" />
       <div
         data-name="in-game-screen-wrapper"

@@ -10,8 +10,9 @@ import CreateGameScreen from "@/screens/CreateGameScreen";
 import GameSelectScreen from "@/screens/GameSelectScreen";
 import ConfigurationScreen from "@/screens/ConfigurationScreen";
 
-import { useScreen } from "@/contexts/screen/useScreen";
 import MessageBox from "@/shared/MessageBox";
+import { useUser } from "@/contexts/user/useUser";
+import { useScreen } from "@/contexts/screen/useScreen";
 import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
 
 const homeStyles = {
@@ -53,22 +54,25 @@ const homeStyles = {
   `,
 };
 
-const screenComponents: Record<string, JSX.Element> = {
-  historyScreen: <HistoryScreen />,
-  createGameScreen: <CreateGameScreen />,
-  editGameScreen: <EditGameScreen />,
-  configurationScreen: <ConfigurationScreen />,
-  gameSelectScreen: <GameSelectScreen />,
-  inGameScreen: <InGameScreen />,
-};
-
 export default function Home() {
-
+  const { username } = useUser();
   const { screenName } = useScreen();
   const { isOpenMB } = useMessageBox();
 
+  const screenComponents: Record<string, JSX.Element> = {
+    historyScreen: <HistoryScreen />,
+    createGameScreen: <CreateGameScreen username={username} />,
+    editGameScreen: <EditGameScreen username={username} />,
+    configurationScreen: <ConfigurationScreen username={username} />,
+    gameSelectScreen: <GameSelectScreen username={username} />,
+    inGameScreen: <InGameScreen username={username} />,
+  };
+
   const renderedScreen = useMemo(() => {
-    return screenComponents[screenName] ?? <DashboardScreen />;
+    return (
+      screenComponents[screenName] ?? <DashboardScreen username={username} />
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenName]);
 
   return (

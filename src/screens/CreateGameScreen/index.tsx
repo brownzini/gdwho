@@ -9,7 +9,11 @@ import createGameScreenStyles from "./styles";
 import { useUser } from "@/contexts/user/useUser";
 import { useScreen } from "@/contexts/screen/useScreen";
 
-export default function CreateGameScreen() {
+interface Props {
+  username:string;
+}
+
+export default function CreateGameScreen({ username }:Props) {
 
   const { response } = useUser();
   const { nextScreen } = useScreen();
@@ -22,8 +26,7 @@ export default function CreateGameScreen() {
       className={createGameScreenStyles["container"]}
     >
       <ScreenHeader
-        nameTitle="Gabriel"
-        todayTitle="Hoje é segunda feira , 11/07/2025"
+        nameTitle={username}
       />
       <div className="w-[93%] h-[1px] bg-[#D9D9D9]" />
       <div

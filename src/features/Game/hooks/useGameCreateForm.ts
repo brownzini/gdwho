@@ -3,6 +3,7 @@ import { gameCreate } from "@/services/game/api-service";
 import { DataInputType, EntriesType } from "@/types/userContextType";
 import { useUser } from "@/contexts/user/useUser";
 import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
+import { useHistory } from "@/contexts/history/useHistory";
 
 interface Props {
   id: number;
@@ -34,6 +35,7 @@ export default function useGameCreateForm({
     setDataList: userSetDataList,
   } = useUser();
 
+  const { addHistoryItem } = useHistory();
   const { dispatchMessageBox } = useMessageBox();
 
   const listToBackend = useMemo(
@@ -63,6 +65,10 @@ export default function useGameCreateForm({
             "JOGO CRIADO:",
             "Seu jogo foi criado com sucesso"
           );
+          addHistoryItem({
+            type: "criou",
+            field: "um jogo",
+          });
           updateContextStates();
           nextScreen("dashboard");
         })

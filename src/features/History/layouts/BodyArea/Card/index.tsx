@@ -1,6 +1,6 @@
+import { historyItemType } from "@/types/historyContextType";
 import CardItem from "./CardItem";
 
-import { historyItemType } from "@/types/History";
 import cardStyles from "./styles";
 
 interface Props {
@@ -23,10 +23,7 @@ export default function Card({ date, items }: Props) {
           data-name="history-card-date-area"  
           className={cardStyles["date"]}
         >
-          <h3
-            data-name="history-card-date-title"   
-            className={cardStyles["dateTitle"]}
-          > 
+          <h3 className={cardStyles["dateTitle"]}> 
             {date} 
           </h3>
         </div>
@@ -42,7 +39,6 @@ export default function Card({ date, items }: Props) {
             <CardItem
               key={index}
               type={element.type}
-              quantity={element.quantity}
               field={element.field}
             />
           );
