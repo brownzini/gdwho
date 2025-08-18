@@ -72,7 +72,7 @@ export default function Home() {
     configurationScreen: <ConfigurationScreen username={username} />,
     gameSelectScreen: <GameSelectScreen username={username} />,
     inGameScreen: <InGameScreen username={username} />,
-    // pulseScreen: <PulseScreen />,
+    pulseScreen: <PulseScreen />,
   };
 
   const renderedScreen = useMemo(() => {
@@ -82,24 +82,25 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenName]);
 
-  // async function relogin() {
-  //   const actiontype = "login";
-  //   await auth({ actiontype, username: null, password: null })
-  //     .then((resp) => {
-  //       const { id, username, role, response, entries, dataList } = resp.data;
-  //       const data = { id, username, role, response, entries, dataList };
-  //       setup({ data });
-  //       nextScreen("dashboard");
-  //     })
-  //     .catch(() => {
-  //       router.push("/login");
-  //     });
-  // }
+  async function relogin() {
+    const actiontype = "login";
+    await auth({ actiontype, username: null, password: null })
+      .then((resp) => {
+        const { id, username, role, response, entries, dataList } = resp.data;
+        const data = { id, username, role, response, entries, dataList };
+        setup({ data });
+        nextScreen("dashboard");
+      })
+      .catch(() => {
+        router.push("/login");
+      });
+  }
 
-  // useEffect(() => {
-  //   if (!username) relogin();
-  //   else nextScreen("dashboard");
-  // }, []);
+  useEffect(() => {
+    if (!username) relogin();
+    else nextScreen("dashboard");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

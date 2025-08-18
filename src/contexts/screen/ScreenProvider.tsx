@@ -25,7 +25,7 @@ const backScreenMap: Record<string, string> = {
 export const ScreenProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
-  const [screenName, setScreenName] = useState<string>("dashboard");
+  const [screenName, setScreenName] = useState<string>("pulseScreen");
 
   useEffect(() => {
     const cachedScreenName = localStorage.getItem("cached_screen");

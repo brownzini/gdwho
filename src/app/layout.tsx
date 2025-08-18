@@ -29,6 +29,7 @@ const luckiest = Luckiest_Guy({
 export const metadata: Metadata = {
   title: "GDwho",
   description: "Game project with machine learn model",
+    icons: "/icon/logo.svg",
 };
 
 export default function RootLayout({
