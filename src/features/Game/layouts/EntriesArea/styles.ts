@@ -11,7 +11,7 @@ const entriesStyles = {
       flex flex-col items-start justify-center gap-1
   `,
   responseLabel: `
-      text-[0.7rem] sm:text-[1rem] text-[#2C2D33] font-["Inter"] font-black
+      text-[0.7rem] sm:text-[1rem] text-[#2C2D33] font-["Inter"] font-black select-none
   `,
   entriesArea: `
       w-full h-[93%] 

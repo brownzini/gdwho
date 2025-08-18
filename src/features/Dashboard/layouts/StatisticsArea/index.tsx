@@ -84,7 +84,6 @@ export default function StatisticsArea() {
             borderStyle="border-[1px] border-[#AB99B0]"
             hoverBgColor="hover:bg-[#8e4fa1]"
             fontStyle={statisticsStyles["buttonTitle"]}
-            onClick={() => nextScreen("")}
           >
             Como Funciona
           </Button>

@@ -37,6 +37,15 @@ export async function gameCreate({ requestData }: GameCreateProps) {
   };
   return await makeRequest(config);
 }
+export async function gameDelete() {
+  const headers = getBearerToken();
+  const config: AxiosRequestConfig = {
+    method: "DELETE",
+    url: `/game/delete`,
+    headers,
+  };
+  return await makeRequest(config);
+}
 export async function sendGuess(id: number, input: string) {
   const headers = getBearerToken();
   const config: AxiosRequestConfig = {
@@ -76,7 +85,7 @@ export async function deleteData(id: number) {
   return await makeRequest(config);
 }
 export async function updateEntry({ id, requestData }: GameUpdateEntryProps) {
-  const headers = getBearerToken();
+  const headers = getBearerToken(true);
   const config: AxiosRequestConfig = {
     method: "PATCH",
     url: `/game/update/entrie/${id}`,

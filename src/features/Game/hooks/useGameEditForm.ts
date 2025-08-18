@@ -76,9 +76,9 @@ export default function useGameEditForm({
 }: Props) {
   const {
     response: userResponse,
-    setResponse: userSetResponse,
     entries: userEntries,
     dataList: userDatalist,
+    setResponse: setUserResponse,
     editContextValueInEntries,
     removeContextEntryByIndex,
     editContextDataListValue,
@@ -118,7 +118,11 @@ export default function useGameEditForm({
   async function sendUpdatedResponseToApi() {
     await updateResponse(response)
       .then(() => {
-        userSetResponse(response);
+        setUserResponse(response);
+        addHistoryItem({
+          type: "atualizou",
+          field: "resposta",
+        });
       })
       .catch(() => {
         dispatchMessageBox(
@@ -270,6 +274,7 @@ export default function useGameEditForm({
       });
     return;
   }
+
   function updateEntryState(
     operation: OperationType,
     key: EntryConstTYpes,
@@ -303,9 +308,9 @@ export default function useGameEditForm({
   useEffect(() => {
     const haveAGame = userResponse !== "";
     if (haveAGame) {
-        setEntries(userEntries);
-        setDataList(userDatalist);
-        setResponse(userResponse);
+      setEntries(userEntries);
+      setDataList(userDatalist);
+      setResponse(userResponse);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
