@@ -13,7 +13,8 @@ export default function CorrectAnswerFeature({ response }:Props) {
     <div
       data-name="correct-answer-container"
       className={correctAnswerStyles["container"]}
-    >
+    > 
+      <audio autoPlay loop src={"/sound/won.MP3"} />
       <CorrectAnswerResponseArea response={response} />
       <CorrectAnswerBackButtonArea />
     </div>

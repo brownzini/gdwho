@@ -91,12 +91,12 @@ export default function useInGame({ setCorrectGuess, volume }: Props) {
           if (result) {
             if (WON_THE_GAME === result && setCorrectGuess) {
                 const creatorPlayerName = listOfGameIDs[selectedGameIndex ?? 0].username;
-                setCorrectGuess(value);
                 addHistoryItem({
                   type: "acertou",
                   field: "o jogo de " + creatorPlayerName,
                 });
                 increaseStoragedStatistic("matchesWon");
+                setCorrectGuess(value);
             } else {
               measureGuessLevel(result);
             }

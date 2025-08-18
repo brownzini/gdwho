@@ -8,7 +8,7 @@ interface Props {
 
 export default function CorrectAnswerResponseArea({ response }:Props) {
 
-  const renderingResponseText = response.length > 50 ? response.slice(0,46)+"..." : response;
+  const renderingResponseText = response.length > 50 ? response.slice(0,30)+"..." : response;
 
   return (
     <div
@@ -35,7 +35,11 @@ export default function CorrectAnswerResponseArea({ response }:Props) {
           data-name="correct-answer-response-description-area"
           className={correctAnswerResponseStyles["responseDescription"]}
         >
+          <h2 className={correctAnswerResponseStyles["responseTitle"]}>
+            Acertou !!!
+          </h2>
           <h2 className={correctAnswerResponseStyles["responseDescriptionLabel"]}>
+            
             {renderingResponseText}
           </h2>
         </div>

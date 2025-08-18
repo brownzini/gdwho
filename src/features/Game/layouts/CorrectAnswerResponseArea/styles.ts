@@ -18,6 +18,7 @@ const correctAnswerResponseStyles = {
         w-full h-[75%] f
         lex justify-center items-center 
   `,
+  responseTitle:`font-["Roboto"] italic`,
   responseDescription: `
         bg-[#ffffff] 
         w-full h-[50%] 
