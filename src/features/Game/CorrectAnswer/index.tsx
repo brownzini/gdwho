@@ -4,13 +4,17 @@ import CorrectAnswerBackButtonArea from "../layouts/CorrectAnswerBackButtonArea"
 
 import correctAnswerStyles from "./styles";
 
-export default function CorrectAnswerFeature() {
+interface Props {
+  response:string;
+}
+
+export default function CorrectAnswerFeature({ response }:Props) {
   return (
     <div
       data-name="correct-answer-container"
       className={correctAnswerStyles["container"]}
     >
-      <CorrectAnswerResponseArea response="BOLO DE CHOCOLATE" />
+      <CorrectAnswerResponseArea response={response} />
       <CorrectAnswerBackButtonArea />
     </div>
   );

@@ -1,14 +1,15 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
-import Input from "@/components/Input";
-import Button from "@/components/Button";
 import entriesStyles from "./styles";
 
 import EntryItem from "./EntryItem";
-import { EntriesType, EntryConstTYpes } from "@/types/userContextType";
-import { desnormalizeLabel, normalizeLabel } from "@/utils/fields";
-import useLoading from "../../hooks/useLoading";
+import Input from "@/components/Input";
 import SvgModel from "@/components/svg";
+import Button from "@/components/Button";
+import useLoading from "../../hooks/useLoading";
+
+import { desnormalizeLabel, normalizeLabel } from "@/utils/fields";
+import { EntriesType, EntryConstTYpes } from "@/types/userContextType";
 
 interface Props {
   createMode: boolean;
@@ -36,58 +37,72 @@ interface Props {
   deleteEntrySubmit?: (id: number, index: number) => Promise<void>;
 }
 
-export default function EntriesArea({
-  entries,
-  createMode,
-  response,
-  setResponse,
-  input,
-  setInput,
-  output,
-  setOutput,
-  label,
-  setLabel,
-  responseError,
-  setResponseError,
-  inputError,
-  setInputError,
-  outputError,
-  setOutputError,
-  labelError,
-  setLabelError,
-  addEntryInList,
-  editEntriesSubmit,
-  setEntrySelectedIndex,
-  editResponseSubmit,
-  deleteEntrySubmit,
-}: Props) {
-  const { loading, setLoading } = useLoading();
+export default function EntriesArea(props: Props) {
+  const {
+    entries,
+    createMode,
+    response,
+    setResponse,
+    input,
+    setInput,
+    output,
+    setOutput,
+    label,
+    setLabel,
+    responseError,
+    setResponseError,
+    inputError,
+    setInputError,
+    outputError,
+    setOutputError,
+    labelError,
+    setLabelError,
+    addEntryInList,
+    editEntriesSubmit,
+    setEntrySelectedIndex,
+    editResponseSubmit,
+    deleteEntrySubmit,
+  } = props;
 
+  const { loading, setLoading } = useLoading();
   const [readMode, setReadMode] = useState<boolean>(!createMode);
 
-  const errorResponseFieldStyles = responseError
-    ? "  border-[#dc362e] text-[#dc362e] "
-    : "  border-[#C4C4C4] text-[#424242] ";
-
-  const errorInputFieldStyles = inputError
-    ? "  border-[#dc362e] text-[#dc362e] "
-    : "  border-[#31B3B5] text-[#3A5F60] ";
-
-  const errorOutputFieldStyles = outputError
-    ? "  border-[#dc362e] text-[#dc362e] "
-    : "  border-[#8B3D4B] text-[#603A41] ";
-
-  const errorLabelFieldStyles = labelError
-    ? "  border-[#dc362e] text-[#dc362e] text-center font-black "
-    : "  border-[#522161] text-[#522161] text-center font-black ";
+  const getErrorStyles = (
+    error: string,
+    styles: string,
+    defaultStyles: string
+  ) => (error ? styles : defaultStyles);
 
   const buttonStyles = createMode
     ? "bg-[#FA6C3E] hover:bg-[#FA6C3E]"
     : "bg-[#6014b0] hover:bg-[#140524]";
 
-  const renderingButtonDescription = createMode
-    ? "INSERIR ENTRADA"
-    : "VOLTAR PARA LISTA";
+  const buttonText = createMode ? "INSERIR ENTRADA" : "VOLTAR PARA LISTA";
+
+  const toggleReadMode = () => setReadMode(true);
+  const handleButton = () => createMode ? addEntryInList() : toggleReadMode();
+  const handleFieldSubmit = async (key: EntryConstTYpes | "response") => {
+    setLoading(true);
+    try {
+      if (key === "response" && editResponseSubmit) {
+        await editResponseSubmit();
+      } else if (editEntriesSubmit && key !== "response") {
+        await editEntriesSubmit(key);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const customizedSetLabel = (value: string) =>
+    setLabel(desnormalizeLabel(value));
+
+  const handleDeleteEntry = async (id: number, index: number) => {
+    if (!deleteEntrySubmit) return;
+    setLoading(true);
+    await deleteEntrySubmit(id, index);
+    setLoading(false);
+  };
 
   const changeToEditMode = (
     index: number,
@@ -101,56 +116,18 @@ export default function EntriesArea({
     setEntrySelectedIndex(index);
     setReadMode(false);
   };
-  const handleButton = () => {
-    if (createMode) addEntryInList();
-    else setReadMode(true);
-  };
-  const handleSetResponseField = async () => {
-    if (editResponseSubmit) {
-      setLoading(true);
-      await editResponseSubmit();
-      setLoading(false);
-    }
-  };
-  const handleSetInputField = async () => {
-    if (editEntriesSubmit) {
-      setLoading(true);
-      await editEntriesSubmit("input");
-      setLoading(false);
-    }
-  };
-  const handleSetOutputField = async () => {
-    if (editEntriesSubmit) {
-      setLoading(true);
-      await editEntriesSubmit("output");
-      setLoading(false);
-    }
-  };
-  const handleSetLabelField = async () => {
-    if (editEntriesSubmit) {
-      setLoading(true);
-      await editEntriesSubmit("label");
-      setLoading(false);
-    }
-  };
-  const customizedSetLabel = (value: string) => {
-    const normalized = desnormalizeLabel(value);
-    console.log(normalized);
-    setLabel(normalized);
-  };
-  const handleDeleteEntry = async (id: number, index: number) => {
-    if (deleteEntrySubmit) {
-      setLoading(true);
-      await deleteEntrySubmit(id, index);
-      setLoading(false);
-    }
-  };
 
   const renderingLabel = normalizeLabel(label);
 
   return (
-    <div data-name="entries-area" className={entriesStyles["entriesArea"]}>
-      <div data-name="response-area" className={entriesStyles["response"]}>
+    <div 
+      data-name="entries-area" 
+      className={entriesStyles["entriesArea"]}
+    >
+      <div 
+        data-name="response-area" 
+        className={entriesStyles["response"]}
+      >
         <b className={entriesStyles["responseLabel"]}>
           Resposta:<span className={entriesStyles["requiredMark"]}>*</span>
         </b>
@@ -161,14 +138,18 @@ export default function EntriesArea({
           borderStyle="border-[1px]"
           setValue={setResponse}
           placeHolder="Digite a resposta do seu jogo ..."
-          styler={errorResponseFieldStyles}
+          styler={getErrorStyles(
+            responseError,
+            "border-[#dc362e] text-[#dc362e]",
+            "border-[#C4C4C4] text-[#424242]"
+          )}
           onClick={() => setResponseError("")}
-          secondAction={handleSetResponseField}
+          secondAction={() => handleFieldSubmit("response")}
           disabled={loading}
         />
       </div>
 
-      {!readMode && (
+      {!readMode ? (
         <>
           <div
             data-name="entries-input-area"
@@ -185,8 +166,12 @@ export default function EntriesArea({
               placeHolder="Ex: trabalha com construções"
               borderStyle="border-[1px]"
               onClick={() => setInputError("")}
-              styler={errorInputFieldStyles}
-              secondAction={handleSetInputField}
+              styler={getErrorStyles(
+                inputError,
+                "border-[#dc362e] text-[#dc362e]",
+                "border-[#31B3B5] text-[#3A5F60]"
+              )}
+              secondAction={() => handleFieldSubmit("input")}
               disabled={loading}
             />
           </div>
@@ -206,8 +191,12 @@ export default function EntriesArea({
               placeHolder="Ex: mexe com cimento"
               borderStyle="border-[1px]"
               onClick={() => setOutputError("")}
-              styler={errorOutputFieldStyles}
-              secondAction={handleSetOutputField}
+              styler={getErrorStyles(
+                outputError,
+                "border-[#dc362e] text-[#dc362e]",
+                "border-[#8B3D4B] text-[#603A41]"
+              )}
+              secondAction={() => handleFieldSubmit("output")}
               disabled={loading}
             />
           </div>
@@ -232,12 +221,17 @@ export default function EntriesArea({
                 setValue={customizedSetLabel}
                 borderStyle="border-[1px]"
                 fontSize="text-[0.7rem] sm:text-[1rem]"
-                styler={errorLabelFieldStyles}
+                styler={getErrorStyles(
+                  labelError,
+                  "border-[#dc362e] text-[#dc362e] text-center font-black",
+                  "border-[#522161] text-[#522161] text-center font-black"
+                )}
                 onClick={() => setLabelError("")}
-                secondAction={handleSetLabelField}
+                secondAction={() => handleFieldSubmit("label")}
                 disabled={loading}
               />
             </div>
+
             {createMode && (
               <div
                 data-name="entries-label-count-icon"
@@ -254,53 +248,48 @@ export default function EntriesArea({
             className={entriesStyles["buttonArea"]}
           >
             <Button
-              width=" w-full sm:w-[50%]"
-              height=" h-[50%] max-h-[25px] sm:max-h-[57px]"
+              width="w-full sm:w-[50%]"
+              height="h-[50%] max-h-[25px] sm:max-h-[57px]"
               bgColor={buttonStyles}
               fontStyle={entriesStyles["buttonTitle"]}
               onClick={handleButton}
               disabled={loading}
             >
               {loading ? (
-                <SvgModel 
-                  name="loading" 
-                  width="75%" 
-                  height="75%" 
+                <SvgModel
+                  name="loading"
+                  width="75%"
+                  height="75%"
                   color="#FFF"
                 />
               ) : (
-                renderingButtonDescription
+                buttonText
               )}
             </Button>
           </div>
         </>
-      )}
-      {readMode && (
+      ) : (
         <div
           data-name="entries-list-container"
           className={entriesStyles["entryListContainer"]}
         >
-          {entries.map((element, index) => {
-            return (
-              <EntryItem
-                key={index}
-                input={element.input}
-                output={element.output}
-                label={normalizeLabel(element.label)}
-                onEdit={() =>
-                  changeToEditMode(
-                    index,
-                    element.input,
-                    element.output,
-                    element.label
-                  )
-                }
-                onDelete={async () =>
-                  await handleDeleteEntry(element.id, index)
-                }
-              />
-            );
-          })}
+          {entries.map((element, index) => (
+            <EntryItem
+              key={index}
+              input={element.input}
+              output={element.output}
+              label={normalizeLabel(element.label)}
+              onEdit={() =>
+                changeToEditMode(
+                  index,
+                  element.input,
+                  element.output,
+                  element.label
+                )
+              }
+              onDelete={() => handleDeleteEntry(element.id, index)}
+            />
+          ))}
         </div>
       )}
     </div>

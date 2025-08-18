@@ -11,10 +11,10 @@ import useInGame from "../hooks/useInGame";
 import { useUser } from "@/contexts/user/useUser";
 
 interface Props {
-  setIsThatCorrect: Dispatch<SetStateAction<boolean>>;
+  setCorrectGuess: Dispatch<SetStateAction<string>>;
 }
 
-export default function InGameFeature({ setIsThatCorrect }: Props) {
+export default function InGameFeature({ setCorrectGuess }: Props) {
   const { colors, volume } = useUser();
 
   const {
@@ -24,7 +24,7 @@ export default function InGameFeature({ setIsThatCorrect }: Props) {
     setValue,
     handleSubmit,
     getCreatorGameName,
-  } = useInGame({ volume, setIsThatCorrect });
+  } = useInGame({ volume, setCorrectGuess });
 
   const worstColors = {
     nearby: colors.nearby,

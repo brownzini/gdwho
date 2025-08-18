@@ -99,15 +99,23 @@ export default function Home() {
   useEffect(() => {
     if (!username) relogin();
     else nextScreen("dashboard");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       {isOpenMB && <MessageBox />}
-      <div data-name="home-container" className={homeStyles["container"]}>
-        <div data-name="home-wrapper" className={homeStyles["wrapper"]}>
-          <div data-name="home-main-area" className={homeStyles["mainArea"]}>
+      <div 
+        data-name="home-container" 
+        className={homeStyles["container"]}
+      >
+        <div 
+          data-name="home-wrapper" 
+          className={homeStyles["wrapper"]}
+        >
+          <div 
+            data-name="home-main-area" 
+            className={homeStyles["mainArea"]}
+          >
             <div className={homeStyles["detail"]} />
             <div
               data-name="home-main-content"

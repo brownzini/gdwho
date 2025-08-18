@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function InGameScreen({ username }:Props) {
-  const [isThatCorrect, setIsThatCorrect] = useState<boolean>(false);
+  const [correctGuess, setCorrectGuess] = useState<string>("");
   return (
     <div
       data-name="in-game-screen-container"
@@ -22,10 +22,10 @@ export default function InGameScreen({ username }:Props) {
         data-name="in-game-screen-wrapper"
         className={inGameScreenStyles["wrapper"]}
       >
-        {isThatCorrect ? (
-          <CorrectAnswerFeature />
+        {correctGuess ? (
+          <CorrectAnswerFeature response={correctGuess} />
         ) : (
-          <InGameFeature setIsThatCorrect={setIsThatCorrect} />
+          <InGameFeature setCorrectGuess={setCorrectGuess} />
         )}
       </div>
     </div>

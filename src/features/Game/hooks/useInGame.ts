@@ -14,10 +14,10 @@ import { increaseStoragedStatistic } from "@/utils/storage/statistics-storage";
 
 interface Props {
   volume: number;
-  setIsThatCorrect?: Dispatch<SetStateAction<boolean>>;
+  setCorrectGuess?: Dispatch<SetStateAction<string>>;
 }
 
-export default function useInGame({ setIsThatCorrect, volume }: Props) {
+export default function useInGame({ setCorrectGuess, volume }: Props) {
   const { selectedGameIndex, listOfGameIDs } = useGame();
 
   const [value, setValue] = useState<string>("");
@@ -80,23 +80,23 @@ export default function useInGame({ setIsThatCorrect, volume }: Props) {
   }
 
   async function sendGuessToApi() {
-    const id = 1;
+
+    const id = listOfGameIDs[selectedGameIndex??-1].id;
+
     await sendGuess(id, value)
       .then((resp) => {
         const haveData = resp.hasOwnProperty("data");
         if (haveData) {
           const { result } = resp.data;
           if (result) {
-            if (WON_THE_GAME === result) {
-              if (setIsThatCorrect) {
-                  const creatorPlayerName = listOfGameIDs[selectedGameIndex ?? 0].username;
-                  setIsThatCorrect(true);
-                  addHistoryItem({
-                    type: "acertou",
-                    field: "o jogo de " + creatorPlayerName,
-                  });
-                  increaseStoragedStatistic("matchesWon");
-              }
+            if (WON_THE_GAME === result && setCorrectGuess) {
+                const creatorPlayerName = listOfGameIDs[selectedGameIndex ?? 0].username;
+                setCorrectGuess(value);
+                addHistoryItem({
+                  type: "acertou",
+                  field: "o jogo de " + creatorPlayerName,
+                });
+                increaseStoragedStatistic("matchesWon");
             } else {
               measureGuessLevel(result);
             }
