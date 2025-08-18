@@ -4,13 +4,18 @@ import { useState, type ReactNode } from "react";
 
 import { UserContext } from "./UserContext";
 
-import { DataType, EntriesType, RoleType } from "@/types/userContextType";
+import {
+  DataType,
+  EntriesType,
+  RoleType,
+  SetupProps,
+} from "@/types/userContextType";
 import { CardColorsType } from "@/types/CardColors";
 import CARD_COLORS from "@/constants/cardColors";
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [userId, setUserId] = useState<number>(1);
-  const [username, setUsername] = useState<string>("BrownziniBrownziniBrownziniBro");
+  const [userId, setUserId] = useState<number | null>(null);
+  const [username, setUsername] = useState<string>("");
 
   const [role, setRole] = useState<RoleType>("user");
 
@@ -21,9 +26,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const [volume, setVolume] = useState<number>(100);
   const [colors, setColors] = useState<CardColorsType>({
-         correct: CARD_COLORS.correct,
-         nearby: CARD_COLORS.nearby,
-         distant: CARD_COLORS.distant,
+    correct: CARD_COLORS.correct,
+    nearby: CARD_COLORS.nearby,
+    distant: CARD_COLORS.distant,
   });
 
   function editContextValueInEntries(
@@ -63,6 +68,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     });
   }
 
+  function setup({ data }: SetupProps) {
+    setUserId(data.id);
+    setUsername(data.username??"");
+    setRole(data.role??"user");
+    setResponse(data.response ?? "");
+    setEntries(data.entries ?? []);
+    setDataList(data.dataList ?? []);
+  }
+
   const value = {
     userId,
     setUserId,
@@ -84,6 +98,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     editContextValueInEntries,
     removeContextDataListValueByIndex,
     removeContextEntryByIndex,
+    setup,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

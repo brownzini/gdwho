@@ -1,31 +1,68 @@
-import { useState } from "react";
-
 import formAreaStyles from "./styles";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
-  signInMode:boolean;
+  signInMode: boolean;
   changeMode: () => void;
+  username: string;
+  setUsername: (username: string) => void;
+  password: string;
+  setPassword: (password: string) => void;
+  repassword: string;
+  setRePassword: (repassword: string) => void;
+  handleSubmit: () => Promise<void>;
+  usernameError:boolean;
+  passwordError:boolean;
+  repasswordError:boolean;
+  setUsernameError: Dispatch<SetStateAction<boolean>>;
+  setPasswordError: Dispatch<SetStateAction<boolean>>;
+  setRepasswordError: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function FormArea({ signInMode, changeMode }:Props) {
+export default function FormArea({
+  signInMode,
+  changeMode,
+  username,
+  setUsername,
+  password,
+  setPassword,
+  repassword,
+  setRePassword,
+  handleSubmit,
+  usernameError,
+  passwordError,
+  repasswordError,
+  setUsernameError,
+  setPasswordError,
+  setRepasswordError,
+}: Props) {
+  const butonDescription = signInMode ? "ENTRAR" : "CADASTRAR";
+  const buttonColor = signInMode ? "bg-[#452670]" : "bg-[#C6518F]";
+  const buttonBorder = signInMode
+    ? "border-[#452670] border-[1px]"
+    : "border-[#C6518F] border-[1px]";
 
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [repassword, setRePassword] = useState<string>("");
+  const detailText = signInMode ? "Criar nova conta" : "Ja tenho uma conta";
+  const detailTextColor = signInMode
+    ? "hover:text-[#452670]"
+    : "hover:text-[#C6518F]";
 
-  const butonDescription = (signInMode) ? "ENTRAR" : "CADASTRAR";
-  const buttonColor = (signInMode)  ? "bg-[#452670]" : "bg-[#C6518F]";
-  const buttonBorder = (signInMode) ? "border-[#452670] border-[1px]" : "border-[#C6518F] border-[1px]";
-
-  const detailText = (signInMode) ? "Criar nova conta" : "Ja tenho uma conta";
-  const detailTextColor = (signInMode) ? "hover:text-[#452670]" : "hover:text-[#C6518F]";
+  const usernameFieldErrorStyle = usernameError
+    ? "border-[1px]  border-[#dc362e] text-[#dc362e] "
+    : "border-[1px]  border-[#C4C4C4] text-[#424242] ";
+  const passwordFieldErrorStyle = passwordError
+    ? "border-[1px]  border-[#dc362e] text-[#dc362e] "
+    : "border-[1px]  border-[#C4C4C4] text-[#424242] ";
+  const rePasswordFieldErrorStyle = repasswordError
+    ? "border-[1px]  border-[#dc362e] text-[#dc362e] "
+    : "border-[1px]  border-[#C4C4C4] text-[#424242] ";
 
   return (
-    <div 
-      data-name="auth-form-container" 
+    <div
+      data-name="auth-form-container"
       className={formAreaStyles["container"]}
     >
       <div
@@ -39,7 +76,8 @@ export default function FormArea({ signInMode, changeMode }:Props) {
           value={username}
           setValue={setUsername}
           placeHolder="nome do seu usuario"
-          borderStyle="border-[1px] border-[#C4C4C4]"
+          borderStyle={usernameFieldErrorStyle}
+          onClick={() => setUsernameError(false)}
         />
       </div>
       <div
@@ -52,24 +90,29 @@ export default function FormArea({ signInMode, changeMode }:Props) {
           height="h-[100%] max-h-[50px]"
           value={password}
           setValue={setPassword}
-          borderStyle="border-[1px] border-[#C4C4C4]"
           placeHolder="sua senha ... "
+          borderStyle={passwordFieldErrorStyle}
+          onClick={() => setPasswordError(false)}
+          secondAction={handleSubmit}
         />
       </div>
-      {(!signInMode) && <div
-        data-name="auth-repassword-area"
-        className={formAreaStyles["passwordArea"]}
-      >
-        <b className={formAreaStyles["passwordText"]}>Repetir senha:</b>
-        <Input
-          type="password"
-          height="h-[100%] max-h-[50px]"
-          value={repassword}
-          setValue={setRePassword}
-          borderStyle="border-[1px] border-[#C4C4C4]"
-          placeHolder="sua senha novamente ... "
-        />
-      </div>}
+      {!signInMode && (
+        <div
+          data-name="auth-repassword-area"
+          className={formAreaStyles["passwordArea"]}
+        >
+          <b className={formAreaStyles["passwordText"]}>Repetir senha:</b>
+          <Input
+            type="password"
+            height="h-[100%] max-h-[50px]"
+            value={repassword}
+            setValue={setRePassword}
+            placeHolder="sua senha novamente ... "
+            borderStyle={rePasswordFieldErrorStyle}
+            onClick={() => setRepasswordError(false)}
+          />
+        </div>
+      )}
       <div
         data-name="auth-button-area"
         className={formAreaStyles["buttonArea"]}
@@ -78,18 +121,18 @@ export default function FormArea({ signInMode, changeMode }:Props) {
           bgColor={buttonColor}
           hoverBgColor="hover:bg-[#fff]"
           borderStyle={buttonBorder}
+          fontStyle={formAreaStyles["buttonDescription"](detailTextColor)}
+          onClick={handleSubmit}
         >
-          <p className={formAreaStyles["buttonDescription"](detailTextColor)}>
-             {butonDescription}
-          </p>
+          {butonDescription}
         </Button>
       </div>
       <div
         data-name="auth-detail-area"
         className={formAreaStyles["detailArea"]}
       >
-        <Button 
-          width="w-[auto]" 
+        <Button
+          width="w-[auto]"
           fontStyle={formAreaStyles["detailText"]}
           onClick={changeMode}
         >

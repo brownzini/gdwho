@@ -3,4 +3,5 @@ export type ScreenContextType = {
   setScreenName: (screenName: string) => void;
   backScreen(): void;
   nextScreen: (name: string) => void;
+  logoutScreen: () => void;
 };

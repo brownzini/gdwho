@@ -23,9 +23,22 @@ export type DataInputType = {
   hasError?: boolean;
 };
 
+interface UserProps {
+  id: number | null;
+  username:string | null;
+  role: RoleType | null; 
+  response: string | null;
+  entries: EntriesType[];
+  dataList: DataType[];
+}
+
+export interface SetupProps {
+  data: UserProps;
+}
+
 export type UserContextType = {
-  userId: number;
-  setUserId: (userId: number) => void;
+  userId: number | null;
+  setUserId: (userId: number | null) => void;
   username: string;
   setUsername: (username: string) => void;
   response: string;
@@ -52,4 +65,5 @@ export type UserContextType = {
   removeContextEntryByIndex(index: number): void;
   colors:CardColorsType;
   setColors: Dispatch<SetStateAction<CardColorsType>>;
+  setup({ data }: SetupProps): void;
 };

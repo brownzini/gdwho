@@ -4,7 +4,7 @@ import StatisticsArea from "./layouts/StatisticsArea";
 export default function Dashboard() {
   return (
     <>
-      <InitialCardArea />
+      <InitialCardArea /> 
       <StatisticsArea />
     </>
   );

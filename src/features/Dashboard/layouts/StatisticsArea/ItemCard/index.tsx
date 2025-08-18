@@ -27,10 +27,7 @@ export default function ItemCard({ description, value, iconName }:Props) {
         data-name="dashboard-statistics-card-body" 
         className={itemCardStyles["cardBody"]}
       >
-        <p 
-          data-name="dashboard-statistics-card-body-description"
-          className={itemCardStyles["cardBodyDescription"]}
-        >
+        <p className={itemCardStyles["cardBodyDescription"]}>
           {description}
         </p>
       </div>
@@ -38,10 +35,7 @@ export default function ItemCard({ description, value, iconName }:Props) {
         data-name="dashboard-statistics-card-footer" 
         className={itemCardStyles["cardFooter"]}
       >
-        <h2
-          data-name="dashboard-statistics-card-footer-title" 
-          className={itemCardStyles["cardFooterTitle"]}
-        >
+        <h2 className={itemCardStyles["cardFooterTitle"]}>
           {value}
         </h2>
       </div>

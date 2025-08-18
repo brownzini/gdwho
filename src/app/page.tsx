@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, useMemo } from "react";
+import { JSX, useEffect, useMemo } from "react";
 
 import InGameScreen from "@/screens/InGameScreen";
 import HistoryScreen from "@/screens/HistoryScreen";
@@ -14,6 +14,10 @@ import MessageBox from "@/shared/MessageBox";
 import { useUser } from "@/contexts/user/useUser";
 import { useScreen } from "@/contexts/screen/useScreen";
 import { useMessageBox } from "@/contexts/messageBox/useMessageBox";
+import { useRouter } from "next/navigation";
+import { auth } from "@/services/auth/api-service";
+
+import PulseScreen from "@/screens/PulseScreen";
 
 const homeStyles = {
   container: `
@@ -55,9 +59,11 @@ const homeStyles = {
 };
 
 export default function Home() {
-  const { username } = useUser();
-  const { screenName } = useScreen();
+  const router = useRouter();
+
+  const { screenName, nextScreen } = useScreen();
   const { isOpenMB } = useMessageBox();
+  const { username, setup } = useUser();
 
   const screenComponents: Record<string, JSX.Element> = {
     historyScreen: <HistoryScreen />,
@@ -66,14 +72,34 @@ export default function Home() {
     configurationScreen: <ConfigurationScreen username={username} />,
     gameSelectScreen: <GameSelectScreen username={username} />,
     inGameScreen: <InGameScreen username={username} />,
+    pulseScreen: <PulseScreen />,
   };
 
   const renderedScreen = useMemo(() => {
     return (
       screenComponents[screenName] ?? <DashboardScreen username={username} />
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenName]);
+
+  async function relogin() {
+    const actiontype = "login";
+    await auth({ actiontype, username: null, password: null })
+      .then((resp) => {
+        const { id, username, role, response, entries, dataList } = resp.data;
+        const data = { id, username, role, response, entries, dataList };
+        setup({ data });
+        nextScreen("dashboard");
+      })
+      .catch(() => {
+        router.push("/login");
+      });
+  }
+
+  useEffect(() => {
+    if (!username) relogin();
+    else nextScreen("dashboard");
+  }, []);
 
   return (
     <>

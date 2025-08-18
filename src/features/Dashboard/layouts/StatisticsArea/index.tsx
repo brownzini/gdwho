@@ -11,6 +11,7 @@ import { useUser } from "@/contexts/user/useUser";
 import useStatistics from "../../hooks/useStatistics";
 
 export default function StatisticsArea() {
+  
   const { response } = useUser();
   const { nextScreen } = useScreen();
 
@@ -29,12 +30,7 @@ export default function StatisticsArea() {
           data-name="dashboard-statistics-description"
           className={statisticsStyles["description"]}
         >
-          <h2
-            data-name="dashboard-statistics-card-description-title"
-            className={statisticsStyles["descriptionTitle"]}
-          >
-            Estatísticas
-          </h2>
+          <h2 className={statisticsStyles["descriptionTitle"]}>Estatísticas</h2>
         </div>
 
         <div

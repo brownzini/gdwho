@@ -13,7 +13,8 @@ export default function ScreenHeader({ nameTitle }: Props) {
 
   const date = getDateName();
   const { nextScreen } = useScreen();
-
+  const { logoutScreen } = useScreen();
+  
   return (
     <div
       data-name="screen-header-container" 
@@ -47,6 +48,7 @@ export default function ScreenHeader({ nameTitle }: Props) {
           height="h-[40%]" 
           bgColor="!bg-[#ffffff]" 
           shadow="shadow-md"
+          onClick={logoutScreen}
         >
           <SvgModel name="logout" width="30%" height="30%" />
         </Button>

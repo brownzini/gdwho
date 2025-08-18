@@ -9,7 +9,9 @@ import {
 } from "react";
 
 import { ScreenContext } from "./ScreenContext";
+import { deleteAuthToken } from "@/utils/storage/token-storage";
 import SHOULD_NOT_BE_CACHABLED_LIST from "@/constants/notCachabledList";
+import { useRouter } from "next/navigation";
 
 const backScreenMap: Record<string, string> = {
       gameSelectScreen: "dashboard",
@@ -21,7 +23,10 @@ const backScreenMap: Record<string, string> = {
 };
 
 export const ScreenProvider = ({ children }: { children: ReactNode }) => {
-  const [screenName, setScreenName] = useState<string>("dashboard");
+
+  const router = useRouter();
+
+  const [screenName, setScreenName] = useState<string>("pulseScreen");
 
   useEffect(() => {
     const cachedScreenName = localStorage.getItem("cached_screen");
@@ -53,14 +58,21 @@ export const ScreenProvider = ({ children }: { children: ReactNode }) => {
       }
   };
 
+  const logoutScreen = useCallback(() => {
+    deleteAuthToken();
+    setScreenName("pulseScreen");
+    router.push("\login");
+  }, [screenName])
+
   const value = useMemo(
     () => ({
       screenName,
       setScreenName,
       backScreen,
       nextScreen,
+      logoutScreen,
     }),
-    [screenName, backScreen, nextScreen]
+    [screenName, backScreen, nextScreen, logoutScreen]
   );
 
   return (
