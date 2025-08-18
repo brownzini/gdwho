@@ -27,14 +27,7 @@ export default function useForm({ signInMode }: Props) {
 
   const router = useRouter();
   const { dispatchMessageBox } = useMessageBox();
-  const {
-    setUserId,
-    setUsername: setContextUsername,
-    setRole,
-    setResponse,
-    setEntries,
-    setDataList,
-  } = useUser();
+  const { setup } = useUser();
 
   async function handleSubmit() {
     const readyToSend = fieldsValidation();
@@ -46,36 +39,54 @@ export default function useForm({ signInMode }: Props) {
     };
     const actiontype = signInMode ? "login" : "register";
     if (readyToSend) {
-      await auth({ actiontype, username, password })
-        .then((resp) => {
-          const { id, username, role, response, entries, dataList, token } =
-            resp.data;
+      if (actiontype === "login")
+        await sendLoginToApi(actiontype, messageModel);
+      else await sendRegisterToApi(actiontype, messageModel);
+    }
+  }
 
-          if (token) {
-              setUserId(id);
-              setContextUsername(username);
-              setRole(role);
-              setResponse(response ?? "");
-              setEntries(entries ?? []);
-              setDataList(dataList ?? []);
-              setAuthToken(token);
-              router.push("/");
-          } else {
-            dispatchMessageBox(
-              "error",
-              messageModel.title,
-              messageModel.subTitle
-            );
-          }
-        })
-        .catch(() => {
+  async function sendLoginToApi(
+    actiontype: "login" | "register",
+    messageModel: {
+      title: string;
+      subTitle: string;
+    }
+  ) {
+    await auth({ actiontype, username, password })
+      .then((resp) => {
+        if (resp.data.token) {
+          setAuthToken(resp.data.token);
+          setup({ data: resp.data });
+          router.push("/");
+        } else {
           dispatchMessageBox(
             "error",
             messageModel.title,
             messageModel.subTitle
           );
-        });
+        }
+      })
+      .catch(() => {
+        dispatchMessageBox("error", messageModel.title, messageModel.subTitle);
+      });
+  }
+
+  async function sendRegisterToApi(
+    actiontype: "login" | "register",
+    messageModel: {
+      title: string;
+      subTitle: string;
     }
+  ) {
+    await auth({ actiontype, username, password })
+      .then((resp) => {
+        setAuthToken(resp.data.token);
+        setup({ data: resp.data });
+        router.push("/");
+      })
+      .catch(() => {
+        dispatchMessageBox("error", messageModel.title, messageModel.subTitle);
+      });
   }
 
   function fieldsValidation() {

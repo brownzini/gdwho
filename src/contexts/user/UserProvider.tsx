@@ -69,12 +69,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }
 
   function setup({ data }: SetupProps) {
-    setUserId(data.id);
-    setUsername(data.username??"");
-    setRole(data.role??"user");
-    setResponse(data.response ?? "");
-    setEntries(data.entries ?? []);
-    setDataList(data.dataList ?? []);
+    const { id, username, role, response, entries, dataList } = data;
+    setUserId(id);
+    setUsername(username ?? "");
+    setRole(role ?? "user");
+    setResponse(response ?? "");
+    setEntries(entries ?? []);
+    setDataList(dataList ?? []);
   }
 
   const value = {

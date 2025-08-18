@@ -5,7 +5,7 @@ const initialCardStyles = {
   wrapper: `
         mx-auto 
         h-full w-full 
-        rounded-md border border-[#7c7b7b] p-4 
+        rounded-md border border-[#c4c4c4] p-4 
         flex justify-center items-center
   `,
   content:`flex animate-pulse space-x-4 w-full`,
