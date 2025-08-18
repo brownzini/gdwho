@@ -1,50 +1,44 @@
 import Image from "next/image";
 import cardStyles from "./styles";
-import { 
-  DASHBOARD_CARD_SUBTITLE, 
-  DASHBOARD_CARD_TITLE 
+import {
+  DASHBOARD_CARD_SUBTITLE,
+  DASHBOARD_CARD_TITLE,
 } from "@/constants/dashboardCard";
 import Button from "@/components/Button";
 import { useScreen } from "@/contexts/screen/useScreen";
+import Link from "next/link";
 
 export default function InitialCard() {
-
   const { nextScreen } = useScreen();
 
   return (
-    <div 
+    <div
       data-name="dashboard-card-container"
       className={cardStyles["container"]}
     >
-      <div
-        data-name="dashboard-card-content" 
-        className={cardStyles["content"]}
-      >
+      <div data-name="dashboard-card-content" className={cardStyles["content"]}>
         <div
-          data-name="dashboard-card-wrapper" 
+          data-name="dashboard-card-wrapper"
           className={cardStyles["cardWrapper"]}
         >
-
           <div
-            data-name="dashboard-card-header" 
+            data-name="dashboard-card-header"
             className={cardStyles["cardHeader"]}
           >
-            <h1 className={cardStyles["cardTitle"]}>
-              {DASHBOARD_CARD_TITLE}
-            </h1>
+            <h1 className={cardStyles["cardTitle"]}>{DASHBOARD_CARD_TITLE}</h1>
           </div>
 
-          <div 
+          <div
             data-name="dashboard-card-body"
             className={cardStyles["cardBody"]}
           >
             <p className={cardStyles["CardSubTitle"]}>
-               {DASHBOARD_CARD_SUBTITLE}
+              {DASHBOARD_CARD_SUBTITLE}
             </p>
           </div>
 
           <div
-            data-name="dashboard-card-footer" 
+            data-name="dashboard-card-footer"
             className={cardStyles["cardFooter"]}
           >
             <Button
@@ -56,24 +50,30 @@ export default function InitialCard() {
             >
               JOGAR
             </Button>
-            <Button
-              bgColor="!bg-[#33363C]"
-              hoverBgColor="hover:!bg-[#0c0c0d]"
-              borderStyle="border-[1px] border-[#33363C]"
-              fontStyle={cardStyles["githubButtonFont"]}
+            <Link 
+              href="https://github.com/brownzini" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-[50%] h-full"
             >
-              GITHUB
-            </Button>
+              <Button
+                bgColor="!bg-[#33363C]"
+                hoverBgColor="hover:!bg-[#0c0c0d]"
+                borderStyle="border-[1px] border-[#33363C]"
+                fontStyle={cardStyles["githubButtonFont"]}
+              >
+                GITHUB
+              </Button>
+            </Link>
           </div>
-          
         </div>
-        <div 
+        <div
           data-name="dashboard-card-image-container"
           className={cardStyles["cardImage"]}
         >
           <Image
             fill
-            priority 
+            priority
             className="absolute w-full h-full object-cover"
             alt="image"
             src="/img/logo.png"

@@ -9,9 +9,9 @@ import Button from "@/components/Button";
 import { useScreen } from "@/contexts/screen/useScreen";
 import { useUser } from "@/contexts/user/useUser";
 import useStatistics from "../../hooks/useStatistics";
+import Link from "next/link";
 
 export default function StatisticsArea() {
-  
   const { response } = useUser();
   const { nextScreen } = useScreen();
 
@@ -72,16 +72,24 @@ export default function StatisticsArea() {
             Meu Jogo
           </Button>
         )}
-        <Button
-          height="h-[50%] sm:h-[40%]"
-          bgColor="bg-[#F5F5F5]"
-          borderStyle="border-[1px] border-[#AB99B0]"
-          hoverBgColor="hover:bg-[#8e4fa1]"
-          fontStyle={statisticsStyles["buttonTitle"]}
-          onClick={() => nextScreen("")}
+        <Link
+          href="https://github.com/brownzini/gdwho"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-[100%] h-[25%]  flex justify-center items-center"
         >
-          Como Funciona
-        </Button>
+          <Button
+            height="h-[50%] sm:h-[100%]"
+            bgColor="bg-[#F5F5F5]"
+            borderStyle="border-[1px] border-[#AB99B0]"
+            hoverBgColor="hover:bg-[#8e4fa1]"
+            fontStyle={statisticsStyles["buttonTitle"]}
+            onClick={() => nextScreen("")}
+          >
+            Como Funciona
+          </Button>
+        </Link>
+
         <Button
           display="flex md:hidden"
           height="h-[30%] max-h-[50px]"
