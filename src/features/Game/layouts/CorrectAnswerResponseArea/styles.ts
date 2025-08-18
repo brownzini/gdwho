@@ -23,6 +23,7 @@ const correctAnswerResponseStyles = {
         w-full h-[50%] 
         rounded-br-[10px] rounded-bl-[10px] 
         flex flex-col justify-center items-center 
+        break-word
   `,
   responseDescriptionLabel: `font-["Luckiest_Guy"] text-[2rem] text-[#1E2E4C] leading-7 text-center`,
 };

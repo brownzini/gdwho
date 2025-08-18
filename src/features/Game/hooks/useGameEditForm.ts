@@ -301,12 +301,11 @@ export default function useGameEditForm({
     editDataListValue("value", dataSelectedIndex, userData.value);
   }
   useEffect(() => {
-    const hasNotEmptyValues =
-      userEntries.length > 0 && userDatalist.length > 0 && userResponse !== "";
-    if (hasNotEmptyValues) {
-      setEntries(userEntries);
-      setDataList(userDatalist);
-      setResponse(userResponse);
+    const haveAGame = userResponse !== "";
+    if (haveAGame) {
+        setEntries(userEntries);
+        setDataList(userDatalist);
+        setResponse(userResponse);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

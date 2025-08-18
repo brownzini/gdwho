@@ -28,7 +28,7 @@ export default function useInGame({ setCorrectGuess, volume }: Props) {
   const { addHistoryItem } = useHistory();
   const { dispatchMessageBox } = useMessageBox();
 
-  const WON_THE_GAME = 102;
+  const WON_THE_GAME = 1.02;
 
   function fieldValidation() {
     const validationResponse = validateText(value, {

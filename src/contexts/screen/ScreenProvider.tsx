@@ -1,17 +1,15 @@
 "use client";
 
-import {
-  useState,
-  useCallback,
-  useMemo,
-  type ReactNode,
-  useEffect,
-} from "react";
+import { useState, useCallback, useMemo, type ReactNode } from "react";
 
 import { ScreenContext } from "./ScreenContext";
 import { deleteAuthToken } from "@/utils/storage/token-storage";
-import SHOULD_NOT_BE_CACHABLED_LIST from "@/constants/notCachabledList";
+
 import { useRouter } from "next/navigation";
+import {
+  getPrevScreen,
+  setPrevScreen,
+} from "@/utils/storage/prevScreen-storage";
 
 const backScreenMap: Record<string, string> = {
   gameSelectScreen: "dashboard",
@@ -27,43 +25,28 @@ export const ScreenProvider = ({ children }: { children: ReactNode }) => {
 
   const [screenName, setScreenName] = useState<string>("pulseScreen");
 
-  useEffect(() => {
-    const cachedScreenName = localStorage.getItem("cached_screen");
-    setScreenName(cachedScreenName ?? "dashboard");
-  }, []);
-
   const nextScreen = useCallback(
     (name: string) => {
-      if (name !== screenName) {
-        setScreenCache(screenName);
-        setScreenName(name);
-      }
+      if (name === "configurationScreen") setPrevScreen(screenName);
+      if (name !== screenName) setScreenName(name);
     },
     [screenName]
   );
 
   const backScreen = useCallback(() => {
-    const cachedScreenName = localStorage.getItem("cached_screen");
-    const previousScreenName = backScreenMap[screenName ?? "dashboard"];
-    const notChangeCachedScreenName =
-      cachedScreenName && cachedScreenName !== screenName;
-    const currentScreenName = notChangeCachedScreenName
-      ? cachedScreenName
-      : previousScreenName;
-    setScreenName(currentScreenName);
+    const defaultPrevScreen = backScreenMap[screenName ?? "dashboard"];
+    const prevScreen =
+      screenName === "configurationScreen"
+        ? getPrevScreen()
+        : defaultPrevScreen;
+    setScreenName(prevScreen);
   }, [screenName]);
-
-  const setScreenCache = (cachedScreenName: string | null) => {
-    if (cachedScreenName)
-      if (!SHOULD_NOT_BE_CACHABLED_LIST.has(cachedScreenName)) {
-        localStorage.setItem("cached_screen", cachedScreenName);
-      }
-  };
 
   const logoutScreen = useCallback(() => {
     deleteAuthToken();
     setScreenName("pulseScreen");
     router.push("/login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenName]);
 
   const value = useMemo(

@@ -72,12 +72,13 @@ export default function Home() {
     configurationScreen: <ConfigurationScreen username={username} />,
     gameSelectScreen: <GameSelectScreen username={username} />,
     inGameScreen: <InGameScreen username={username} />,
+    dashboard: <DashboardScreen username={username} />,
     pulseScreen: <PulseScreen />,
   };
 
   const renderedScreen = useMemo(() => {
     return (
-      screenComponents[screenName] ?? <DashboardScreen username={username} />
+      screenComponents[screenName] ?? <PulseScreen />
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenName]);
@@ -99,6 +100,7 @@ export default function Home() {
   useEffect(() => {
     if (!username) relogin();
     else nextScreen("dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
