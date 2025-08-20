@@ -8,7 +8,7 @@ const iconsStyles = {
         ${bgColor} 
         rounded-[100%] 
         cursor-pointer relative
-        w-[10%] h-[50%]
+        w-[10%] h-[50%] min-w-[30px]
         min-w-[25px] min-h-[25px] max-h-[10px]
         sm:min-w-[50px] sm:min-h-[50px] sm:max-w-[50px] 2xl:max-w-[250px] 2xl:max-h-[70px]
         flex justify-center items-center
